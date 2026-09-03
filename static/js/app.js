@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  // --- Initial Seed Database: Ministry of Petroleum & Natural Gas Datasets ---
+  // --- 1. Realistic Seed Database: Ministry of Petroleum & Natural Gas Datasets ---
   const MOPNG_SEED_RECORDS = [
     {
       id: "REC-2026-8841",
@@ -30,6 +30,10 @@
         anomaliesDetected: 2,
         sensorIntegrity: "Verified (SCADA-RTU-09)"
       },
+      parameter: "Mass Flow Balance",
+      observedValue: "13.54 MMSCMD",
+      expectedRange: "14.05 – 14.30 MMSCMD",
+      deviation: "-4.8% divergence",
       indicators: [
         "Inlet telemetry at Hazira compressor station deviates from downstream Jagdishpur terminal meter by 4.8% (statutory PNGRB limit <= 1.2%).",
         "SCADA pressure curve exhibits localized depression between Valve Station VS-14 and VS-16 without off-take logged in daily manifest.",
@@ -57,6 +61,10 @@
         anomaliesDetected: 1,
         sensorIntegrity: "ASTM D2622 XRF Verified"
       },
+      parameter: "Sulphur Content",
+      observedValue: "11.4 ppm",
+      expectedRange: "<= 10.0 ppm (BIS IS 1460)",
+      deviation: "+14.0% above limit",
       indicators: [
         "Despatch batch sulphur content recorded at 11.4 ppm, exceeding mandatory BS-VI ceiling of 10.0 ppm under Environment Protection Rules.",
         "Refinery primary hydrocracker sensor log showed brief catalyst bed temperature dip 4 hours prior to blending batch sign-off.",
@@ -83,6 +91,10 @@
         anomaliesDetected: 3,
         sensorIntegrity: "Weighbridge Tare Automated Log"
       },
+      parameter: "Subsidized Domestic Allocation",
+      observedValue: "26,980 Verified Dispenses",
+      expectedRange: "28,400 Reconciled Dispenses",
+      deviation: "-1,420 Cylinders (5.0%)",
       indicators: [
         "1,420 subsidized domestic LPG cylinders dispatched without corresponding Aadhaar authentication tokens in PMUY database.",
         "Geographic clustering of repeat bookings within 48 hours detected across three commercial highway distributors.",
@@ -109,6 +121,10 @@
         anomaliesDetected: 0,
         sensorIntegrity: "Dual Rosemount Coriolis calibrated 28-Aug"
       },
+      parameter: "Wellhead Flow & Pressure",
+      observedValue: "184 bar / 38,200 BBL",
+      expectedRange: "180 – 190 bar / 37,500 – 39,000 BBL",
+      deviation: "+0.6% (Nominal)",
       indicators: [
         "Wellhead multi-phase flow rates align within 0.6% tolerance against Uran coastal terminal receipt meters.",
         "Subsea choke valve pressure differential exhibits stable laminar profile over continuous 72-hour operational cycle.",
@@ -135,6 +151,10 @@
         anomaliesDetected: 0,
         sensorIntegrity: "NABL Accredited Lab Automated Telemetry"
       },
+      parameter: "Flash Point & Smoke Point",
+      observedValue: "41.2 deg C / 24.5 mm",
+      expectedRange: ">= 38.0 deg C / >= 18.0 mm",
+      deviation: "+3.2 deg C Margin",
       indicators: [
         "All critical aviation parameters comply strictly with DGCA and MoPNG mandatory safety regulations.",
         "Pipeline custody transfer filtration delta-P within normal limits (0.42 bar).",
@@ -161,6 +181,10 @@
         anomaliesDetected: 1,
         sensorIntegrity: "PRS Telemetry Stream Online"
       },
+      parameter: "Regulated Network Pressure",
+      observedValue: "19.4 bar",
+      expectedRange: "14.0 – 16.0 bar",
+      deviation: "+21.2% Surge",
       indicators: [
         "Secondary pressure reduction slam-shut valve operated 2 times during midnight low-consumption window.",
         "Pilot diaphragm response latency delayed by 4.2 seconds beyond manufacturer safety limits.",
@@ -186,6 +210,10 @@
         anomaliesDetected: 0,
         sensorIntegrity: "Enraf Radar Gauge Calibrated"
       },
+      parameter: "ATG Radar Level & Temperature",
+      observedValue: "45,800 MT / 29.4 deg C",
+      expectedRange: "45,650 – 45,950 MT",
+      deviation: "+0.3% (Compliant)",
       indicators: [
         "Tank inventory mass balance reconciled with marine tanker offloading manifest.",
         "No vapor recovery system alarm or volatile organic emission detected."
@@ -210,6 +238,10 @@
         anomaliesDetected: 0,
         sensorIntegrity: "Triple Redundant Piezometer Sensors"
       },
+      parameter: "Water Curtain Pressure & Seepage",
+      observedValue: "9.2 bar / 0.4 L/min",
+      expectedRange: ">= 8.5 bar / <= 2.5 L/min",
+      deviation: "Nominal Containment",
       indicators: [
         "Underground rock cavern water curtain containment curtain holding at designated hydrostatic gradient.",
         "Piezometric water table levels surrounding Padur facility verified within statutory parameters."
@@ -233,6 +265,10 @@
         anomaliesDetected: 0,
         sensorIntegrity: "SCADA Node JH-08 Online"
       },
+      parameter: "Throughput & Operating Pressure",
+      observedValue: "11.2 MMSCMD / 74 bar",
+      expectedRange: "10.8 – 11.5 MMSCMD / 70 – 78 bar",
+      deviation: "+0.9% (Nominal)",
       indicators: [
         "Mass balance verified across fertilizer plant off-take terminals at Gorakhpur and Sindri.",
         "All telemetry verified against dispatch schedule."
@@ -257,6 +293,10 @@
         anomaliesDetected: 1,
         sensorIntegrity: "Rosen MFL Calibrated Run"
       },
+      parameter: "ILI Metal Loss Depth",
+      observedValue: "22% Wall Loss",
+      expectedRange: "<= 20% (ASME B31.8S O&M Threshold)",
+      deviation: "+2% Above Alert Threshold",
       indicators: [
         "In-line pigging telemetry recorded 22% localized wall loss at KM 42.8.",
         "Operating pressure lowered temporarily by 10 bar pending technical verification."
@@ -265,7 +305,7 @@
     }
   ];
 
-  // Initial Reports Repository
+  // --- 2. Initial Reports Repository ---
   const MOPNG_SEED_REPORTS = [
     {
       title: "Quarterly Hydrocarbon Pipeline Mass Balance Scrutiny Brief (Q2-2026)",
@@ -275,7 +315,7 @@
       status: "Officially Signed",
       createdBy: "Shri Rajesh K. Sharma, Director",
       classification: "OFFICIAL SECRET / RESTRICTED",
-      downloadUrl: "#"
+      period: "Q2 FY2025-26"
     },
     {
       title: "National City Gas Distribution (CGD) Allocation Discrepancy Scrutiny",
@@ -285,7 +325,7 @@
       status: "Published to Ministry",
       createdBy: "Technical Audit Cell",
       classification: "CONFIDENTIAL",
-      downloadUrl: "#"
+      period: "Monthly - Aug 2026"
     },
     {
       title: "Strategic Petroleum Reserves (ISPRL) Padur Cavern Hydrostatic Audit",
@@ -295,7 +335,7 @@
       status: "Officially Signed",
       createdBy: "Joint Director (Safety & Security)",
       classification: "SECRET",
-      downloadUrl: "#"
+      period: "Annual Verification"
     },
     {
       title: "IOCL Mathura & Paradip Refinery Sulphur Spec Compliance Verification",
@@ -305,7 +345,7 @@
       status: "Action Pending",
       createdBy: "Environmental Monitoring Directorate",
       classification: "OFFICIAL / INTERNAL",
-      downloadUrl: "#"
+      period: "Bi-Weekly Batch Audit"
     },
     {
       title: "GAIL HVJ Trunk Pipeline Pressure Variance Technical Evaluation",
@@ -315,11 +355,11 @@
       status: "Officially Signed",
       createdBy: "Shri Rajesh K. Sharma, Director",
       classification: "RESTRICTED",
-      downloadUrl: "#"
+      period: "Incident Review"
     }
   ];
 
-  // Initial Operational Alerts
+  // --- 3. Initial Operational Alerts ---
   const MOPNG_SEED_ALERTS = [
     {
       id: "ALT-2026-01",
@@ -329,7 +369,9 @@
       description: "Batch PDR-BSVI-2026-B88 exceeds BIS IS 1460 ceiling of 10.0 ppm. Risk of environmental non-compliance and vehicular emissions.",
       timestamp: "03-Sep-2026 19:15 IST",
       acknowledged: false,
-      refId: "REC-2026-9022"
+      refId: "REC-2026-9022",
+      assignedOfficer: "Shri R. K. Sharma (Director)",
+      source: "Refinery Lab NABL Feed"
     },
     {
       id: "ALT-2026-02",
@@ -339,7 +381,9 @@
       description: "Unauthenticated batch dispatch logged without biometric Pahal tokens. Potential diversion to commercial un-metered consumers.",
       timestamp: "03-Sep-2026 17:30 IST",
       acknowledged: false,
-      refId: "REC-2026-9140"
+      refId: "REC-2026-9140",
+      assignedOfficer: "Shri R. K. Sharma (Director)",
+      source: "DBTL Weighbridge API"
     },
     {
       id: "ALT-2026-03",
@@ -349,7 +393,9 @@
       description: "Hazira vs Jagdishpur telemetry divergence exceeds PNGRB statutory tolerance of 1.2%. Pressure drop localized to VS-14.",
       timestamp: "03-Sep-2026 21:40 IST",
       acknowledged: false,
-      refId: "REC-2026-8841"
+      refId: "REC-2026-8841",
+      assignedOfficer: "Shri S. P. Nambiar (Chief Examiner)",
+      source: "SCADA RTU Grid"
     },
     {
       id: "ALT-2026-04",
@@ -359,7 +405,9 @@
       description: "Pressure reached 19.4 bar during midnight off-peak hours. Regulating pilot diaphragm response latency noted.",
       timestamp: "03-Sep-2026 11:20 IST",
       acknowledged: false,
-      refId: "REC-2026-9420"
+      refId: "REC-2026-9420",
+      assignedOfficer: "Shri S. P. Nambiar (Chief Examiner)",
+      source: "PRS SCADA Stream"
     },
     {
       id: "ALT-2026-05",
@@ -369,7 +417,9 @@
       description: "ILI Magnetic Flux Leakage pig recorded localized corrosion exceeding standard O&M 20% threshold.",
       timestamp: "02-Sep-2026 14:00 IST",
       acknowledged: false,
-      refId: "REC-2026-9840"
+      refId: "REC-2026-9840",
+      assignedOfficer: "Shri R. K. Sharma (Director)",
+      source: "In-Line Inspection Run"
     },
     {
       id: "ALT-2026-06",
@@ -379,7 +429,9 @@
       description: "Statutory monthly feed reconciliation ledger overdue by 48 hours pursuant to Petroleum Rules.",
       timestamp: "02-Sep-2026 10:15 IST",
       acknowledged: true,
-      refId: "REC-2026-9100"
+      refId: "REC-2026-9100",
+      assignedOfficer: "Shri R. K. Sharma (Director)",
+      source: "Ministry Portal Ingestion"
     },
     {
       id: "ALT-2026-07",
@@ -389,7 +441,9 @@
       description: "Ultrasonic density reading delta of 0.8% against fiscal custody transfer Coriolis meter.",
       timestamp: "01-Sep-2026 16:40 IST",
       acknowledged: true,
-      refId: "REC-2026-9210"
+      refId: "REC-2026-9210",
+      assignedOfficer: "Technical Audit Cell",
+      source: "Coriolis Flow Meter"
     },
     {
       id: "ALT-2026-08",
@@ -399,75 +453,84 @@
       description: "Compressor run-hours exceeded 4,000 hours. Scheduled preventative overhaul flagged.",
       timestamp: "01-Sep-2026 12:05 IST",
       acknowledged: true,
-      refId: "REC-2026-9050"
+      refId: "REC-2026-9050",
+      assignedOfficer: "Technical Audit Cell",
+      source: "Automated Tank Gauging"
     },
     {
       id: "ALT-2026-09",
-      severity: "INFORMATIONAL",
+      severity: "LOW",
       facility: "ISPRL Mangalore Cavern",
       title: "Periodic Cavern Water Curtain Pressure Sensor Re-Zeroing",
       description: "Automated hydrostatic pressure diagnostic executed normally. All piezometer readings nominal.",
       timestamp: "01-Sep-2026 08:00 IST",
       acknowledged: true,
-      refId: "REC-2026-9630"
+      refId: "REC-2026-9630",
+      assignedOfficer: "Safety & Security Cell",
+      source: "Piezometer Sensor Grid"
     }
   ];
 
-  // Initial Immutable NIC Audit Trail
+  // --- 4. Initial Immutable NIC Audit Trail ---
   const MOPNG_SEED_AUDIT = [
     {
       timestamp: "03-Sep-2026 21:42:15 IST",
-      ref: "AUD-8841-A",
-      actor: "PARAKH AI Rule Engine v3.2",
-      type: "ANOMALY_FLAGGED",
-      facility: "GAIL HVJ Sector 4B",
-      description: "Deterministic scrutiny detected 4.8% flow discrepancy between Hazira and Jagdishpur SCADA meters.",
-      hash: "SHA256:7e8a91c2...09b4",
+      user: "PARAKH AI Rule Engine v3.2",
+      action: "ANOMALY_FLAGGED",
+      module: "AI Compliance Scrutiny",
+      recordId: "REC-2026-8841",
+      prevStatus: "Under Scrutiny",
+      newStatus: "Flagged",
+      ipAddress: "10.24.112.44 (NIC Internal Node)",
       status: "ALERT"
     },
     {
       timestamp: "03-Sep-2026 19:20:04 IST",
-      ref: "AUD-9022-B",
-      actor: "NABL Lab Ingestion Service",
-      type: "SPEC_VIOLATION",
-      facility: "IOCL Paradip Terminal",
-      description: "Sulphur certificate extracted from PDF: 11.4 ppm. Flagged as exceeding BS-VI 10 ppm ceiling.",
-      hash: "SHA256:4b11f8e2...a12c",
+      user: "NABL Lab Ingestion Service",
+      action: "SPEC_VIOLATION",
+      module: "Production & Despatch",
+      recordId: "REC-2026-9022",
+      prevStatus: "Pending Audit",
+      newStatus: "Flagged",
+      ipAddress: "10.24.112.18 (Paradip Ref Node)",
       status: "CRITICAL"
     },
     {
       timestamp: "03-Sep-2026 17:35:12 IST",
-      ref: "AUD-9140-C",
-      actor: "DBTL Pahal Cross-Verify Connector",
-      type: "SUBSIDY_AUDIT",
-      facility: "IOCL LPG Kanpur",
-      description: "1,420 domestic subsidized cylinders failed biometric Aadhaar validation check.",
-      hash: "SHA256:92cb5830...3d71",
+      user: "DBTL Pahal Cross-Verify Connector",
+      action: "SUBSIDY_AUDIT",
+      module: "LPG Allocation",
+      recordId: "REC-2026-9140",
+      prevStatus: "Under Ingestion",
+      newStatus: "Flagged",
+      ipAddress: "10.24.110.82 (NIC Cloud Kanpur)",
       status: "CRITICAL"
     },
     {
       timestamp: "03-Sep-2026 15:15:00 IST",
-      ref: "AUD-9255-D",
-      actor: "Shri Rajesh K. Sharma (Director)",
-      type: "OFFICER_SIGNOFF",
-      facility: "ONGC Mumbai High B-17",
-      description: "Officer signed off on monthly offshore telemetry reconciliation dossier with digital token.",
-      hash: "DSIG-MOPNG-9255-88A1FF",
+      user: "Shri Rajesh K. Sharma (Director)",
+      action: "OFFICER_SIGNOFF",
+      module: "Decision Support",
+      recordId: "REC-2026-9255",
+      prevStatus: "Under Review",
+      newStatus: "Verified",
+      ipAddress: "10.24.100.05 (MoPNG Shastri Bhawan)",
       status: "SUCCESS"
     },
     {
       timestamp: "03-Sep-2026 11:30:22 IST",
-      ref: "AUD-9420-E",
-      actor: "SCADA Telemetry Daemon",
-      type: "TELEMETRY_INGEST",
-      facility: "GAIL Ahmedabad CGD",
-      description: "Ingested 14,400 raw pressure samples from Vatva PRS. Auto-integrity checksum confirmed.",
-      hash: "SHA256:1a82d004...bb72",
+      user: "SCADA Telemetry Daemon",
+      action: "TELEMETRY_INGEST",
+      module: "Telemetry Upload",
+      recordId: "REC-2026-9420",
+      prevStatus: "New Batch",
+      newStatus: "Under Scrutiny",
+      ipAddress: "10.24.115.60 (GAIL SCADA Node)",
       status: "SUCCESS"
     }
   ];
 
-  // --- Main Application State ---
+  // --- 5. Main Application Controller ---
   class ParakhApplication {
     constructor() {
       this.currentView = 'dashboard';
@@ -496,6 +559,7 @@
       this.isPipelineRunning = false;
       this.activeAlertFilter = 'ALL';
       this.currentLang = 'en';
+      this.activeAdminTab = 'users';
 
       this.init();
     }
@@ -511,9 +575,10 @@
       this.renderStructuredAiInsights();
       this.loadAnalysisCase('CASE-8841');
       this.refreshCaptcha();
+      this.setupDropzone();
     }
 
-    // --- Clock and Header Utilities ---
+    // --- Clock and Accessibility ---
     startLiveClock() {
       const update = () => {
         const now = new Date();
@@ -551,8 +616,7 @@
     }
 
     // --- Navigation & View Switching ---
-    switchView(viewName) {
-      // If user is logged out and tries to access portal view, keep on login
+    switchView(viewName, filterPsu = null) {
       if (!this.isLoggedIn && viewName !== 'login') {
         this.showLoginScreen();
         return;
@@ -598,7 +662,11 @@
       // Update sidebar active buttons
       const sidebarBtns = document.querySelectorAll('.sidebar-link-btn');
       sidebarBtns.forEach(btn => {
-        if (btn.getAttribute('data-view') === viewName) {
+        const btnView = btn.getAttribute('data-view');
+        const btnPsu = btn.getAttribute('data-psu');
+        if (filterPsu && btnPsu === filterPsu) {
+          btn.classList.add('active');
+        } else if (!filterPsu && btnView === viewName && !btnPsu) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
@@ -606,13 +674,19 @@
       });
 
       // Update Breadcrumbs
-      this.updateBreadcrumbs(viewName);
+      this.updateBreadcrumbs(viewName, filterPsu);
 
-      // Re-render views if needed
+      // Handle specific view hooks
       if (viewName === 'dashboard') {
         this.renderComplianceChart();
       } else if (viewName === 'records') {
-        this.renderRecordsTable();
+        if (filterPsu) {
+          const psuSelect = document.getElementById('filterPsuSelect');
+          if (psuSelect) psuSelect.value = filterPsu;
+          this.applyFilters();
+        } else {
+          this.renderRecordsTable();
+        }
       } else if (viewName === 'alerts') {
         this.renderAlerts();
       } else if (viewName === 'history') {
@@ -622,26 +696,27 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    updateBreadcrumbs(viewName) {
+    updateBreadcrumbs(viewName, filterPsu) {
       const parentEl = document.getElementById('breadcrumbParent');
       const currentEl = document.getElementById('breadcrumbCurrent');
       const timeEl = document.getElementById('breadcrumbTime');
 
       const viewLabels = {
-        'dashboard': { parent: 'Operational Portal', current: 'Dashboard Overview' },
-        'records': { parent: 'Data Management', current: 'Production & Despatch Records' },
-        'upload': { parent: 'Data Management', current: 'Statutory Data Ingestion' },
+        'dashboard': { parent: 'Operational Portal', current: 'Main Dashboard' },
+        'records': { parent: 'Data & Records', current: filterPsu ? `Production & Dispatch (${filterPsu})` : 'Production & Dispatch' },
+        'upload': { parent: 'Data & Records', current: 'Telemetry Upload' },
         'ai-analysis': { parent: 'Analysis & Insights', current: 'AI Compliance Scrutiny' },
         'ai-insights': { parent: 'Analysis & Insights', current: 'Structured AI Insights' },
-        'reports': { parent: 'Reports & Audits', current: 'Statutory Reports' },
-        'alerts': { parent: 'Monitoring & Control', current: 'Operational Alerts' },
-        'history': { parent: 'Monitoring & Control', current: 'NIC Audit History' },
-        'administration': { parent: 'System Administration', current: 'Portal Settings' },
+        'reports': { parent: 'Analysis & Insights', current: 'Statutory Reports' },
+        'alerts': { parent: 'Monitoring', current: 'Active Alerts' },
+        'history': { parent: 'Monitoring', current: 'Audit Trail' },
+        'administration': { parent: 'System', current: 'Administration' },
+        'settings': { parent: 'System', current: 'Portal Settings' },
         'login': { parent: 'Access Control', current: 'Officer Sign-In' }
       };
 
       const info = viewLabels[viewName] || { parent: 'Portal', current: viewName };
-      if (parentEl) parentEl.innerHTML = `<a href="javascript:void(0)">${info.parent}</a>`;
+      if (parentEl) parentEl.innerHTML = `<a href="javascript:void(0)" onclick="parakhApp.switchView('${viewName}')">${info.parent}</a>`;
       if (currentEl) currentEl.textContent = info.current;
       if (timeEl) timeEl.textContent = 'Refreshed: ' + new Date().toLocaleTimeString('en-GB') + ' IST';
     }
@@ -682,7 +757,7 @@
       if (roleEl) roleEl.textContent = this.currentUser.designation;
       if (authBtnText) authBtnText.textContent = 'Log Out';
 
-      this.addAuditEntry('OFFICER_LOGIN', 'Portal Access', `Successful authentication via NIC National Node by ${this.currentUser.name}`, 'INFO');
+      this.addAuditEntry('OFFICER_LOGIN', 'Access Control', `Successful authentication via NIC National Node by ${this.currentUser.name}`, 'SUCCESS');
       this.switchView('dashboard');
     }
 
@@ -704,7 +779,7 @@
 
     // --- Dashboard Rendering ---
     renderDashboard() {
-      // Render recent table
+      // Render recent activity table
       const tbody = document.getElementById('dashboardRecentTbody');
       if (!tbody) return;
 
@@ -728,11 +803,11 @@
           <td><strong>${rec.id}</strong></td>
           <td>${rec.category}</td>
           <td><strong>${rec.psu}</strong> — ${rec.facility}</td>
-          <td style="font-size:11px; color:#4a5968;">${rec.dataSource}</td>
+          <td style="font-size:11.5px; color:#475569;">${rec.dataSource}</td>
           <td><span class="badge ${badgeCls}">${rec.status}</span></td>
           <td><span class="badge ${riskCls}">${rec.riskLevel}</span></td>
-          <td style="font-size:11px; color:#184534;"><strong>${rec.aiResult}</strong></td>
-          <td style="font-size:11px; white-space:nowrap;">${rec.date}</td>
+          <td style="font-size:11.5px; color:#0A243F;"><strong>${rec.aiResult}</strong></td>
+          <td style="font-size:11.5px; white-space:nowrap;">${rec.date}</td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="parakhApp.openRecordModal('${rec.id}')">View Details</button>
           </td>
@@ -748,19 +823,19 @@
 
         unacked.forEach(alt => {
           const item = document.createElement('div');
-          item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#faf8f2; border:1px solid #ded5c2; padding:6px 10px; border-radius:3px; gap:8px;";
+          item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#F8FAFC; border:1px solid #CBD5E1; padding:7px 12px; border-radius:3px; gap:8px;";
 
-          let sevBadge = alt.severity === 'CRITICAL' ? 'badge-critical' : 'badge-high';
+          let sevBadge = alt.severity === 'CRITICAL' ? 'badge-critical' : alt.severity === 'HIGH' ? 'badge-high' : 'badge-medium';
 
           item.innerHTML = `
             <div style="display:flex; align-items:center; gap:8px; flex:1;">
               <span class="badge ${sevBadge}">${alt.severity}</span>
-              <div style="font-size:12px;">
+              <div style="font-size:12.5px;">
                 <strong>${alt.facility}:</strong> ${alt.title}
-                <span style="font-size:10px; color:#687786; margin-left:6px;">[${alt.timestamp}]</span>
+                <span style="font-size:11px; color:#64748B; margin-left:6px;">[${alt.timestamp}]</span>
               </div>
             </div>
-            <div style="display:flex; gap:4px;">
+            <div style="display:flex; gap:5px;">
               <button class="btn btn-accent btn-sm" onclick="parakhApp.openRecordModal('${alt.refId}')">Scrutinize</button>
               <button class="btn btn-secondary btn-sm" onclick="parakhApp.acknowledgeAlert('${alt.id}')">Acknowledge</button>
             </div>
@@ -770,7 +845,7 @@
       }
     }
 
-    // --- Traditional Canvas Chart (Restrained 2012-2018 Enterprise Style) ---
+    // --- Traditional Canvas Chart (Restrained 2012-2018 Style) ---
     renderComplianceChart() {
       const canvas = document.getElementById('complianceChartCanvas');
       if (!canvas) return;
@@ -780,8 +855,8 @@
       const w = canvas.width;
       const h = canvas.height;
 
-      // Clear canvas with subtle off-white government background
-      ctx.fillStyle = '#FAF9F5';
+      // Clear canvas with crisp off-white background
+      ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(0, 0, w, h);
 
       // Data setup: 6 months of FY 2025-26
@@ -789,7 +864,6 @@
       const psuSelect = document.getElementById('chartPsuFilter');
       const filter = psuSelect ? psuSelect.value : 'ALL';
 
-      // Bar data (Despatch Volume in TMT/MMSCMD equivalent index)
       let volumeData = [124, 138, 142, 135, 148, 154];
       let complianceRate = [82, 85, 87, 84, 89, 91];
 
@@ -809,9 +883,9 @@
       const chartW = w - padLeft - padRight;
       const chartH = h - padTop - padBottom;
 
-      // Draw Grid Lines (1px subtle beige/slate)
+      // Draw Grid Lines
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#E0D8C4';
+      ctx.strokeStyle = '#E2E8F0';
 
       const gridSteps = 4;
       for (let i = 0; i <= gridSteps; i++) {
@@ -823,19 +897,19 @@
 
         // Left axis labels (Volume)
         ctx.fillStyle = '#123B63';
-        ctx.font = '10px Arial';
+        ctx.font = '10.5px Arial';
         ctx.textAlign = 'right';
         const val = Math.round(200 - (200 / gridSteps) * i);
         ctx.fillText(val.toString(), padLeft - 6, y + 3);
 
         // Right axis labels (Compliance %)
-        ctx.fillStyle = '#397B63';
+        ctx.fillStyle = '#C25E00';
         ctx.textAlign = 'left';
         const pct = Math.round(100 - (50 / gridSteps) * i);
         ctx.fillText(pct + '%', w - padRight + 6, y + 3);
       }
 
-      // Draw Bars (Deep Navy #123B63 with subtle 1px border)
+      // Draw Bars (Deep Navy #123B63)
       const numPoints = months.length;
       const slotW = chartW / numPoints;
       const barW = slotW * 0.45;
@@ -845,30 +919,27 @@
         const barH = (volumeData[idx] / 200) * chartH;
         const y = padTop + chartH - barH;
 
-        // Solid Navy bar
         ctx.fillStyle = '#123B63';
         ctx.fillRect(x, y, barW, barH);
 
-        // Subtle 1px darker border
-        ctx.strokeStyle = '#0b2540';
+        ctx.strokeStyle = '#0A243F';
         ctx.strokeRect(x, y, barW, barH);
 
         // X-axis label
-        ctx.fillStyle = '#334155';
-        ctx.font = '10px Arial';
+        ctx.fillStyle = '#475569';
+        ctx.font = '10.5px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(m, x + barW / 2, h - padBottom + 16);
       });
 
-      // Draw Compliance Line (Petroleum Green #397B63)
+      // Draw Compliance Line (Saffron / Amber #C25E00)
       ctx.beginPath();
       ctx.lineWidth = 2.5;
-      ctx.strokeStyle = '#397B63';
+      ctx.strokeStyle = '#C25E00';
 
       const linePoints = [];
       months.forEach((m, idx) => {
         const x = padLeft + slotW * idx + slotW / 2;
-        // 50% to 100% scale
         const pct = complianceRate[idx];
         const normalized = (pct - 50) / 50;
         const y = padTop + chartH - normalized * chartH;
@@ -879,17 +950,16 @@
       });
       ctx.stroke();
 
-      // Draw line points (Rectangles / squares in authentic 2014 style)
+      // Draw line points (Squares)
       linePoints.forEach(pt => {
         ctx.fillStyle = '#FFFFFF';
-        ctx.strokeStyle = '#397B63';
+        ctx.strokeStyle = '#C25E00';
         ctx.lineWidth = 2;
         ctx.fillRect(pt.x - 3, pt.y - 3, 6, 6);
         ctx.strokeRect(pt.x - 3, pt.y - 3, 6, 6);
 
-        // Value text
-        ctx.fillStyle = '#275E4A';
-        ctx.font = 'bold 9px Arial';
+        ctx.fillStyle = '#9A4A00';
+        ctx.font = 'bold 9.5px Arial';
         ctx.textAlign = 'center';
         ctx.fillText(pt.val + '%', pt.x, pt.y - 6);
       });
@@ -948,11 +1018,11 @@
           <td><strong>${rec.id}</strong></td>
           <td>${rec.category}</td>
           <td><strong>${rec.psu}</strong> — ${rec.facility}</td>
-          <td style="font-size:11px; color:#4a5968;">${rec.dataSource}</td>
+          <td style="font-size:11.5px; color:#475569;">${rec.dataSource}</td>
           <td><span class="badge ${badgeCls}">${rec.status}</span></td>
           <td><span class="badge ${riskCls}">${rec.riskLevel}</span></td>
-          <td style="font-size:11px; color:#184534;"><strong>${rec.aiResult}</strong></td>
-          <td style="font-size:11px; white-space:nowrap;">${rec.date}</td>
+          <td style="font-size:11.5px; color:#0A243F;"><strong>${rec.aiResult}</strong></td>
+          <td style="font-size:11.5px; white-space:nowrap;">${rec.date}</td>
           <td>
             <button class="btn btn-secondary btn-sm" onclick="parakhApp.openRecordModal('${rec.id}')">View Details</button>
           </td>
@@ -983,7 +1053,6 @@
       };
       container.appendChild(prevBtn);
 
-      // Page numbers
       for (let p = 1; p <= totalPages; p++) {
         const btn = document.createElement('button');
         btn.className = `page-btn ${p === this.recordsCurrentPage ? 'active' : ''}`;
@@ -1046,8 +1115,9 @@
     }
 
     filterRecordsByPsu(psuName) {
-      this.switchView('records');
-      document.getElementById('filterPsuSelect').value = psuName;
+      this.switchView('records', psuName);
+      const sel = document.getElementById('filterPsuSelect');
+      if (sel) sel.value = psuName;
       this.applyFilters();
     }
 
@@ -1103,38 +1173,38 @@
       let telemetryRows = '';
       if (rec.telemetry) {
         for (const [k, v] of Object.entries(rec.telemetry)) {
-          telemetryRows += `<tr><td style="font-weight:bold; width:40%; background:#f6f4ee;">${k}:</td><td>${v}</td></tr>`;
+          telemetryRows += `<tr><td style="font-weight:bold; width:40%; background:#F8FAFC;">${k}:</td><td>${v}</td></tr>`;
         }
       }
 
       let indicatorsHtml = '';
       if (rec.indicators && rec.indicators.length) {
-        indicatorsHtml = `<ul style="list-style:disc; margin-left:18px; display:flex; flex-direction:column; gap:4px; font-size:12px; color:#1C2B39;">` +
+        indicatorsHtml = `<ul style="list-style:disc; margin-left:18px; display:flex; flex-direction:column; gap:5px; font-size:12.5px; color:#0F172A;">` +
           rec.indicators.map(i => `<li>${i}</li>`).join('') + `</ul>`;
       }
 
       if (bodyEl) {
         bodyEl.innerHTML = `
-          <div style="background:#FAF8F2; border:1px solid #ded5bf; padding:10px; border-radius:3px;">
+          <div style="background:#F8FAFC; border:1px solid #CBD5E1; padding:11px; border-radius:3px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <span style="font-size:14px; font-weight:bold; color:#123B63;">${rec.psu} — ${rec.facility}</span>
               <span class="badge ${rec.riskLevel === 'High' ? 'badge-critical' : rec.riskLevel === 'Medium' ? 'badge-high' : 'badge-success'}">${rec.riskLevel} RISK</span>
             </div>
-            <div style="font-size:12px; color:#556877;">
+            <div style="font-size:12px; color:#475569;">
               Category: <strong>${rec.category}</strong> | Data Stream: <strong>${rec.dataSource}</strong> | Ingestion: ${rec.date}
             </div>
           </div>
 
-          <div style="border:1px solid #397B63; background:#F5F9F7; padding:10px; border-radius:3px;">
-            <div style="font-size:11px; font-weight:bold; color:#275E4A; text-transform:uppercase;">Deterministic AI Assessment Result</div>
-            <div style="font-size:13px; font-weight:bold; color:#123B63; margin:3px 0;">${rec.aiResult}</div>
-            <div style="font-size:12px; color:#275E4A; margin-top:4px;">
+          <div style="border:1px solid #C25E00; background:#FFFBEB; padding:11px; border-radius:3px;">
+            <div style="font-size:11px; font-weight:bold; color:#92400E; text-transform:uppercase;">Deterministic AI Assessment Result</div>
+            <div style="font-size:13.5px; font-weight:bold; color:#123B63; margin:4px 0;">${rec.aiResult}</div>
+            <div style="font-size:12.5px; color:#92400E; margin-top:4px;">
               <strong>Recommendation:</strong> ${rec.recommendation || 'Continuous telemetry monitoring.'}
             </div>
           </div>
 
           <div>
-            <div style="font-size:12px; font-weight:bold; color:#123B63; margin-bottom:4px; text-transform:uppercase;">Technical Telemetry & Sensor Readings</div>
+            <div style="font-size:12px; font-weight:bold; color:#123B63; margin-bottom:5px; text-transform:uppercase;">Technical Telemetry & Observed Readings</div>
             <div class="table-responsive">
               <table class="table-gov">
                 <tbody>${telemetryRows}</tbody>
@@ -1143,7 +1213,7 @@
           </div>
 
           <div>
-            <div style="font-size:12px; font-weight:bold; color:#123B63; margin-bottom:4px; text-transform:uppercase;">Key Discrepancy Indicators & Evidence Snippets</div>
+            <div style="font-size:12px; font-weight:bold; color:#123B63; margin-bottom:5px; text-transform:uppercase;">Key Discrepancy Indicators & Statutory Notes</div>
             ${indicatorsHtml}
           </div>
         `;
@@ -1158,7 +1228,6 @@
       if (modal) modal.classList.remove('active');
     }
 
-    // --- Officer Sign-Off Flow ---
     openOfficerSignOffFromModal() {
       if (!this.currentSelectedRecord) return;
       this.closeRecordModal();
@@ -1187,12 +1256,16 @@
       }
 
       if (this.currentSelectedRecord) {
+        const prevStatus = this.currentSelectedRecord.status;
         const newStatus = decision === 'APPROVE' ? 'Verified' : decision === 'REJECT' ? 'Compliant' : 'Under Scrutiny';
         this.currentSelectedRecord.status = newStatus;
+        
         this.addAuditEntry(
           'OFFICER_DECISION',
-          this.currentSelectedRecord.facility,
-          `Statutory Decision [${decision}] recorded by ${this.currentUser.name}. Remark: "${remark}"`,
+          'Decision Support',
+          this.currentSelectedRecord.id,
+          prevStatus,
+          newStatus,
           decision === 'APPROVE' ? 'SUCCESS' : 'ALERT'
         );
       }
@@ -1203,7 +1276,46 @@
       alert(`Officer Decision successfully registered with Ministry Digital Signature.`);
     }
 
-    // --- Data Upload Handler ---
+    // --- Drag & Drop Data Upload Setup ---
+    setupDropzone() {
+      const dropzone = document.getElementById('uploadDropzone');
+      const fileInput = document.getElementById('uploadFileInput');
+      if (!dropzone || !fileInput) return;
+
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+      });
+
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          this.updateDropzoneLabel(fileInput.files[0].name);
+        }
+      });
+
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+          this.updateDropzoneLabel(fileInput.files[0].name);
+        }
+      });
+    }
+
+    updateDropzoneLabel(fileName) {
+      const label = document.getElementById('uploadDropzoneFilename');
+      if (label) {
+        label.innerHTML = `<strong>Selected file:</strong> <span style="color:#123B63;">${fileName}</span>`;
+      }
+    }
+
     handleDataUpload(e) {
       if (e) e.preventDefault();
       const psu = document.getElementById('uploadPsuSelect').value;
@@ -1213,7 +1325,7 @@
       const fileInput = document.getElementById('uploadFileInput');
 
       if (!fileInput.files.length) {
-        alert("Please select a valid data file.");
+        alert("Please select or drop a valid telemetry/manifest data file.");
         return;
       }
 
@@ -1223,8 +1335,10 @@
       const progressLabel = document.getElementById('uploadProgressLabel');
       const progressPercent = document.getElementById('uploadProgressPercent');
       const submitBtn = document.getElementById('uploadSubmitBtn');
+      const successState = document.getElementById('uploadSuccessState');
 
       if (progressContainer) progressContainer.style.display = 'block';
+      if (successState) successState.style.display = 'none';
       if (submitBtn) submitBtn.disabled = true;
 
       let pct = 10;
@@ -1239,10 +1353,11 @@
           if (progressLabel) progressLabel.textContent = 'Ingestion complete: SHA-256 Checksum Verified (Integrity: PASSED)';
 
           setTimeout(() => {
-            // Add new record to seed database
-            const newId = `REC-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+            const newBatchId = `BATCH-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+            const newRecordId = `REC-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
             const newRecord = {
-              id: newId,
+              id: newRecordId,
               category: category,
               psu: psu,
               facility: facility,
@@ -1253,11 +1368,16 @@
               date: new Date().toISOString().slice(0,10) + " " + new Date().toLocaleTimeString('en-GB').slice(0,5) + " IST",
               telemetry: {
                 fileName: file.name,
+                batchId: newBatchId,
                 fileSize: (file.size / 1024).toFixed(1) + " KB",
                 recordsIngested: 1240,
                 checksum: "SHA256:88a1c9e0" + Math.floor(1000 + Math.random() * 9000),
                 ingestionNode: "MoPNG-NIC-DEL04"
               },
+              parameter: "SCADA Telemetry Batch",
+              observedValue: "1,240 Samples",
+              expectedRange: "Full Time-Series",
+              deviation: "Awaiting Scrutiny",
               indicators: [
                 `File ${file.name} ingested successfully under regulatory classification ${category}.`,
                 "SHA-256 cryptographic checksum matches transmission manifest.",
@@ -1268,28 +1388,48 @@
 
             this.records.unshift(newRecord);
             this.filteredRecords = [...this.records];
-            this.addAuditEntry('DATA_INGESTION', facility, `Batch file ${file.name} ingested for ${psu}. Record ${newId} created.`, 'SUCCESS');
+            
+            this.addAuditEntry(
+              'DATA_INGESTION',
+              'Telemetry Upload',
+              newRecordId,
+              'New Batch',
+              'Under Scrutiny',
+              'SUCCESS'
+            );
 
             if (submitBtn) submitBtn.disabled = false;
             if (progressContainer) progressContainer.style.display = 'none';
 
-            alert(`Batch Ingestion Successful!\nRecord ID: ${newId}\nCryptographic Integrity: PASSED`);
-            this.switchView('records');
-          }, 600);
+            // Show Successful Upload State Card
+            if (successState) {
+              document.getElementById('successBatchId').textContent = newBatchId;
+              document.getElementById('successRecordId').textContent = newRecordId;
+              document.getElementById('successUploadedBy').textContent = this.currentUser.name;
+              document.getElementById('successTimestamp').textContent = newRecord.date;
+              document.getElementById('successSource').textContent = `${psu} (${dataStream})`;
+              document.getElementById('successFileName').textContent = file.name;
+              successState.style.display = 'block';
+            }
+          }, 500);
         } else {
           if (progressBar) progressBar.style.width = pct + '%';
           if (progressPercent) progressPercent.textContent = pct + '%';
         }
-      }, 300);
+      }, 250);
     }
 
     resetUploadForm() {
       document.getElementById('uploadDataForm').reset();
       const progressContainer = document.getElementById('uploadProgressContainer');
+      const successState = document.getElementById('uploadSuccessState');
+      const filenameLabel = document.getElementById('uploadDropzoneFilename');
       if (progressContainer) progressContainer.style.display = 'none';
+      if (successState) successState.style.display = 'none';
+      if (filenameLabel) filenameLabel.innerHTML = 'Drag & drop telemetry files here, or <span style="text-decoration:underline;">browse computer</span>';
     }
 
-    // --- Multi-Stage AI Analysis Scrutiny Execution ---
+    // --- Multi-Stage AI Compliance Scrutiny ---
     onAnalysisCaseSelect() {
       const sel = document.getElementById('analysisCaseSelect');
       if (sel) {
@@ -1309,6 +1449,11 @@
           confidence: 87,
           severity: "Medium",
           severityBadge: "badge-high",
+          parameter: "Mass Flow Balance & In-Line Pressure",
+          observed: "13.54 MMSCMD / 4.2 bar drop",
+          expected: "14.05 – 14.30 MMSCMD / 2.1 bar drop",
+          deviation: "-4.8% Flow Mismatch",
+          clause: "PNGRB Technical Standards Regulation 4(2)(b)",
           indicators: [
             "Input telemetry at Hazira compressor shows 4.8% divergence against downstream Jagdishpur terminal meter (statutory PNGRB limit <= 1.2%).",
             "Transient localized pressure drop recorded between Valve Station VS-14 and VS-16 without off-take logged in daily manifest.",
@@ -1322,6 +1467,11 @@
           confidence: 96,
           severity: "High",
           severityBadge: "badge-critical",
+          parameter: "Diesel Sulphur Content (XRF)",
+          observed: "11.4 ppm",
+          expected: "<= 10.0 ppm (Ceiling)",
+          deviation: "+14.0% Over Mandatory Limit",
+          clause: "Bureau of Indian Standards (BIS) IS 1460:2020",
           indicators: [
             "Despatch batch sulphur content recorded at 11.4 ppm, exceeding mandatory BS-VI ceiling under Environment Protection Rules.",
             "Refinery primary hydrocracker sensor log showed brief catalyst bed temperature dip 4 hours prior to blending batch sign-off.",
@@ -1335,6 +1485,11 @@
           confidence: 91,
           severity: "High",
           severityBadge: "badge-critical",
+          parameter: "Biometric DBTL Verification",
+          observed: "26,980 Verified Dispenses",
+          expected: "28,400 Total Dispatched",
+          deviation: "1,420 Unauthenticated Cylinders (5.0%)",
+          clause: "Direct Benefit Transfer for LPG (DBTL Pahal) Guidelines",
           indicators: [
             "1,420 subsidized domestic LPG cylinders dispatched without corresponding Aadhaar authentication tokens in PMUY database.",
             "Geographic clustering of repeat bookings within 48 hours detected across three commercial highway distributors.",
@@ -1348,6 +1503,11 @@
           confidence: 94,
           severity: "Low",
           severityBadge: "badge-success",
+          parameter: "Subsea Multi-Phase Production Rate",
+          observed: "38,200 BBL/day / 184 bar",
+          expected: "37,500 – 39,000 BBL/day / 180 – 190 bar",
+          deviation: "+0.6% Nominal Variance",
+          clause: "Oilfield Hydrocarbon Accounting Protocol Section 12",
           indicators: [
             "Wellhead multi-phase flow rates align within 0.6% tolerance against Uran coastal terminal receipt meters.",
             "Subsea choke valve pressure differential exhibits stable laminar profile over continuous 72-hour operational cycle.",
@@ -1364,58 +1524,85 @@
       container.innerHTML = `
         <div class="panel ai-insight-panel">
           <div class="panel-header">
-            <span>AI ANALYSIS RESULT — INCIDENT REF: ${caseId}</span>
+            <span>AI COMPLIANCE FINDINGS & STATUTORY DOSSIER — ${caseId}</span>
             <span class="ai-tag">${cData.target}</span>
           </div>
           <div class="panel-body">
             <div class="ai-result-block">
               <div class="ai-assessment-box">
-                <div style="font-size:11px; font-weight:bold; color:#123B63; text-transform:uppercase;">AI Analysis Result</div>
-                <div style="font-size:14px; font-weight:bold; color:#214c3a; margin-top:2px;">
-                  Assessment: ${cData.assessment}
+                <div style="font-size:11px; font-weight:bold; color:#123B63; text-transform:uppercase;">Statutory Compliance Assessment</div>
+                <div style="font-size:14px; font-weight:bold; color:#123B63; margin-top:3px;">
+                  ${cData.assessment}
                 </div>
               </div>
 
-              <div class="ai-metric-row">
+              <!-- Parameter Comparison Table -->
+              <div class="table-responsive" style="margin-top:2px;">
+                <table class="table-gov">
+                  <thead>
+                    <tr>
+                      <th>Evaluated Parameter</th>
+                      <th>Observed Telemetry</th>
+                      <th>Permissible Range</th>
+                      <th>Measured Deviation</th>
+                      <th>Governing Clause</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>${cData.parameter}</strong></td>
+                      <td style="color:#C25E00; font-weight:bold;">${cData.observed}</td>
+                      <td>${cData.expected}</td>
+                      <td><span class="badge ${cData.severityBadge}">${cData.deviation}</span></td>
+                      <td style="font-size:11.5px; color:#475569;">${cData.clause}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="ai-metric-row" style="margin-top:4px;">
                 <div class="ai-metric-col">
-                  <span class="ai-metric-label">Confidence</span>
+                  <span class="ai-metric-label">Confidence Score</span>
                   <div class="ai-metric-value">${cData.confidence}%</div>
                   <div class="confidence-bar-wrap">
                     <div class="confidence-bar-fill" style="width: ${cData.confidence}%;"></div>
                   </div>
                 </div>
                 <div class="ai-metric-col">
-                  <span class="ai-metric-label">Severity</span>
-                  <div class="ai-metric-value"><span class="badge ${cData.severityBadge}">${cData.severity}</span></div>
+                  <span class="ai-metric-label">Risk Classification</span>
+                  <div class="ai-metric-value"><span class="badge ${cData.severityBadge}">${cData.severity} RISK</span></div>
                 </div>
                 <div class="ai-metric-col">
-                  <span class="ai-metric-label">Deterministic Engine</span>
-                  <div style="font-size:12px; font-weight:bold; color:#123B63;">PNGRB Rule Matrix v3.2</div>
+                  <span class="ai-metric-label">Scrutiny Engine</span>
+                  <div style="font-size:12.5px; font-weight:bold; color:#123B63;">Deterministic Rule Matrix v3.2</div>
                 </div>
               </div>
 
               <div>
-                <div style="font-size:11px; font-weight:bold; color:#123B63; margin-bottom:4px; text-transform:uppercase;">Key Indicators:</div>
+                <div style="font-size:12px; font-weight:bold; color:#123B63; margin-bottom:5px; text-transform:uppercase;">Synthesized Discrepancy Evidence:</div>
                 <ul class="ai-indicator-list">
                   ${cData.indicators.map(i => `<li class="ai-indicator-item">${i}</li>`).join('')}
                 </ul>
               </div>
 
               <div class="ai-recommendation-box">
-                <strong>Recommendation:</strong>
+                <strong>Recommended Statutory Action:</strong>
                 ${cData.recommendation}
               </div>
 
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; flex-wrap:wrap; gap:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:8px;">
                 <div style="display:flex; gap:6px;">
                   <button class="btn btn-accent btn-sm" onclick="parakhApp.endorseAiFinding('${caseId}')">
                     [ Endorse Finding & Issue Direction ]
                   </button>
                   <button class="btn btn-secondary btn-sm" onclick="parakhApp.requestReaudit('${caseId}')">
-                    [ Request Sensor Re-Audit ]
+                    [ Request Calibration Re-Audit ]
+                  </button>
+                  <button class="btn btn-primary btn-sm" onclick="parakhApp.openOfficerSignOffModal()">
+                    [ Record Final Sign-Off ]
                   </button>
                 </div>
-                <span style="font-size:11px; color:#556877;">Verification Hub: MCA21, GSTN, SCADA & PNGRB Grid</span>
+                <span style="font-size:11px; color:#64748B;">Multi-Source Verification: PNGRB Grid, SCADA & NABL Hub</span>
               </div>
             </div>
           </div>
@@ -1443,12 +1630,11 @@
         { id: 'pipeStage5', statusId: 'pipeStage5Status', label: 'Dossier Assembled (210ms)' }
       ];
 
-      // Reset cards
       stages.forEach(s => {
         const el = document.getElementById(s.statusId);
         if (el) {
           el.textContent = 'Queued...';
-          el.style.color = '#536270';
+          el.style.color = '#64748B';
         }
       });
 
@@ -1468,19 +1654,18 @@
             const prevEl = document.getElementById(prev.statusId);
             if (prevEl) {
               prevEl.textContent = '✓ COMPLETED';
-              prevEl.style.color = '#275E4A';
+              prevEl.style.color = '#166534';
               prevEl.style.fontWeight = 'bold';
             }
           }
           currentStageIdx++;
         } else {
           clearInterval(stepInterval);
-          // Complete last stage
           const last = stages[stages.length - 1];
           const lastEl = document.getElementById(last.statusId);
           if (lastEl) {
             lastEl.textContent = '✓ COMPLETED';
-            lastEl.style.color = '#275E4A';
+            lastEl.style.color = '#166534';
             lastEl.style.fontWeight = 'bold';
           }
 
@@ -1493,21 +1678,25 @@
 
           this.addAuditEntry(
             'AI_SCRUTINY_RUN',
+            'AI Compliance Scrutiny',
             this.currentAnalysisCase,
-            `5-stage scrutiny pipeline completed across 14,400 sensor records. Anomaly classification confirmed.`,
+            'Under Scrutiny',
+            'Dossier Generated',
             'SUCCESS'
           );
 
           this.loadAnalysisCase(this.currentAnalysisCase);
         }
-      }, 400);
+      }, 350);
     }
 
     endorseAiFinding(caseId) {
       this.addAuditEntry(
         'OFFICER_ENDORSEMENT',
+        'Decision Support',
         caseId,
-        `Finding endorsed by ${this.currentUser.name}. Formal inspection team ordered pursuant to PNGRB Gazette notice.`,
+        'Under Scrutiny',
+        'Endorsed',
         'SUCCESS'
       );
       alert(`AI Finding for ${caseId} officially endorsed by ${this.currentUser.name}.\nStatutory inspection directive dispatched.`);
@@ -1516,132 +1705,167 @@
     requestReaudit(caseId) {
       this.addAuditEntry(
         'RE_AUDIT_REQUEST',
+        'Decision Support',
         caseId,
-        `Re-calibration and manual sensor check ordered by ${this.currentUser.name}.`,
+        'Under Scrutiny',
+        'Re-Audit Requested',
         'ALERT'
       );
       alert(`Re-audit directive issued for ${caseId}.\nOperating PSU has 48 hours to submit re-calibrated sensor certificates.`);
     }
 
-    // --- Structured AI Insights View (Prompt-specified structure) ---
+    // --- Structured AI Insights View (Cards & Comparison Table) ---
     renderStructuredAiInsights() {
       const container = document.getElementById('insightsCardContainer');
-      if (!container) return;
+      const tableBody = document.getElementById('insightsTableBody');
 
       const insightsList = [
         {
-          ref: "INSIGHT-2026-PNG-01",
-          target: "GAIL HVJ Trunk Pipeline Sector 4B",
-          assessment: "Potential flow discrepancy and pressure divergence detected",
-          confidence: 87,
+          anomaly: "Mass Flow Inflow-Outflow Mismatch (> 4.8%)",
           severity: "Medium",
           severityBadge: "badge-high",
-          indicators: [
-            "Input telemetry at Hazira compressor station deviates from downstream Jagdishpur terminal meter by 4.8% (statutory limit <= 1.2%).",
-            "SCADA pressure curve exhibits localized depression between Valve Station VS-14 and VS-16 without corresponding off-take in manifest.",
-            "Gas chromatograph density sample indicates minor thermal variance compared to refinery test cert."
-          ],
-          recommendation: "Immediate physical ultrasonic valve inspection at Valve Station VS-14 recommended before subsequent transmission batch."
+          facility: "GAIL HVJ Trunk Sector 4B",
+          parameter: "Mass Flow Balance",
+          observed: "13.54 MMSCMD",
+          expected: "14.05 – 14.30 MMSCMD",
+          deviation: "-4.8% divergence",
+          aiFinding: "Localized pressure depression between VS-14 and VS-16 without off-take recorded in manifest.",
+          recommendation: "Immediate physical ultrasonic valve inspection at Valve Station VS-14 recommended."
         },
         {
-          ref: "INSIGHT-2026-PNG-02",
-          target: "IOCL Paradip Refinery (BS-VI Diesel Despatch)",
-          assessment: "Sulphur specification margin exceeded (11.4 ppm vs 10.0 ppm max)",
-          confidence: 96,
+          anomaly: "Sulphur Content Spec Ceiling Exceeded",
           severity: "High",
           severityBadge: "badge-critical",
-          indicators: [
-            "Despatch batch sulphur content recorded at 11.4 ppm, exceeding mandatory BS-VI ceiling of 10.0 ppm under Environment Protection Rules.",
-            "Refinery hydrocracker sensor log showed brief catalyst bed temperature dip 4 hours prior to blending batch sign-off.",
-            "Downstream terminal containment protocol activated."
-          ],
-          recommendation: "Quarantine Batch PDR-BSVI-2026-B88 at downstream Cuttack depot for mandatory re-hydrotreating and lab re-certification."
+          facility: "IOCL Paradip Refinery Terminal B",
+          parameter: "Sulphur Content (XRF)",
+          observed: "11.4 ppm",
+          expected: "<= 10.0 ppm (BIS IS 1460)",
+          deviation: "+14.0% above limit",
+          aiFinding: "Hydrocracker temperature excursion resulted in off-spec sulphur release before containment cutoff.",
+          recommendation: "Quarantine Batch PDR-BSVI-2026-B88 at downstream depot for re-hydrotreating."
         },
         {
-          ref: "INSIGHT-2026-PNG-03",
-          target: "Subsidized LPG Bottling Plant - Kanpur Rural",
-          assessment: "Subsidy diversion pattern flagged (1,420 cylinders unaccounted)",
-          confidence: 91,
+          anomaly: "Subsidized Domestic LPG Allocation Divergence",
           severity: "High",
           severityBadge: "badge-critical",
-          indicators: [
-            "1,420 subsidized domestic LPG cylinders dispatched without corresponding Aadhaar authentication tokens in PMUY database.",
-            "Geographic clustering of repeat bookings within 48 hours detected across three commercial highway distributors.",
-            "Weighbridge RFID logs exhibit timing discrepancies with gate security register."
-          ],
-          recommendation: "Issue immediate statutory show-cause notice to Agency UP-KNP-104 and dispatch Ministry Vigilance inspection team."
+          facility: "IOCL Bottling Plant Kanpur",
+          parameter: "DBTL Pahal Authenticated Dispenses",
+          observed: "26,980 Dispenses",
+          expected: "28,400 Dispenses",
+          deviation: "-1,420 Cylinders (5.0%)",
+          aiFinding: "1,420 subsidized cylinders dispatched without Aadhaar authentication tokens; commercial diversion suspected.",
+          recommendation: "Issue show-cause notice to Agency UP-KNP-104 and dispatch Ministry Vigilance team."
         },
         {
-          ref: "INSIGHT-2026-PNG-04",
-          target: "ONGC Mumbai High Offshore Platform B-17",
-          assessment: "Subsea wellhead flow and associated gas mass-balance verified",
-          confidence: 99,
+          anomaly: "Secondary Pressure Regulation Surge",
+          severity: "Medium",
+          severityBadge: "badge-high",
+          facility: "GAIL Ahmedabad CGD Network",
+          parameter: "PRS Regulated Outlet Pressure",
+          observed: "19.4 bar",
+          expected: "14.0 – 16.0 bar",
+          deviation: "+21.2% Surge",
+          aiFinding: "Diaphragm response latency caused midnight transient over-pressure in industrial off-take sector.",
+          recommendation: "Dispatch emergency CGD field engineer to overhaul pilot regulator at PRS-Vatva-02."
+        },
+        {
+          anomaly: "Pipe Wall Loss Exceeding O&M Threshold",
+          severity: "Medium",
+          severityBadge: "badge-high",
+          facility: "IOCL Mathura Pipeline Section",
+          parameter: "ILI Metal Loss Depth",
+          observed: "22% Wall Loss",
+          expected: "<= 20% (ASME B31.8S)",
+          deviation: "+2.0% over threshold",
+          aiFinding: "Magnetic Flux Leakage pig recorded localized metal loss at KM 42.8.",
+          recommendation: "Execute visual direct examination and reduce operating pressure by 10 bar."
+        },
+        {
+          anomaly: "Subsea Choke & Flow Balance Verified",
           severity: "Low",
           severityBadge: "badge-success",
-          indicators: [
-            "Flow rates match onshore Uran terminal receipt meters within 0.6% statutory tolerance.",
-            "Subsea choke valve pressure differential exhibits stable laminar profile over continuous 72-hour operational cycle.",
-            "Zero fugitive flare emission violations recorded."
-          ],
-          recommendation: "Routine scheduled telemetry monitoring; next statutory underwater sensor calibration scheduled 15-Oct-2026."
+          facility: "ONGC Mumbai High Platform B-17",
+          parameter: "Multi-Phase Flow Balance",
+          observed: "38,200 BBL / 184 bar",
+          expected: "37,500 – 39,000 BBL",
+          deviation: "+0.6% (Nominal)",
+          aiFinding: "All subsea choke differential pressures laminar and reconciled with Uran terminal.",
+          recommendation: "Routine scheduled telemetry monitoring; next calibration scheduled 15-Oct-2026."
         }
       ];
 
-      container.innerHTML = insightsList.map(ins => `
-        <div class="panel ai-insight-panel">
-          <div class="panel-header">
-            <span>AI ANALYSIS RESULT — REF: ${ins.ref}</span>
-            <span class="ai-tag">${ins.target}</span>
-          </div>
-          <div class="panel-body">
-            <div class="ai-result-block">
-              <div class="ai-assessment-box">
-                <div style="font-size:11px; font-weight:bold; color:#123B63; text-transform:uppercase;">AI Analysis Result</div>
-                <div style="font-size:13px; font-weight:bold; color:#214c3a; margin-top:2px;">
-                  Assessment: ${ins.assessment}
-                </div>
-              </div>
+      // Render structured table
+      if (tableBody) {
+        tableBody.innerHTML = insightsList.map(ins => `
+          <tr>
+            <td><strong>${ins.anomaly}</strong></td>
+            <td><span class="badge ${ins.severityBadge}">${ins.severity}</span></td>
+            <td>${ins.facility}</td>
+            <td><code>${ins.parameter}</code></td>
+            <td style="color:#C25E00; font-weight:bold;">${ins.observed}</td>
+            <td>${ins.expected}</td>
+            <td><strong>${ins.deviation}</strong></td>
+            <td style="font-size:12px; color:#475569;">${ins.aiFinding}</td>
+            <td style="font-size:12px; color:#123B63;"><strong>${ins.recommendation}</strong></td>
+          </tr>
+        `).join('');
+      }
 
-              <div class="ai-metric-row">
-                <div class="ai-metric-col">
-                  <span class="ai-metric-label">Confidence</span>
-                  <div class="ai-metric-value">${ins.confidence}%</div>
-                  <div class="confidence-bar-wrap">
-                    <div class="confidence-bar-fill" style="width: ${ins.confidence}%;"></div>
+      // Render structured insight cards
+      if (container) {
+        container.innerHTML = insightsList.slice(0, 3).map((ins, idx) => `
+          <div class="panel ai-insight-panel">
+            <div class="panel-header">
+              <span>STRUCTURED ANOMALY DOSSIER — INSIGHT #${idx + 1}</span>
+              <span class="ai-tag">${ins.facility}</span>
+            </div>
+            <div class="panel-body">
+              <div class="ai-result-block">
+                <div class="ai-assessment-box">
+                  <div style="font-size:11px; font-weight:bold; color:#123B63; text-transform:uppercase;">Detected Anomaly</div>
+                  <div style="font-size:13.5px; font-weight:bold; color:#123B63; margin-top:2px;">
+                    ${ins.anomaly}
                   </div>
                 </div>
-                <div class="ai-metric-col">
-                  <span class="ai-metric-label">Severity</span>
-                  <div class="ai-metric-value"><span class="badge ${ins.severityBadge}">${ins.severity}</span></div>
+
+                <div class="ai-metric-row">
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Observed Value</span>
+                    <div class="ai-metric-value" style="color:#C25E00;">${ins.observed}</div>
+                  </div>
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Expected Statutory Range</span>
+                    <div class="ai-metric-value">${ins.expected}</div>
+                  </div>
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Measured Deviation</span>
+                    <div class="ai-metric-value"><span class="badge ${ins.severityBadge}">${ins.deviation}</span></div>
+                  </div>
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Severity</span>
+                    <div class="ai-metric-value"><span class="badge ${ins.severityBadge}">${ins.severity} RISK</span></div>
+                  </div>
                 </div>
-                <div class="ai-metric-col">
-                  <span class="ai-metric-label">Verification Target</span>
-                  <div style="font-size:12px; font-weight:bold; color:#123B63;">${ins.target}</div>
+
+                <div style="font-size:12.5px; color:#334155;">
+                  <strong>AI Finding:</strong> ${ins.aiFinding}
                 </div>
-              </div>
 
-              <div>
-                <div style="font-size:11px; font-weight:bold; color:#123B63; margin-bottom:4px; text-transform:uppercase;">Key Indicators:</div>
-                <ul class="ai-indicator-list">
-                  ${ins.indicators.map(i => `<li class="ai-indicator-item">${i}</li>`).join('')}
-                </ul>
-              </div>
+                <div class="ai-recommendation-box">
+                  <strong>Recommended Action:</strong> ${ins.recommendation}
+                </div>
 
-              <div class="ai-recommendation-box">
-                <strong>Recommendation:</strong>
-                ${ins.recommendation}
-              </div>
-
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-                <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('ai-analysis'); parakhApp.loadAnalysisCase('CASE-8841');">
-                  [ View Detailed Analysis ]
-                </button>
-                <span style="font-size:11px; color:#556877;">Engine: Deterministic Rule Matrix v3.2</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                  <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('ai-analysis')">
+                    [ Open in Scrutiny Suite ]
+                  </button>
+                  <span style="font-size:11px; color:#64748B;">Algorithm: PNGRB Multi-Source Scrutiny v3.2</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        `).join('');
+      }
     }
 
     // --- Reports Management ---
@@ -1652,11 +1876,12 @@
       tbody.innerHTML = this.reports.map(rep => `
         <tr>
           <td><strong>${rep.title}</strong></td>
-          <td style="font-family:monospace; font-size:11px;">${rep.code}</td>
+          <td style="font-family:monospace; font-size:11.5px;">${rep.code}</td>
           <td>${rep.category}</td>
-          <td style="font-size:11px;">${rep.date}</td>
+          <td style="font-size:11.5px;">${rep.period || 'Q2 FY25-26'}</td>
+          <td style="font-size:11.5px;">${rep.date}</td>
           <td><span class="badge badge-success">${rep.status}</span></td>
-          <td style="font-size:11px;">${rep.createdBy}</td>
+          <td style="font-size:11.5px;">${rep.createdBy}</td>
           <td><span class="badge badge-info">${rep.classification}</span></td>
           <td>
             <div style="display:flex; gap:4px;">
@@ -1684,18 +1909,19 @@
       if (!tbody) return;
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:20px; color:#687786;">No statutory reports found matching criteria.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:20px; color:#64748B;">No statutory reports found matching criteria.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = filtered.map(rep => `
         <tr>
           <td><strong>${rep.title}</strong></td>
-          <td style="font-family:monospace; font-size:11px;">${rep.code}</td>
+          <td style="font-family:monospace; font-size:11.5px;">${rep.code}</td>
           <td>${rep.category}</td>
-          <td style="font-size:11px;">${rep.date}</td>
+          <td style="font-size:11.5px;">${rep.period || 'Q2 FY25-26'}</td>
+          <td style="font-size:11.5px;">${rep.date}</td>
           <td><span class="badge badge-success">${rep.status}</span></td>
-          <td style="font-size:11px;">${rep.createdBy}</td>
+          <td style="font-size:11.5px;">${rep.createdBy}</td>
           <td><span class="badge badge-info">${rep.classification}</span></td>
           <td>
             <div style="display:flex; gap:4px;">
@@ -1732,11 +1958,18 @@
         status: "Officially Signed",
         createdBy: `${this.currentUser.name}`,
         classification: "RESTRICTED",
-        downloadUrl: "#"
+        period: "On-Demand Compilation"
       };
 
       this.reports.unshift(newRep);
-      this.addAuditEntry('REPORT_GENERATED', sector, `Statutory Report ${newCode} generated in ${fmt} format by ${this.currentUser.name}`, 'SUCCESS');
+      this.addAuditEntry(
+        'REPORT_GENERATED',
+        'Statutory Reports',
+        newCode,
+        'Draft',
+        'Officially Signed',
+        'SUCCESS'
+      );
       this.closeGenerateReportModal();
       this.renderReportsTable();
       alert(`Report ${newCode} successfully compiled and digitally attested.\nArchived in Ministry Central Repository.`);
@@ -1750,7 +1983,7 @@
       alert(`Opening raw telemetry and audit dataset for report [${code}] in spreadsheet viewer.`);
     }
 
-    // --- Alerts Management (3-Tone Restrained Styling) ---
+    // --- Alerts Management (3-Tone Restrained) ---
     renderAlerts() {
       const container = document.getElementById('alertsFullContainer');
       if (!container) return;
@@ -1772,30 +2005,41 @@
 
       container.innerHTML = filtered.map(alt => {
         let badgeCls = 'badge-info';
-        if (alt.severity === 'CRITICAL') badgeCls = 'badge-critical';
-        else if (alt.severity === 'HIGH') badgeCls = 'badge-high';
-        else if (alt.severity === 'MEDIUM') badgeCls = 'badge-medium';
+        let borderCol = '#123B63';
+        if (alt.severity === 'CRITICAL') {
+          badgeCls = 'badge-critical';
+          borderCol = '#991B1B';
+        } else if (alt.severity === 'HIGH') {
+          badgeCls = 'badge-high';
+          borderCol = '#C25E00';
+        } else if (alt.severity === 'MEDIUM') {
+          badgeCls = 'badge-medium';
+          borderCol = '#D97706';
+        }
 
         return `
-          <div class="panel" style="background:#FAF9F5; border-left:4px solid ${alt.severity === 'CRITICAL' ? '#8B2019' : alt.severity === 'HIGH' ? '#8C5B11' : '#397B63'};">
-            <div class="panel-header" style="background:#F2EFE6;">
+          <div class="panel" style="background:#FFFFFF; border-left:4px solid ${borderCol};">
+            <div class="panel-header" style="background:#F8FAFC;">
               <div style="display:flex; align-items:center; gap:8px;">
                 <span class="badge ${badgeCls}">${alt.severity}</span>
                 <span style="font-weight:bold; color:#123B63;">${alt.facility}</span>
-                <span style="font-size:11px; color:#5c6b78;">| Ref: ${alt.id}</span>
+                <span style="font-size:11.5px; color:#475569;">| Ref: ${alt.id}</span>
+                <span style="font-size:11.5px; color:#64748B;">[Source: ${alt.source || 'SCADA'}]</span>
               </div>
-              <span style="font-size:11px; color:#5c6b78;">${alt.timestamp}</span>
+              <span style="font-size:11.5px; color:#64748B;">${alt.timestamp}</span>
             </div>
             <div class="panel-body">
-              <div style="font-size:13px; font-weight:bold; color:#123B63; margin-bottom:4px;">${alt.title}</div>
-              <p style="font-size:12px; color:#334155; margin-bottom:10px; line-height:1.4;">${alt.description}</p>
+              <div style="font-size:13.5px; font-weight:bold; color:#123B63; margin-bottom:4px;">${alt.title}</div>
+              <p style="font-size:12.5px; color:#334155; margin-bottom:10px; line-height:1.4;">${alt.description}</p>
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <div style="font-size:11px; color:#687786;">
+                <div style="font-size:11.5px; color:#64748B;">
+                  Assigned Officer: <strong>${alt.assignedOfficer || 'Shri R. K. Sharma'}</strong> |
                   Status: <strong>${alt.acknowledged ? '✓ Acknowledged by Audit Officer' : 'Pending Formal Officer Review'}</strong>
                 </div>
                 <div style="display:flex; gap:6px;">
                   <button class="btn btn-secondary btn-sm" onclick="parakhApp.openRecordModal('${alt.refId}')">View Telemetry</button>
                   ${!alt.acknowledged ? `<button class="btn btn-accent btn-sm" onclick="parakhApp.acknowledgeAlert('${alt.id}')">Acknowledge</button>` : ''}
+                  <button class="btn btn-secondary btn-sm" onclick="parakhApp.resolveAlert('${alt.id}')">Mark Resolved</button>
                   <button class="btn btn-primary btn-sm" onclick="parakhApp.escalateAlert('${alt.id}')">Escalate to Directorate</button>
                 </div>
               </div>
@@ -1814,11 +2058,17 @@
       const alt = this.alerts.find(a => a.id === alertId);
       if (alt) {
         alt.acknowledged = true;
-        this.addAuditEntry('ALERT_ACKNOWLEDGED', alt.facility, `Alert ${alt.id} acknowledged by ${this.currentUser.name}`, 'INFO');
+        this.addAuditEntry(
+          'ALERT_ACKNOWLEDGED',
+          'Operational Alerts',
+          alt.id,
+          'Active',
+          'Acknowledged',
+          'SUCCESS'
+        );
         this.renderAlerts();
         this.renderDashboard();
 
-        // Update badge
         const unackedCount = this.alerts.filter(a => !a.acknowledged).length;
         const countEl = document.getElementById('headerAlertCount');
         const sideEl = document.getElementById('sidebarAlertBadge');
@@ -1827,15 +2077,41 @@
       }
     }
 
+    resolveAlert(alertId) {
+      const alt = this.alerts.find(a => a.id === alertId);
+      if (alt) {
+        alt.acknowledged = true;
+        alt.resolved = true;
+        this.addAuditEntry(
+          'ALERT_RESOLVED',
+          'Operational Alerts',
+          alt.id,
+          'Acknowledged',
+          'Resolved',
+          'SUCCESS'
+        );
+        alert(`Alert ${alertId} marked as resolved and archived into historical audit log.`);
+        this.renderAlerts();
+        this.renderDashboard();
+      }
+    }
+
     escalateAlert(alertId) {
       const alt = this.alerts.find(a => a.id === alertId);
       if (alt) {
-        this.addAuditEntry('ALERT_ESCALATED', alt.facility, `Alert ${alt.id} escalated to MoPNG Joint Secretary & Technical Safety Cell`, 'ALERT');
+        this.addAuditEntry(
+          'ALERT_ESCALATED',
+          'Operational Alerts',
+          alt.id,
+          'Active',
+          'Escalated to MoPNG Directorate',
+          'ALERT'
+        );
         alert(`Alert ${alertId} escalated to the Ministry Directorate.\nStatutory summons drafted.`);
       }
     }
 
-    // --- Audit Trail (NIC Standard) ---
+    // --- Audit Trail (NIC Regulatory Standard) ---
     renderAuditHistory() {
       const tbody = document.getElementById('auditHistoryTbody');
       if (!tbody) return;
@@ -1848,41 +2124,96 @@
 
         return `
           <tr>
-            <td style="white-space:nowrap; font-size:11px;">${entry.timestamp}</td>
-            <td style="font-family:monospace; font-size:11px;">${entry.ref}</td>
-            <td><strong>${entry.actor}</strong></td>
-            <td style="font-size:11px;"><code>${entry.type}</code></td>
-            <td>${entry.facility}</td>
-            <td style="font-size:12px;">${entry.description}</td>
-            <td style="font-family:monospace; font-size:10px; color:#123B63;">${entry.hash}</td>
+            <td style="white-space:nowrap; font-size:11.5px;">${entry.timestamp}</td>
+            <td><strong>${entry.user}</strong></td>
+            <td style="font-size:11.5px;"><code>${entry.action}</code></td>
+            <td>${entry.module}</td>
+            <td style="font-family:monospace; font-size:11.5px;">${entry.recordId || 'N/A'}</td>
+            <td><span class="badge badge-info">${entry.prevStatus}</span></td>
+            <td><span class="badge ${tagCls}">${entry.newStatus}</span></td>
+            <td style="font-family:monospace; font-size:10.5px; color:#475569;">${entry.ipAddress}</td>
             <td><span class="badge ${tagCls}">${entry.status}</span></td>
           </tr>
         `;
       }).join('');
     }
 
-    addAuditEntry(type, facility, description, status) {
+    addAuditEntry(action, module, recordId, prevStatus, newStatus, status) {
       const now = new Date();
       const timestamp = now.toLocaleDateString('en-GB') + " " + now.toLocaleTimeString('en-GB') + " IST";
-      const hash = `SHA256:${Math.random().toString(16).substring(2, 10)}...${Math.random().toString(16).substring(2, 6)}`;
-      const ref = `AUD-${Math.floor(1000 + Math.random() * 9000)}-Z`;
 
       this.auditTrail.unshift({
         timestamp,
-        ref,
-        actor: `${this.currentUser.name} (${this.currentUser.badgeId})`,
-        type,
-        facility,
-        description,
-        hash,
+        user: `${this.currentUser.name} (${this.currentUser.badgeId})`,
+        action,
+        module,
+        recordId,
+        prevStatus,
+        newStatus,
+        ipAddress: "10.24.100.05 (MoPNG Shastri Bhawan)",
         status
       });
 
       this.renderAuditHistory();
     }
+
+    filterAuditTrail() {
+      const search = (document.getElementById('auditSearchInput').value || '').toLowerCase();
+      const moduleFilter = document.getElementById('auditModuleFilter').value;
+
+      const filtered = this.auditTrail.filter(entry => {
+        if (search && !entry.user.toLowerCase().includes(search) &&
+            !entry.recordId.toLowerCase().includes(search) &&
+            !entry.action.toLowerCase().includes(search)) {
+          return false;
+        }
+        if (moduleFilter !== 'ALL' && entry.module !== moduleFilter) return false;
+        return true;
+      });
+
+      const tbody = document.getElementById('auditHistoryTbody');
+      if (!tbody) return;
+
+      tbody.innerHTML = filtered.map(entry => {
+        let tagCls = 'badge-info';
+        if (entry.status === 'SUCCESS') tagCls = 'badge-success';
+        else if (entry.status === 'CRITICAL') tagCls = 'badge-critical';
+        else if (entry.status === 'ALERT') tagCls = 'badge-high';
+
+        return `
+          <tr>
+            <td style="white-space:nowrap; font-size:11.5px;">${entry.timestamp}</td>
+            <td><strong>${entry.user}</strong></td>
+            <td style="font-size:11.5px;"><code>${entry.action}</code></td>
+            <td>${entry.module}</td>
+            <td style="font-family:monospace; font-size:11.5px;">${entry.recordId || 'N/A'}</td>
+            <td><span class="badge badge-info">${entry.prevStatus}</span></td>
+            <td><span class="badge ${tagCls}">${entry.newStatus}</span></td>
+            <td style="font-family:monospace; font-size:10.5px; color:#475569;">${entry.ipAddress}</td>
+            <td><span class="badge ${tagCls}">${entry.status}</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // --- Administration Tabs ---
+    switchAdminTab(tabName) {
+      this.activeAdminTab = tabName;
+      const tabBtns = document.querySelectorAll('.admin-tab-btn');
+      tabBtns.forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabName) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const contents = document.querySelectorAll('.admin-tab-content');
+      contents.forEach(c => c.style.display = 'none');
+
+      const target = document.getElementById(`admin-tab-${tabName}`);
+      if (target) target.style.display = 'block';
+    }
   }
 
-  // Instantiate and bind to global window
+  // Global mount
   window.parakhApp = new ParakhApplication();
 
 })();
