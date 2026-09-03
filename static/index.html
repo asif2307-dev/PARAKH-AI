@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARAKH AI — AI-Powered Bid Compliance Platform for GeM</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gem: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            gov: {
+              blue: '#1e3a8a',
+              dark: '#0f2942',
+              accent: '#2563eb',
+              amber: '#d97706',
+              green: '#059669',
+              red: '#dc2626',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+
+  <!-- Top Government Strip -->
+  <div class="bg-gov-dark text-slate-300 text-xs px-4 py-1.5 flex flex-wrap justify-between items-center border-b border-slate-700/60 z-50">
+    <div class="flex items-center space-x-3">
+      <span class="inline-flex items-center text-amber-400 font-semibold tracking-wide">
+        <i class="fa-solid fa-landmark mr-1.5"></i> GOVERNMENT OF INDIA • GeM PROCUREMENT INTELLIGENCE
+      </span>
+      <span class="text-slate-500">|</span>
+      <span class="hidden sm:inline text-slate-400">Smart India Hackathon 2026 Prototype (SIH26100)</span>
+      <span class="hidden md:inline bg-blue-950 text-blue-300 text-[10px] font-bold px-2 py-0.5 rounded border border-blue-800">TEAM: BUTTER CHICKEN</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <span class="inline-flex items-center text-emerald-400 font-medium">
+        <span class="pulse-dot bg-emerald-400 mr-1.5"></span> Deterministic Demo Mode Active
+      </span>
+      <span class="text-slate-500">|</span>
+      <button onclick="app.resetDemoState()" class="hover:text-amber-300 text-slate-300 text-xs flex items-center transition">
+        <i class="fa-solid fa-rotate-left mr-1"></i> Reset Demo State
+      </button>
+      <span class="text-slate-500">|</span>
+      <button onclick="app.toggleDemoGuide()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-2 py-0.5 rounded text-[11px] flex items-center shadow transition">
+        <i class="fa-solid fa-chalkboard-user mr-1"></i> 3-Min Pitch Guide
+      </button>
+    </div>
+  </div>
+
+  <!-- Primary Application Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <!-- Logo and Branding -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-gov-dark to-gov-blue flex items-center justify-center text-white font-black text-xl shadow-md border border-blue-900">
+            P
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xl font-black tracking-tight text-gov-dark">PARAKH <span class="text-gov-accent">AI</span></span>
+              <span class="bg-blue-100 text-blue-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded tracking-wider border border-blue-200">v2.0</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium leading-none">AI-Assisted Tender Verification & Compliance Intelligence</p>
+          </div>
+        </div>
+
+        <!-- Central Quick Stats or Navigation Indicator -->
+        <div class="hidden lg:flex items-center space-x-6 text-xs text-slate-600">
+          <div class="flex items-center space-x-2 border-r border-slate-200 pr-6">
+            <span class="text-slate-400 font-semibold uppercase">Scale:</span>
+            <span class="font-bold text-slate-800">1.6L+ Buyer Orgs</span>
+            <span class="text-slate-300">•</span>
+            <span class="font-bold text-slate-800">₹5.43L Cr GMV</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-slate-400 font-semibold uppercase">Review Benchmark:</span>
+            <span class="text-rose-600 line-through">14 hrs</span>
+            <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+            <span class="text-emerald-600 font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">2 hrs with PARAKH AI</span>
+          </div>
+        </div>
+
+        <!-- Officer Session Profile -->
+        <div class="flex items-center space-x-3">
+          <div class="hidden sm:block text-right">
+            <div class="text-xs font-bold text-slate-800" id="header-user-name">Rajesh Kumar</div>
+            <div class="text-[10px] text-slate-500 font-medium" id="header-user-role">Senior Procurement Officer (GeM-Proc-104)</div>
+          </div>
+          <div class="w-9 h-9 rounded-full bg-slate-200 border-2 border-gov-blue/40 flex items-center justify-center text-gov-dark font-bold text-sm cursor-pointer" onclick="app.navigate('login')" title="Click to Switch User / Landing">
+            <i class="fa-solid fa-user-shield text-gov-blue"></i>
+          </div>
+          <button onclick="app.logout()" class="text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-slate-100 transition text-xs" title="Switch User / Logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Layout -->
+  <div class="flex-1 flex max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 gap-6">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 shrink-0 hidden md:block">
+      <nav class="space-y-1.5 bg-white p-3 rounded-xl border border-slate-200 shadow-xs sticky top-24">
+        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 py-1">Main Modules</div>
+        
+        <button onclick="app.navigate('login')" id="nav-login" class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-xs font-semibold transition text-slate-600 hover:bg-slate-100">
+          <i class="fa-solid fa-house w-4 text-center text-slate-400"></i>
+          <span>Landing / Login</span>
+        </button>
+
+        <button onclick="app.navigate('dashboard')" id="nav-dashboard" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <i class="fa-solid fa-chart-line w-4 text-center text-gov-blue"></i>
+          <span>Dashboard</span>
+        </button>
+
+        <button onclick="app.navigate('bids')" id="nav-bids" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-file-signature w-4 text-center text-gov-blue"></i>
+            <span>Bids Management</span>
+          </div>
+          <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full" id="sidebar-bids-count">6</span>
+        </button>
+
+        <div class="pt-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 py-1">AI & Verification</div>
+
+        <button onclick="app.openHeroBid()" id="nav-hero-bid" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold transition bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 shadow-xs">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+            <span>Hero Demo Bid</span>
+          </div>
+          <span class="bg-rose-100 text-rose-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded uppercase">High Risk</span>
+        </button>
+
+        <button onclick="app.navigate('evidence')" id="nav-evidence" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <i class="fa-solid fa-diagram-project w-4 text-center text-indigo-600"></i>
+          <span>Evidence Mapping (BidDoc)</span>
+        </button>
+
+        <button onclick="app.navigate('verification')" id="nav-verification" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <i class="fa-solid fa-shield-halved w-4 text-center text-emerald-600"></i>
+          <span>Multi-Source Verify+</span>
+        </button>
+
+        <button onclick="app.navigate('audit')" id="nav-audit" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <i class="fa-solid fa-scroll w-4 text-center text-slate-600"></i>
+          <span>Audit Trail</span>
+        </button>
+
+        <div class="pt-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 py-1">System</div>
+
+        <button onclick="app.navigate('connectors')" id="nav-connectors" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-semibold transition text-slate-700 hover:bg-slate-100">
+          <i class="fa-solid fa-server w-4 text-center text-slate-500"></i>
+          <span>Simulated Connectors</span>
+        </button>
+
+        <div class="mt-4 p-3 bg-blue-50/80 rounded-lg border border-blue-100 text-[11px] text-blue-900 leading-relaxed">
+          <div class="font-bold mb-1 flex items-center text-gov-blue">
+            <i class="fa-solid fa-circle-info mr-1 text-xs"></i> AI Decision Support
+          </div>
+          PARAKH AI extracts, cross-verifies and flags contradictions. Final sign-off legally remains with the procurement officer.
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content Dynamic View Port -->
+    <main class="flex-1 min-w-0" id="main-view">
+      <!-- Injected dynamically by app.js -->
+    </main>
+
+  </div>
+
+  <!-- Document Evidence Viewer Modal -->
+  <div id="document-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-fadeIn">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+        <div>
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-file-pdf text-red-600 text-lg"></i>
+            <h3 class="font-bold text-slate-800 text-base" id="doc-modal-title">Document Viewer</h3>
+            <span class="text-xs bg-slate-200 text-slate-700 font-semibold px-2 py-0.5 rounded" id="doc-modal-page">Page 12</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5" id="doc-modal-meta">Extracted by PaddleOCR • OCR Confidence: 96.4%</p>
+        </div>
+        <button onclick="app.closeDocumentModal()" class="text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-100 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <!-- Modal Content Body -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-4" id="doc-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex justify-between items-center text-xs">
+        <div class="text-slate-500">
+          <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Bounding Box coordinates verified against source PDF stream.
+        </div>
+        <button onclick="app.closeDocumentModal()" class="px-4 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded-lg transition">
+          Close Preview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Officer Decision Sign-off Modal -->
+  <div id="decision-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-2xl overflow-hidden animate-fadeIn">
+      <div class="px-6 py-4 bg-gov-dark text-white flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-signature text-amber-400 text-lg"></i>
+          <h3 class="font-bold text-base">Procurement Officer Review & Sign-Off</h3>
+        </div>
+        <button onclick="app.closeDecisionModal()" class="text-slate-400 hover:text-white transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4" id="decision-modal-content">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-Minute Pitch Guide Drawer -->
+  <div id="demo-guide-drawer" class="fixed bottom-4 right-4 max-w-md w-full bg-white rounded-2xl shadow-2xl border-2 border-amber-400 z-50 hidden overflow-hidden transition-all">
+    <div class="bg-amber-400 text-slate-950 px-4 py-2.5 font-bold text-xs flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-trophy"></i>
+        <span>SIH 2026 Presentation Script (3-Minute Golden Path)</span>
+      </div>
+      <button onclick="app.toggleDemoGuide()" class="text-slate-800 hover:text-black">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="p-4 text-xs space-y-2.5 max-h-96 overflow-y-auto text-slate-700 bg-amber-50/40">
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-gov-blue">Step 1: Dashboard Overview</strong>
+        <p>Show 128 total bids, 14h manual vs 2h with PARAKH AI. Explain the deterministic rule engine principle (AI extracts, rules validate).</p>
+      </div>
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-gov-blue">Step 2: Open Hero Bid (BID-2026-003)</strong>
+        <p>Bharat Industrial Systems. Click <strong>"Run AI Analysis"</strong>. Show live 5-stage pipeline.</p>
+      </div>
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-rose-700 font-bold">Step 3: Contradiction Detection (Hero Feature!)</strong>
+        <p>Highlight the Turnover Contradiction: <strong>₹8.2 Cr claimed</strong> in Financial Statement vs <strong>₹3.9 Cr verified</strong> in MCA21 ROC. Show the expired ISO certificate.</p>
+      </div>
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-gov-blue">Step 4: Evidence Traceability (BidDoc)</strong>
+        <p>Click "View Evidence" to open the PDF preview with highlighted bounding box on Page 12.</p>
+      </div>
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-gov-blue">Step 5: Officer Decision</strong>
+        <p>Click "Record Officer Decision" -> Select <strong>"Send for Review"</strong> -> insert preset remarks -> Submit.</p>
+      </div>
+      <div class="p-2 bg-white rounded border border-amber-200">
+        <strong class="text-gov-blue">Step 6: Audit Trail</strong>
+        <p>Verify that status updated to "Sent for Clarification" and an immutable SHA-256 logged record was created.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 left-5 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- Application Logic Scripts -->
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
