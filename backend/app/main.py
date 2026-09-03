@@ -33,7 +33,9 @@ if STATIC_DIR.exists():
 
 @app.get("/")
 async def root():
-    index_file = STATIC_DIR / "index.html"
+    index_file = BASE_DIR / "index.html"
+    if not index_file.exists():
+        index_file = STATIC_DIR / "index.html"
     if index_file.exists():
         return FileResponse(str(index_file))
     return {
