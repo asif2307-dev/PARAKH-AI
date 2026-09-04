@@ -533,7 +533,7 @@
   // --- 5. Main Application Controller ---
   class ParakhApplication {
     constructor() {
-      this.currentView = 'dashboard';
+      this.currentView = 'home';
       this.records = [...MOPNG_SEED_RECORDS];
       this.filteredRecords = [...MOPNG_SEED_RECORDS];
       this.reports = [...MOPNG_SEED_REPORTS];
@@ -576,6 +576,23 @@
       this.loadAnalysisCase('CASE-8841');
       this.refreshCaptcha();
       this.setupDropzone();
+
+      // Listen for browser hash navigation (e.g. #dashboard, #home, #records)
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && hash !== this.currentView) {
+          this.switchView(hash, null, false);
+        }
+      });
+
+      // Initial route from hash if specified, otherwise default to home
+      const initialHash = window.location.hash.replace('#', '');
+      const validViews = ['dashboard', 'bids', 'documents', 'compliance', 'crosscheck', 'risk', 'smartbid', 'reports', 'notifications', 'audit', 'settings', 'profile', 'help', 'records', 'upload', 'history'];
+      if (initialHash && validViews.includes(initialHash)) {
+        this.switchView(initialHash, null, false);
+      } else {
+        this.switchView('dashboard', null, false);
+      }
     }
 
     // --- Clock and Accessibility ---
@@ -615,14 +632,17 @@
       }
     }
 
-    // --- Navigation & View Switching ---
-    switchView(viewName, filterPsu = null) {
+    // --- Navigation & View Switching (Public Pillar Pages vs Operational Portal) ---
+    switchView(viewName, filterPsu = null, updateHash = true) {
       if (!this.isLoggedIn && viewName !== 'login') {
         this.showLoginScreen();
         return;
       }
 
       this.currentView = viewName;
+      if (updateHash && viewName !== 'login') {
+        window.location.hash = viewName;
+      }
 
       // Hide all view sections
       const sections = document.querySelectorAll('.view-section');
@@ -634,19 +654,39 @@
         targetSec.style.display = 'block';
       }
 
-      // Hide login screen
+      // Control layout shell (Public Pillar Pages vs Operational Portal vs Login)
+      const publicViews = ['home', 'tech', 'grid', 'compliance', 'about', 'helpdesk'];
       const loginSection = document.getElementById('institutionalLoginSection');
       const portalContainer = document.getElementById('portalContainer');
       const noticeTicker = document.getElementById('noticeTicker');
+      const sidebar = document.getElementById('portalSidebar');
+      const breadcrumbBar = document.getElementById('breadcrumbBar');
 
       if (viewName === 'login') {
         if (loginSection) loginSection.style.display = 'block';
         if (portalContainer) portalContainer.style.display = 'none';
         if (noticeTicker) noticeTicker.style.display = 'none';
-      } else {
+        if (sidebar) sidebar.style.display = 'none';
+        if (breadcrumbBar) breadcrumbBar.style.display = 'none';
+      } else if (publicViews.includes(viewName)) {
         if (loginSection) loginSection.style.display = 'none';
-        if (portalContainer) portalContainer.style.display = 'flex';
+        if (portalContainer) {
+          portalContainer.style.display = 'block';
+          portalContainer.classList.add('home-mode');
+        }
         if (noticeTicker) noticeTicker.style.display = 'block';
+        if (sidebar) sidebar.style.display = 'none';
+        if (breadcrumbBar) breadcrumbBar.style.display = 'none';
+      } else {
+        // Operational Portal Views
+        if (loginSection) loginSection.style.display = 'none';
+        if (portalContainer) {
+          portalContainer.style.display = 'flex';
+          portalContainer.classList.remove('home-mode');
+        }
+        if (noticeTicker) noticeTicker.style.display = 'block';
+        if (sidebar) sidebar.style.display = 'flex';
+        if (breadcrumbBar) breadcrumbBar.style.display = 'flex';
       }
 
       // Update active nav items in horizontal bar
@@ -702,16 +742,21 @@
       const timeEl = document.getElementById('breadcrumbTime');
 
       const viewLabels = {
-        'dashboard': { parent: 'Operational Portal', current: 'Main Dashboard' },
-        'records': { parent: 'Data & Records', current: filterPsu ? `Production & Dispatch (${filterPsu})` : 'Production & Dispatch' },
-        'upload': { parent: 'Data & Records', current: 'Telemetry Upload' },
-        'ai-analysis': { parent: 'Analysis & Insights', current: 'AI Compliance Scrutiny' },
-        'ai-insights': { parent: 'Analysis & Insights', current: 'Structured AI Insights' },
-        'reports': { parent: 'Analysis & Insights', current: 'Statutory Reports' },
-        'alerts': { parent: 'Monitoring', current: 'Active Alerts' },
-        'history': { parent: 'Monitoring', current: 'Audit Trail' },
-        'administration': { parent: 'System', current: 'Administration' },
-        'settings': { parent: 'System', current: 'Portal Settings' },
+        'home': { parent: 'PARAKH AI', current: 'Home Overview' },
+        'tech': { parent: 'Technology', current: 'AI Engine Architecture' },
+        'grid': { parent: 'Infrastructure', current: 'National Grid & PSUs' },
+        'about': { parent: 'Institution', current: 'About Ministry & Governance' },
+        'helpdesk': { parent: 'Support', current: 'Helpdesk & Grievances' },
+        'upload': { parent: 'Procurement Data', current: 'Bid Documents' },
+        'compliance': { parent: 'Intelligence', current: 'Compliance Scrutiny' },
+        'crosscheck': { parent: 'Intelligence', current: 'Registry CrossCheck' },
+        'risk': { parent: 'Intelligence', current: 'Risk Analysis' },
+        'smartbid': { parent: 'Intelligence', current: 'SmartBid Compare' },
+        'reports': { parent: 'Intelligence', current: 'Reports & Export' },
+        'notifications': { parent: 'System', current: 'Notifications' },
+        'history': { parent: 'System', current: 'Audit Trail' },
+        'settings': { parent: 'System', current: 'System Settings' },
+        'dashboard': { parent: 'Operational Portal', current: 'Main Dashboard (Phase 2)' },
         'login': { parent: 'Access Control', current: 'Officer Sign-In' }
       };
 
@@ -719,6 +764,52 @@
       if (parentEl) parentEl.innerHTML = `<a href="javascript:void(0)" onclick="parakhApp.switchView('${viewName}')">${info.parent}</a>`;
       if (currentEl) currentEl.textContent = info.current;
       if (timeEl) timeEl.textContent = 'Refreshed: ' + new Date().toLocaleTimeString('en-GB') + ' IST';
+    }
+
+    // --- Interactive Pillar Page Helpers ---
+    filterPillarGrid(psu, btn) {
+      const pills = document.querySelectorAll('.psu-filter-pill');
+      pills.forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('#pillarGridCardsContainer .home-module-card');
+      cards.forEach(card => {
+        const cardPsu = card.getAttribute('data-psu');
+        if (psu === 'ALL' || cardPsu === psu) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      if (!body) return;
+      const isHidden = body.style.display === 'none' || !body.style.display;
+      body.style.display = isHidden ? 'block' : 'none';
+      const arrow = btn.querySelector('span:last-child');
+      if (arrow) arrow.textContent = isHidden ? '▴' : '▾';
+    }
+
+    handleGrievanceSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('grievanceName').value;
+      const psu = document.getElementById('grievancePsu').value;
+      const cat = document.getElementById('grievanceCategory').value;
+      const refId = "GRV-2026-" + Math.floor(1000 + Math.random() * 9000);
+
+      this.addAuditEntry(
+        'GRIEVANCE_LODGED',
+        'Nodal Helpdesk',
+        refId,
+        'New Submission',
+        'Logged for Inquiry',
+        'ALERT'
+      );
+
+      alert(`Statutory Anomaly / Grievance Logged Successfully!\n\nReference ID: ${refId}\nReporting Officer: ${name}\nTarget Entity: ${psu}\nCategory: ${cat}\n\nThis incident has been anchored into the Ministry NIC Event Ledger and routed to the Directorate of Pipeline Audit & Allocation.`);
+      e.target.reset();
     }
 
     // --- Authentication & Portal Lock ---
@@ -1856,7 +1947,7 @@
                 </div>
 
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                  <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('ai-analysis')">
+                  <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('compliance')">
                     [ Open in Scrutiny Suite ]
                   </button>
                   <span style="font-size:11px; color:#64748B;">Algorithm: PNGRB Multi-Source Scrutiny v3.2</span>

@@ -1,126 +1,112 @@
-# PARAKH AI — AI-Powered Bid Compliance Platform for GeM
+# PARAKH AI
 
-[![Smart India Hackathon 2026](https://img.shields.io/badge/SIH-2026_Prototype-orange.svg)](https://sih.gov.in)
-[![Problem Statement](https://img.shields.io/badge/PS_ID-SIH26100-blue.svg)](https://gem.gov.in)
-[![Team](https://img.shields.io/badge/Team-BUTTER_CHICKEN-green.svg)]()
-[![Theme](https://img.shields.io/badge/Theme-Smart_Automation-purple.svg)]()
+**Automating Trust in Public Procurement**
 
-> **"Verify evidence. Detect contradictions. Make procurement decisions with confidence."**
+PARAKH AI is a powerful, AI-assisted decision-support platform designed for the Government e-Marketplace (GeM). It streamlines bid evaluation, enforces statutory compliance, and upholds transparency across the national public procurement lifecycle by bridging isolated data silos and employing deterministic AI scrutiny.
 
 ---
 
-## 1. Overview & Problem Statement
+## 🌟 Unique Selling Propositions (USPs) & Core Features
 
-In public procurement on the **Government e-Marketplace (GeM)**, evaluating tender bids across technical qualifications, statutory financial thresholds, MSME exemptions, and quality certifications is an intensely manual, error-prone process. A single vendor evaluation typically consumes **14 hours** of manual review, leading to cross-source verification gaps and compromised auditability.
+PARAKH AI is built upon 9 core pillars of procurement intelligence.
 
-**PARAKH AI** is an AI-assisted decision-support platform that slashes review time from **14 hours to 2 hours (85.7% reduction)** by combining:
-1. **Tender Intelligence & Extraction** (PaddleOCR & LLM parsing)
-2. **Requirement–Evidence Mapping (BidDoc)**: Automatic linkage of clauses to document pages & snippets.
-3. **Multi-Source Verification (Verify+)**: Independent cross-verification against regulatory databases (MCA21, GSTN, Udyam, Debarment).
-4. **Deterministic Compliance & Contradiction Engine**: AI extracts claims; deterministic rule logic evaluates compliance.
-5. **Officer-Led Sign-Off & Audit Trail**: The human procurement officer always holds final authority.
+### 1. BidDoc (Tender Intelligence)
+**What it is:** Advanced OCR and structural parsing engine.
+**What it does:** Autonomously reads complex PDF tender documents to extract mandatory compliance clauses (e.g., annual turnover requirements, ISO certifications, OEM authorizations).
 
----
+### 2. Verify (Compliance Scrutiny)
+**What it is:** Requirement-to-Evidence mapping engine.
+**What it does:** Automatically links extracted tender requirements to the specific pages and bounding boxes within a vendor's submitted evidence. It ensures every claim has a traceable, verified lineage.
 
-## 2. Core Architecture (Matching SIH Final PPT Slide 3)
+### 3. Expiry Monitor
+**What it is:** Real-time document validity tracking.
+**What it does:** Actively monitors the expiration dates of critical certificates (ISO, MSME, specific licenses) submitted by bidders to ensure compliance throughout the contract lifecycle.
 
-```
-                       ┌──────────────────────────────────────────────┐
-                       │             GeM / Tender Data                │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │ Tender Intelligence & Requirement Extraction │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │ Bidder Documents (PDF/Scans) → OCR + Doc AI  │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │ RAG + Semantic Evidence Matching (BidDoc)    │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │   Rule / Compliance Engine (Deterministic)   │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │ Risk + Contradiction Detection (Verify+)     │
-                       └──────────────────────┬───────────────────────┘
-                                              │
-                       ┌──────────────────────▼───────────────────────┐
-                       │  Officer Dashboard & Final Sign-Off (Human)  │
-                       └──────────────────────────────────────────────┘
-```
+### 4. CrossCheck (Multi-Source Verification)
+**What it is:** Direct API integrations with authoritative government registries.
+**What it does:** Instantly cross-verifies vendor submissions against external databases (MCA21 for financials, GSTN for tax status, Udyam for MSME claims, and central debarment lists) to detect forged documents or inflated claims.
+
+### 5. Risk Analysis
+**What it is:** Predictive risk scoring and cartelization detection.
+**What it does:** Assigns a risk profile to bidders (High/Medium/Low) based on historical bidding patterns, shared IP addresses, and cross-entity relationships, helping procurement officers flag suspicious behavior before awarding contracts.
+
+### 6. SmartBid Compare
+**What it is:** AI-driven side-by-side technical and financial comparison.
+**What it does:** Generates a unified matrix comparing multiple bids against the required evaluation criteria, highlighting passes, fails, and overall AI compliance scores for rapid decision-making.
+
+### 7. Explainable AI
+**What it is:** Transparent reasoning for all automated flags.
+**What it does:** Ensures that whenever a discrepancy is flagged (e.g., a turnover mismatch), the platform provides the exact source data, the target registry data, and the deviation percentage, keeping the human officer in control.
+
+### 8. Reports & Exports
+**What it is:** Cryptographically secure compliance reports.
+**What it does:** Allows officers to generate PDF briefs summarizing the entire scrutiny process for a specific tender, ready for stakeholder review and procurement audits.
+
+### 9. Immutable Audit Trail
+**What it is:** Secure, tamper-proof logging.
+**What it does:** Maintains a cryptographically-hashed log of all system interactions, AI verifications, API syncs, and manual overrides performed by officers.
 
 ---
 
-## 3. Quick Start & How to Run
+## 💻 How to Use the Platform
 
-### Prerequisites
-- Python 3.10+ (Installed on system)
-- Web browser (Chrome, Edge, Firefox)
+### 1. Accessing the System
+1. Navigate to the **Public Portal** to read about the framework, view platform architecture, and access governance resources.
+2. Click **Access Officer Portal** to enter the secure login barrier.
+3. Authenticate using your designated Procurement Officer credentials.
 
-### Launch Command
-Open a terminal in `C:\Users\moasi\.gemini\antigravity\scratch\parakh-ai` and run:
+### 2. Navigating the Dashboard
+Once authenticated, you will land on the **Procurement Intelligence Dashboard**. The sidebar provides access to all USPs:
+* **Overview:** View high-level KPIs, active scrutiny cases, and recent compliance flags.
+* **Tenders & Bids / Bid Documents:** Upload new tender documents (PDF, CSV, XLSX, JSON) for the AI engine to parse.
+* **Compliance Scrutiny:** Run multi-stage analysis on a selected bid to extract rules and verify evidence.
+* **Registry CrossCheck:** View live sync statuses with MCA21, GSTN, and Udyam, and monitor expiring documents.
+* **Risk Analysis:** Review predictive risk scores for specific bidders.
+* **SmartBid Compare:** Load a comparison matrix for a specific tender to determine the most compliant L1 bidder.
+* **Reports & Export:** Generate and download SHA-256 verified PDF reports.
+* **Audit Trail:** View the immutable timeline of all platform actions.
 
-```powershell
-python main.py
-```
-*(Alternatively double-click `run.bat` or run `.\run.ps1`)*
-
-The server will initialize on:
-👉 **`http://127.0.0.1:8000`**
-
-### Demo Login Credentials
-- **Username:** `officer`
-- **Password:** `demo123`
-- **Role:** Procurement Officer (Rajesh Kumar, Senior Procurement Officer)
-
----
-
-## 4. The 3–5 Minute Golden Path Demo Flow
-
-Follow this exact sequence during SIH jury evaluation:
-
-1. **Dashboard Overview (30 seconds)**:
-   - Navigate to `http://127.0.0.1:8000`.
-   - Point out key platform metrics: **128 Total Bids**, **17 Pending Reviews**, **6 High Risk**, **82% Compliance Rate**.
-   - Highlight the **Review Time Benchmark** (14h manual → 2h with PARAKH AI) and **Deterministic Rule Engine** principle.
-
-2. **Open Hero Demo Bid (30 seconds)**:
-   - Click the prominent **"Launch Hero Demo Bid (BID-2026-003)"** button (or select from Bids Management).
-   - Vendor: **Bharat Industrial Systems** (Supply of Mechanical Equipment & Valves, BHEL).
-   - Notice the un-analyzed status.
-
-3. **Trigger AI Analysis & Verification (30 seconds)**:
-   - Click **"Start AI Compliance Analysis"**.
-   - Observe the live 5-stage pipeline: Clause Extraction → OCR Parsing → BidDoc Mapping → Verify+ Connectors → Contradiction Check.
-
-4. **Contradiction Detection — HERO FEATURE (60 seconds)**:
-   - Inspect the high-visibility **CONTRADICTION DETECTED** banner:
-     - **Turnover Mismatch**: Tender requires $\ge$ ₹5.0 Cr. Bidder submitted financial statement claiming **₹8.20 Cr**, but MCA21 ROC verified return indicates only **₹3.90 Cr**.
-     - **Expired Certificate**: ISO 9001:2015 expired on 15-Nov-2025.
-     - **Eligibility Mismatch**: Claimed MSE waiver, but registered as a Medium Enterprise on Udyam.
-   - Click **"Inspect Page 12"** to open the realistic document preview showing the yellow-highlighted bounding box snippet.
-
-5. **Officer Determination & Sign-Off (45 seconds)**:
-   - Click **"Record Officer Decision"**.
-   - Select **"SEND FOR REVIEW (Clarification)"**.
-   - Select the preset remark: *"Turnover information differs between submitted financial statement (₹8.2 Cr) and verification source (₹3.9 Cr). Clarification required."*
-   - Click **"Submit Official Decision & Sign"**.
-   - Confirm status changes to **"Sent for Clarification"**.
-
-6. **Audit Trail Verification (30 seconds)**:
-   - Navigate to **Audit Trail** in the sidebar.
-   - Show the sequential, cryptographically signed ledger (`sha256:...`) confirming every AI action and the officer's final decision.
+### 3. Running a Compliance Check (Example Workflow)
+1. Go to **Bid Documents** and upload a vendor's submission package.
+2. Navigate to **Compliance Scrutiny**, select the Target Tender & Bidder from the dropdown, and click **[ Run Compliance Scrutiny ]**.
+3. Watch as the 5-stage pipeline executes: *BidDoc Parsing -> Rule Extraction -> Registry CrossCheck -> Contradiction Check -> Final Verdict*.
+4. Review any **Critical Compliance Flags** detected (e.g., Financial Discrepancy).
+5. Click **Generate Compliance Report** to export the findings for the official procurement file.
 
 ---
 
-## 5. Transparent Simulation Disclosure
+## 🛠️ Local Development & Setup
 
-In strict adherence to Smart India Hackathon integrity guidelines:
-- External government connectors (**MCA21**, **GSTN**, **Udyam**, **CVC Debarment**, **BIS**) run in a high-fidelity **Simulated Sandbox**.
-- The architecture implements pluggable client interfaces ready for live government API gateway endpoints without code rewrites.
-- The prototype requires **no paid API keys** and runs completely offline and deterministically.
+### Requirements
+* Python 3.9+
+* PostgreSQL (or Supabase integration)
+* Node.js (Optional, depending on frontend tooling)
+
+### Running the Application
+
+1. **Install Python Dependencies:**
+   ```bash
+   pip install -r backend/requirements.txt
+   ```
+
+2. **Configure Environment Variables:**
+   Ensure your `.env` file (if applicable) contains the correct Supabase / PostgreSQL connection strings.
+
+3. **Start the API Server:**
+   You can run the application using the provided batch script or manually via Uvicorn:
+   ```bash
+   # Using the batch script (Windows)
+   run.bat
+   
+   # OR manually using Python
+   cd backend/app
+   python main.py
+   ```
+   *The server will start on `http://localhost:8000`.*
+
+4. **Access the Application:**
+   * Public Website: `http://localhost:8000/public/index.html`
+   * Officer Portal: `http://localhost:8000/portal/dashboard`
+
+---
+*Developed for the Government e-Marketplace (GeM) Initiative.*

@@ -1,7 +1,8 @@
 import hashlib
 from datetime import datetime
 from typing import List, Dict, Any
-from app.data.seed_data import db
+from app.database import SessionLocal
+from app.models.db_models import AuditLog
 
 class AuditService:
     """
@@ -12,19 +13,54 @@ class AuditService:
 
     @staticmethod
     def get_all_logs(bid_id: str = None) -> List[Dict[str, Any]]:
-        logs = db.audit_logs
+        db = SessionLocal()
+        query = db.query(AuditLog)
         if bid_id:
-            return [log for log in logs if log.get("bid_id") == bid_id or log.get("bid_id") is None]
-        return list(reversed(logs))
+            query = query.filter(AuditLog.bid_id == bid_id)
+        logs = query.all()
+        db.close()
+        
+        # Format like previous API
+        results = []
+        for l in logs:
+            now_str = l.timestamp
+            raw_string = f"{now_str}|{l.bid_id}|{l.action_type}|{l.actor}|{l.details}"
+            hash_signature = f"sha256:{hashlib.sha256(raw_string.encode('utf-8')).hexdigest()}"
+            results.append({
+                "id": f"LOG-{l.id}",
+                "timestamp": l.timestamp,
+                "bid_id": l.bid_id,
+                "action_type": l.action_type,
+                "actor": l.actor,
+                "details": l.details,
+                "status_tag": l.status_tag,
+                "hash_signature": hash_signature
+            })
+        return list(reversed(results))
 
     @staticmethod
     def record_entry(bid_id: str, action_type: str, actor: str, details: str, status_tag: str = "INFO") -> Dict[str, Any]:
+        db = SessionLocal()
         now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S IST")
+        
+        log = AuditLog(
+            bid_id=bid_id,
+            timestamp=now_str,
+            action_type=action_type,
+            actor=actor,
+            details=details,
+            status_tag=status_tag
+        )
+        db.add(log)
+        db.commit()
+        db.refresh(log)
+        db.close()
+        
         raw_string = f"{now_str}|{bid_id}|{action_type}|{actor}|{details}"
         hash_signature = f"sha256:{hashlib.sha256(raw_string.encode('utf-8')).hexdigest()}"
         
-        entry = {
-            "id": f"LOG-{len(db.audit_logs) + 1001}",
+        return {
+            "id": f"LOG-{log.id}",
             "timestamp": now_str,
             "bid_id": bid_id,
             "action_type": action_type,
@@ -33,5 +69,3 @@ class AuditService:
             "status_tag": status_tag,
             "hash_signature": hash_signature
         }
-        db.audit_logs.append(entry)
-        return entry

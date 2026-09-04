@@ -7,11 +7,10 @@ echo   Team: BUTTER CHICKEN ^| Category: Software ^| Theme: Smart Automation
 echo ======================================================================
 echo.
 echo Checking Python environment...
-python --version >nul 2>&1
-if %errorlevel% neq 0 (
-    echo [ERROR] python command not found directly. Trying explicit AppData path...
+if exist "%LOCALAPPDATA%\Programs\Python\Python311\python.exe" (
     "%LOCALAPPDATA%\Programs\Python\Python311\python.exe" main.py
 ) else (
-    python main.py
+    py -3.11 main.py 2>nul || py main.py 2>nul || python main.py
 )
 pause
+

@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARAKH AI — Official Bid Compliance Platform | Government e-Marketplace</title>
+  <meta name="description" content="Official Decision-Support & Statutory Compliance Scrutiny Platform for the Government e-Marketplace.">
+  <meta name="author" content="Government e-Marketplace">
+  
+  <!-- Custom Institutional CSS (2012-2018 Enterprise Design, Three-Tone System) -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/static/images/parakh-logo.png">
+</head>
+<body class="font-size-md">
+
+  <!-- =====================================================================
+       1. TOP GOVERNMENT OF INDIA ACCESSIBILITY & UTILITY STRIP
+       ===================================================================== -->
+  <div class="gov-top-strip" id="govTopStrip">
+    <div class="gov-top-strip-inner">
+      <div class="gov-top-left">
+        <span class="gov-id-text">
+          <svg class="emblem-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L2 7v2h20V7L12 2zm-8 8v8H2v2h20v-2h-2v-8h-2v8h-3v-8h-2v8h-2v-8H9v8H7v-8H4zm7 2a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+          </svg>
+          भारत सरकार | GOVERNMENT OF INDIA
+        </span>
+        <span class="gov-dept-text">| à¤ªà¥‡à¤Ÿà¥à¤°à¥‹à¤²à¤¿à¤¯à¤® à¤à¤µà¤‚ à¤ªà¥à¤°à¤¾à¤•à¥ƒà¤¤à¤¿à¤• à¤—à¥ˆà¤¸ à¤®à¤‚à¤¤à¥à¤°à¤¾à¤²à¤¯ | Government e-Marketplace</span>
+      </div>
+      <div class="gov-top-right">
+        <span class="strip-item">
+          <strong>Node:</strong> GeM-NIC-DEL04
+        </span>
+        <span class="strip-item font-resizer">
+          <span>Text Size:</span>
+          <button type="button" onclick="parakhApp.adjustFontSize('sm')" title="Decrease font size">A-</button>
+          <button type="button" onclick="parakhApp.adjustFontSize('md')" title="Normal font size">A</button>
+          <button type="button" onclick="parakhApp.adjustFontSize('lg')" title="Increase font size">A+</button>
+        </span>
+        <span class="strip-item">
+          <a class="strip-link" href="javascript:void(0)" onclick="parakhApp.toggleLanguage()">हिन्दी / English</a>
+        </span>
+        <span class="strip-item" id="liveClockDisplay">
+          04-Sep-2026 01:00:00 IST
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. INSTITUTIONAL HEADER
+       ===================================================================== -->
+  <header class="institutional-header" id="institutionalHeader">
+    <div class="header-inner">
+      <!-- Left: Emblem & Ministry Identity -->
+      <div class="brand-section" onclick="window.location.href='/'" title="Go to PARAKH AI Home">
+        <div class="emblem-logo-container" title="PARAKH AI Logo">
+          <img src="/static/images/parakh-logo.png" alt="PARAKH AI Logo" style="height: 65px; width: auto; object-fit: contain;">
+        </div>
+        <div class="brand-titles">
+          <div class="brand-hindi">भारत सरकार</div>
+          <div class="brand-ministry">Government of India</div>
+          <div class="brand-parakh">
+            <span class="parakh-main-title">PARAKH AI</span>
+            <span class="parakh-tag">PROCUREMENT INTELLIGENCE</span>
+            <span class="parakh-subtitle">AI-Powered Bid Compliance & Scrutiny Portal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: User Identity & Actions -->
+      <div class="header-user-area" id="headerUserArea">
+        <div class="system-status-indicator" title="System Integration Status">
+          <span class="status-dot"></span>
+          <span>Core DB: ONLINE</span>
+        </div>
+
+        <div class="user-profile-box" id="userProfileBox">
+          <div class="user-avatar" id="userAvatarInitials">RK</div>
+          <div class="user-details">
+            <span class="user-name" id="userDisplayName">Shri Rajesh K. Sharma</span>
+            <span class="user-role" id="userDisplayRole">Director (Procurement Audit)</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="header-btn" onclick="parakhApp.switchView('alerts')" title="Operational Alerts">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+            </svg>
+            <span>Alerts</span>
+            <span class="badge-count" id="headerAlertCount">3</span>
+          </button>
+          <button class="header-btn" onclick="parakhApp.handleLogoutToggle()" id="authToggleButton" title="Log out or switch account">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+            </svg>
+            <span id="authToggleText">Log Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- =====================================================================
+       5. PORTAL MAIN CONTAINER (SIDEBAR + CONTENT)
+       ===================================================================== -->
+  <div class="portal-container" id="portalContainer">
+
+    <!-- OPERATIONAL SIDEBAR NAVIGATION (DISPLAYED IN PORTAL MODE) -->
+    <aside class="portal-sidebar" id="portalSidebar">
+
+      <div class="sidebar-header">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"/>
+        </svg>
+        <span>PARAKH PORTAL</span>
+      </div>
+
+      <!-- Group 1: OVERVIEW -->
+      <div class="sidebar-nav-group">
+        <button type="button" class="sidebar-link-btn active" data-view="dashboard" onclick="parakhApp.switchView('dashboard')">
+          <span>📊 OVERVIEW</span>
+          <span class="sidebar-count" style="background:#DBEAFE; color:#1E40AF;">Live</span>
+        </button>
+      </div>
+
+      <!-- Group 2: PROCUREMENT -->
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">PROCUREMENT</div>
+        <ul class="sidebar-links">
+          <li><button type="button" class="sidebar-link-btn" data-view="records" onclick="parakhApp.switchView('records')"><span>Tenders & Bids</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="upload" onclick="parakhApp.switchView('upload')"><span>Bid Documents</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Group 3: INTELLIGENCE (PARAKH USPs) -->
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">INTELLIGENCE</div>
+        <ul class="sidebar-links">
+          <li><button type="button" class="sidebar-link-btn" data-view="compliance" onclick="parakhApp.switchView('compliance')"><span>Compliance Scrutiny</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="crosscheck" onclick="parakhApp.switchView('crosscheck')"><span>Registry CrossCheck</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="risk" onclick="parakhApp.switchView('risk')"><span>Risk Analysis</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="smartbid" onclick="parakhApp.switchView('smartbid')"><span>SmartBid Compare</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="reports" onclick="parakhApp.switchView('reports')"><span>Reports & Export</span></button></li>
+        </ul>
+      </div>
+
+      <!-- Group 4: SYSTEM -->
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">SYSTEM</div>
+        <ul class="sidebar-links">
+          <li><button type="button" class="sidebar-link-btn" data-view="history" onclick="parakhApp.switchView('history')"><span>Audit Trail</span></button></li>
+          <li><button type="button" class="sidebar-link-btn" data-view="settings" onclick="parakhApp.switchView('settings')"><span>Settings</span></button></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer-info">
+        <div><strong>Server:</strong> PARAKH-NODE-01</div>
+        <div><strong>DB Cluster:</strong> SUPABASE-PG</div>
+        <div><strong>Status:</strong> Secured (TLS 1.3)</div>
+      </div>
+    </aside>
+
+    <!-- MAIN DYNAMIC CONTENT CONTAINER -->
+    <main class="portal-main-content" id="portalMainContent">
+
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumb-bar" id="breadcrumbBar" aria-label="Breadcrumb">
+        <ul class="breadcrumb-list">
+          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('home')">Home</a></li>
+          <li class="breadcrumb-separator">/</li>
+          <li id="breadcrumbParent"><a href="javascript:void(0)">PARAKH AI</a></li>
+          <li class="breadcrumb-separator">/</li>
+          <li class="breadcrumb-current" id="breadcrumbCurrent">Institutional Home Overview</li>
+        </ul>
+        <span class="breadcrumb-timestamp" id="breadcrumbTime">Refreshed: Just now</span>
+      </nav>
+
+      <section class="view-section" id="view-dashboard" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>PARAKH AI - Procurement Intelligence Dashboard</h1>
+            <p>Real-time bid compliance metrics, statutory cross-checks, and AI-powered discrepancy detection across the Government e-Marketplace.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('upload')">
+              <span>Upload Bid Docs</span>
+            </button>
+            <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('compliance')">
+              <span>Run Compliance Scrutiny</span>
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="parakhApp.openGenerateReportModal()">
+              <span>Generate Brief</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 Practical Compact KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Total Bids Processed</span>
+            <span class="kpi-value" id="kpiTotalRecords">14,820</span>
+            <span class="kpi-subtext">Across all central ministries</span>
+          </div>
+          <div class="kpi-card kpi-accent">
+            <span class="kpi-label">Bids Under Scrutiny</span>
+            <span class="kpi-value" id="kpiActiveCases">42</span>
+            <span class="kpi-subtext">Active AI scrutiny</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Compliant Bids</span>
+            <span class="kpi-value" style="color:#166534;">14,210</span>
+            <span class="kpi-subtext">82.4% overall compliance</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">High-Risk Bids</span>
+            <span class="kpi-value" style="color:#991B1B;">6</span>
+            <span class="kpi-subtext">Requires officer intervention</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Active Alerts</span>
+            <span class="kpi-value" style="color:#991B1B;" id="kpiAlerts">9</span>
+            <span class="kpi-subtext">3 Critical, 4 High, 2 Medium</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Upcoming Statutory Deadline</span>
+            <span class="kpi-value" style="font-size:16px; margin-top:8px; color:#123B63;">15-Sep-2026</span>
+            <span class="kpi-subtext">Q2 GeM Procurement Audit</span>
+          </div>
+        </div>
+
+        <!-- 2-Column Split: Overview Chart & Risk Distribution vs Structured AI Finding -->
+        <div class="dashboard-grid-2col">
+          <!-- Column 1: Compliance Overview & Risk Distribution -->
+          <div class="panel">
+            <div class="panel-header">
+              <span>MONTHLY BID COMPLIANCE TRENDS (FY 2025-26)</span>
+              <div>
+                <select id="chartPsuFilter" class="form-control" style="font-size:11.5px; padding:3px 7px;" onchange="parakhApp.renderComplianceChart()">
+                  <option value="ALL">All Ministries & Departments</option>
+                  <option value="GAIL">GAIL (Natural Gas Grid)</option>
+                  <option value="IOCL">IOCL (Refineries & Pipeline)</option>
+                  <option value="ONGC">ONGC (Offshore Extraction)</option>
+                </select>
+              </div>
+            </div>
+            <div class="panel-body">
+              <canvas id="complianceChartCanvas" width="560" height="200" style="width:100%; height:200px; display:block; background-color:#FFFFFF; border:1px solid #CBD5E1;"></canvas>
+              
+              <!-- Risk Distribution Breakdown -->
+              <div style="margin-top:12px; background:#F8FAFC; border:1px solid #CBD5E1; padding:9px 12px; border-radius:3px;">
+                <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:#123B63; margin-bottom:5px;">
+                  <span>Risk Distribution Breakdown</span>
+                  <span>82% Compliant | 14% Under Scrutiny | 4% High Risk</span>
+                </div>
+                <div style="display:flex; height:9px; border-radius:2px; overflow:hidden; border:1px solid #CBD5E1;">
+                  <div style="width:82%; background:#166534;" title="Compliant (82%)"></div>
+                  <div style="width:14%; background:#C25E00;" title="Under Scrutiny (14%)"></div>
+                  <div style="width:4%; background:#991B1B;" title="High Risk (4%)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Structured AI Decision-Support Intelligence Card -->
+          <div class="panel ai-insight-panel">
+            <div class="panel-header">
+              <span>AI COMPLIANCE DECISION SUPPORT</span>
+              <span class="ai-tag">REF: GEM-BID-8841</span>
+            </div>
+            <div class="panel-body">
+              <div class="ai-result-block">
+                <div class="ai-assessment-box">
+                  <div style="font-size:11px; font-weight:bold; color:#123B63; text-transform:uppercase;">AI Analysis Result</div>
+                  <div style="font-size:13.5px; font-weight:bold; color:#123B63; margin-top:2px;">
+                    Potential financial anomaly and GSTIN mismatch detected
+                  </div>
+                </div>
+
+                <div class="ai-metric-row">
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Confidence</span>
+                    <div class="ai-metric-value">87%</div>
+                    <div class="confidence-bar-wrap">
+                      <div class="confidence-bar-fill" style="width: 87%;"></div>
+                    </div>
+                  </div>
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Severity</span>
+                    <div class="ai-metric-value"><span class="badge badge-high">Medium</span></div>
+                  </div>
+                  <div class="ai-metric-col">
+                    <span class="ai-metric-label">Target Entity</span>
+                    <div style="font-size:12.5px; font-weight:bold; color:#123B63;">Bidder A - Tender #4929</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="font-size:11.5px; font-weight:bold; color:#123B63; margin-bottom:4px; text-transform:uppercase;">Key Discrepancy Indicators:</div>
+                  <ul class="ai-indicator-list">
+                    <li class="ai-indicator-item">Hazira compressor vs Jagdishpur terminal meter indicates <strong>4.8% divergence</strong> (statutory limit &le; 1.2%).</li>
+                    <li class="ai-indicator-item">MSME Udyam registration category does not match the mandatory requirement for this tender.</li>
+                  </ul>
+                </div>
+
+                <div class="ai-recommendation-box">
+                  <strong>Recommended Action:</strong>
+                  Dispatch physical ultrasonic calibration team to Valve Station VS-14 before subsequent transmission cycle.
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                  <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('compliance'); parakhApp.loadAnalysisCase('CASE-8841');">
+                    [ View Detailed Analysis ]
+                  </button>
+                  <span style="font-size:11px; color:#64748B;">Engine: Deterministic Rule Matrix v3.2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Production & Dispatch Activity Table -->
+        <div class="panel">
+          <div class="panel-header">
+            <span>RECENT PRODUCTION & DISPATCH RECONCILIATION LOG</span>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records')">View All Records &raquo;</button>
+          </div>
+          <div class="panel-body" style="padding:0;">
+            <div class="table-responsive">
+              <table class="table-gov" id="dashboardRecentTable">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Category</th>
+                    <th>Facility / PSU</th>
+                    <th>Data Source</th>
+                    <th>Status</th>
+                    <th>Risk Level</th>
+                    <th>AI Result</th>
+                    <th>Date & Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardRecentTbody">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerts / Pending Actions Area -->
+        <div class="panel">
+          <div class="panel-header">
+            <span>OPERATIONAL ALERTS REQUIRING IMMEDIATE OFFICER SIGN-OFF</span>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('alerts')">Manage Alerts &raquo;</button>
+          </div>
+          <div class="panel-body">
+            <div style="display:flex; flex-direction:column; gap:8px;" id="dashboardAlertsList">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 2: DATA & RECORDS (PRODUCTION & DISPATCH)
+           =================================================================== -->
+      <section class="view-section" id="view-records" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Production & Dispatch Records Management</h1>
+            <p>Complete multi-source statutory repository of pipeline SCADA readings, refinery dispatch ledgers, and subsidized fuel allocations.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="btn btn-accent btn-sm" onclick="parakhApp.switchView('upload')">
+              <span>+ Ingest Telemetry Batch</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.exportRecordsCSV()">
+              <span>Export CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enterprise Filter Bar -->
+        <div class="filter-card">
+          <div class="form-row">
+            <div class="form-group flex-grow">
+              <label class="form-label" for="filterSearchInput">Search Facility / Record ID</label>
+              <input type="text" id="filterSearchInput" class="form-control" placeholder="e.g. GAIL, HVJ, REC-2026, Paradip..." oninput="parakhApp.applyFilters()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="filterCategorySelect">Category</label>
+              <select id="filterCategorySelect" class="form-control" onchange="parakhApp.applyFilters()">
+                <option value="ALL">All Categories</option>
+                <option value="Natural Gas Grid">Natural Gas Grid</option>
+                <option value="Crude Refining">Crude Refining</option>
+                <option value="LPG Allocation">Subsidized LPG Allocation</option>
+                <option value="Offshore Extraction">Offshore Extraction</option>
+                <option value="City Gas Distribution">City Gas Distribution (CGD)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="filterPsuSelect">PSU / Entity</label>
+              <select id="filterPsuSelect" class="form-control" onchange="parakhApp.applyFilters()">
+                <option value="ALL">All Entities</option>
+                <option value="GAIL">GAIL (India) Ltd</option>
+                <option value="IOCL">Indian Oil Corp Ltd (IOCL)</option>
+                <option value="ONGC">ONGC Ltd</option>
+                <option value="HPCL">Hindustan Petroleum (HPCL)</option>
+                <option value="BPCL">Bharat Petroleum (BPCL)</option>
+                <option value="ISPRL">Indian Strategic Reserves</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="filterStatusSelect">Status</label>
+              <select id="filterStatusSelect" class="form-control" onchange="parakhApp.applyFilters()">
+                <option value="ALL">All Statuses</option>
+                <option value="Compliant">Compliant</option>
+                <option value="Under Scrutiny">Under Scrutiny</option>
+                <option value="Flagged">Flagged</option>
+                <option value="Verified">Verified</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="filterDateFrom">Date From</label>
+              <input type="date" id="filterDateFrom" class="form-control" value="2026-08-01" onchange="parakhApp.applyFilters()">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="filterDateTo">Date To</label>
+              <input type="date" id="filterDateTo" class="form-control" value="2026-09-04" onchange="parakhApp.applyFilters()">
+            </div>
+            <div class="form-group" style="flex-direction:row; gap:5px;">
+              <button type="button" class="btn btn-primary btn-sm" onclick="parakhApp.applyFilters()">Apply Filter</button>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.resetFilters()">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Structured Enterprise Table -->
+        <div class="table-responsive">
+          <table class="table-gov" id="recordsDataTable">
+            <thead>
+              <tr>
+                <th class="sortable" onclick="parakhApp.sortRecords('id')">Record ID â¬</th>
+                <th class="sortable" onclick="parakhApp.sortRecords('category')">Category â¬</th>
+                <th class="sortable" onclick="parakhApp.sortRecords('psu')">PSU / Facility â¬</th>
+                <th>Data Source</th>
+                <th class="sortable" onclick="parakhApp.sortRecords('status')">Status â¬</th>
+                <th class="sortable" onclick="parakhApp.sortRecords('risk')">Risk Level â¬</th>
+                <th>AI Result</th>
+                <th class="sortable" onclick="parakhApp.sortRecords('date')">Date & Time â¬</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recordsTbody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Bar -->
+        <div class="pagination-container">
+          <div>
+            Showing <strong id="pageStartRecord">1</strong> to <strong id="pageEndRecord">10</strong> of <strong id="pageTotalRecords">142</strong> statutory records
+          </div>
+          <div class="pagination-controls" id="paginationControls">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 3: DATA UPLOAD (TELEMETRY UPLOAD)
+           =================================================================== -->
+      <section class="view-section" id="view-upload" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Statutory Telemetry & Manifest Ingestion</h1>
+            <p>Upload telemetry dumps, laboratory quality certificates, or distribution ledgers for deterministic validation and checksum verification.</p>
+          </div>
+        </div>
+
+        <div class="panel" style="max-width:880px; margin:0 auto;">
+          <div class="panel-header">
+            <span>INGESTION WORKFLOW & STATUTORY DECLARATION</span>
+          </div>
+          <div class="panel-body">
+            <form id="uploadDataForm" onsubmit="parakhApp.handleDataUpload(event)">
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div class="form-row">
+                  <div class="form-group flex-grow">
+                    <label class="form-label" for="uploadPsuSelect">Reporting Hydrocarbon PSU / Entity *</label>
+                    <select id="uploadPsuSelect" class="form-control" required>
+                      <option value="">-- Select Reporting Entity --</option>
+                      <option value="GAIL">GAIL (India) Ltd â€” National Gas Grid</option>
+                      <option value="IOCL">Indian Oil Corporation Ltd â€” Refineries & Pipelines</option>
+                      <option value="ONGC">Oil & Natural Gas Corporation Ltd â€” Offshore Wells</option>
+                      <option value="HPCL">Hindustan Petroleum Corporation Ltd â€” Marketing & LPG</option>
+                      <option value="BPCL">Bharat Petroleum Corporation Ltd â€” Distribution</option>
+                      <option value="ISPRL">Indian Strategic Petroleum Reserves Ltd â€” Caverns</option>
+                    </select>
+                  </div>
+                  <div class="form-group flex-grow">
+                    <label class="form-label" for="uploadCategorySelect">Hydrocarbon Sector Classification *</label>
+                    <select id="uploadCategorySelect" class="form-control" required>
+                      <option value="">-- Select Sector --</option>
+                      <option value="Natural Gas Grid">Natural Gas Trunk Pipeline</option>
+                      <option value="Crude Refining">Crude Refining & Despatch</option>
+                      <option value="LPG Allocation">Subsidized Domestic LPG Allocation</option>
+                      <option value="Offshore Extraction">Offshore Wellhead Production</option>
+                      <option value="City Gas Distribution">City Gas Distribution Network (CGD)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group flex-grow">
+                    <label class="form-label" for="uploadFacilityInput">Facility / Pipeline Terminal Identifier *</label>
+                    <input type="text" id="uploadFacilityInput" class="form-control" placeholder="e.g. Hazira Compressor Station CS-02 / Paradip Refinery Terminal B" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="uploadReportingPeriod">Audit Period *</label>
+                    <input type="month" id="uploadReportingPeriod" class="form-control" value="2026-08" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="uploadDataStream">Data Stream Type *</label>
+                  <select id="uploadDataStream" class="form-control" required>
+                    <option value="SCADA_PRESSURE">SCADA Pressure & Mass Flow Sensor Telemetry (.csv, .xlsx)</option>
+                    <option value="DESPATCH_MANIFEST">Statutory Despatch & Custody Transfer Manifest (.pdf, .csv)</option>
+                    <option value="LAB_QUALITY_CERT">Laboratory Quality & Sulphur Specification Certificate (.pdf)</option>
+                    <option value="SUBSIDIZED_LPG_LEDGER">Subsidized LPG Bottling & Retail Dispense Ledger (.xlsx, .csv)</option>
+                  </select>
+                </div>
+
+                <!-- Drag & Drop Upload Zone -->
+                <div class="form-group">
+                  <label class="form-label">Select or Drag Telemetry File (.csv, .xlsx, .pdf, .json) *</label>
+                  <div class="upload-dropzone" id="uploadDropzone">
+                    <div class="upload-dropzone-icon">ðŸ“</div>
+                    <div id="uploadDropzoneFilename" style="font-size:13px; color:#334155; margin-bottom:4px;">
+                      Drag & drop telemetry files here, or <span style="color:#123B63; text-decoration:underline; font-weight:bold;">browse computer</span>
+                    </div>
+                    <div style="font-size:11.5px; color:#64748B;">Supported: CSV, XLSX, PDF, JSON up to 50 MB. Files are cryptographically hashed via SHA-256.</div>
+                  </div>
+                  <input type="file" id="uploadFileInput" accept=".csv,.xlsx,.xls,.pdf,.json" style="display:none;" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="uploadOfficerRemark">Officer Attestation Remarks</label>
+                  <textarea id="uploadOfficerRemark" class="form-control" rows="2" placeholder="Enter officer verification remarks or reference dispatch memo number..."></textarea>
+                </div>
+
+                <!-- Live Upload Progress -->
+                <div id="uploadProgressContainer" style="display:none; background:#F8FAFC; border:1px solid #CBD5E1; padding:10px 12px; border-radius:3px;">
+                  <div style="display:flex; justify-content:space-between; font-size:11.5px; font-weight:700; color:#123B63; margin-bottom:5px;">
+                    <span id="uploadProgressLabel">Calculating SHA-256 checksum & validating schema...</span>
+                    <span id="uploadProgressPercent">45%</span>
+                  </div>
+                  <div style="width:100%; height:9px; background:#E2E8F0; border-radius:2px; overflow:hidden;">
+                    <div id="uploadProgressBar" style="width:45%; height:100%; background:#C25E00; transition:width 0.3s ease;"></div>
+                  </div>
+                </div>
+
+                <!-- Successful Upload State Card -->
+                <div id="uploadSuccessState" style="display:none; background:#F0FDF4; border:1px solid #86EFAC; padding:12px; border-radius:3px;">
+                  <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                    <span style="font-size:16px; color:#166534;">âœ“</span>
+                    <span style="font-size:13.5px; font-weight:bold; color:#166534;">Batch Successfully Ingested & Cryptographically Verified</span>
+                  </div>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:12px; color:#334155;">
+                    <div><strong>Batch ID:</strong> <span id="successBatchId">BATCH-2026-0914</span></div>
+                    <div><strong>Record ID:</strong> <span id="successRecordId">REC-2026-9901</span></div>
+                    <div><strong>Uploaded By:</strong> <span id="successUploadedBy">Shri Rajesh K. Sharma</span></div>
+                    <div><strong>Timestamp:</strong> <span id="successTimestamp">04-Sep-2026 01:05 IST</span></div>
+                    <div><strong>Data Source:</strong> <span id="successSource">GAIL (SCADA)</span></div>
+                    <div><strong>File Name:</strong> <span id="successFileName">HVJ_Pressure_Dump_Sep26.csv</span></div>
+                  </div>
+                  <div style="margin-top:10px; display:flex; gap:6px;">
+                    <button type="button" class="btn btn-accent btn-sm" onclick="parakhApp.switchView('records')">View in Records Table</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="parakhApp.switchView('compliance')">Launch AI Scrutiny</button>
+                  </div>
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
+                  <button type="button" class="btn btn-secondary" onclick="parakhApp.resetUploadForm()">Reset Form</button>
+                  <button type="submit" class="btn btn-accent" id="uploadSubmitBtn">
+                    <span>[ Ingest & Scrutinize Batch ]</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 4: AI COMPLIANCE SCRUTINY (AI ANALYSIS)
+           =================================================================== -->
+            <section class="view-section" id="view-compliance" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>AI Compliance Scrutiny</h1>
+            <p>Automated bid parsing and multi-stage compliance verification against GeM procurement rules.</p>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:14px;">
+          <div class="panel-header">
+            <span>SELECT BID FOR SCRUTINY</span>
+          </div>
+          <div class="panel-body">
+            <div class="form-row">
+              <div class="form-group flex-grow">
+                <label class="form-label" for="analysisCaseSelect">Target Tender & Bidder</label>
+                <select id="analysisCaseSelect" class="form-control" onchange="parakhApp.onAnalysisCaseSelect()">
+                  <option value="CASE-8841">Tender #4929 - Bidder A (Financial Discrepancy)</option>
+                  <option value="CASE-9022">Tender #4929 - Bidder B (MSME Exemption Scrutiny)</option>
+                  <option value="CASE-9140">Tender #5011 - Bidder C (ISO Certification Validation)</option>
+                </select>
+              </div>
+              <div class="form-group" style="align-self:flex-end;">
+                <button type="button" class="btn btn-accent" id="triggerAiAnalysisBtn" onclick="parakhApp.runAiAnalysisPipeline()">
+                  <span class="btn-icon">⚙️</span>
+                  <span>[ Run Compliance Scrutiny ]</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5-Stage Operational Pipeline Display -->
+        <div class="panel" style="margin-bottom:14px;">
+          <div class="panel-header">
+            <span>COMPLIANCE PIPELINE EXECUTION</span>
+            <span id="analysisPipelineStatusBadge" class="badge badge-info">IDLE / READY</span>
+          </div>
+          <div class="panel-body">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:10px;" id="pipelineStageCards">
+              <div class="kpi-card" id="pipeStage1">
+                <span class="kpi-label">Stage 1</span>
+                <span style="font-size:12px; font-weight:bold; color:var(--parakh-navy); margin-top:2px;">BidDoc Parsing</span>
+                <span class="kpi-subtext" id="pipeStage1Status">Ready</span>
+              </div>
+              <div class="kpi-card" id="pipeStage2">
+                <span class="kpi-label">Stage 2</span>
+                <span style="font-size:12px; font-weight:bold; color:var(--parakh-navy); margin-top:2px;">Rule Extraction</span>
+                <span class="kpi-subtext" id="pipeStage2Status">Pending</span>
+              </div>
+              <div class="kpi-card" id="pipeStage3">
+                <span class="kpi-label">Stage 3</span>
+                <span style="font-size:12px; font-weight:bold; color:var(--parakh-navy); margin-top:2px;">Registry CrossCheck</span>
+                <span class="kpi-subtext" id="pipeStage3Status">Pending</span>
+              </div>
+              <div class="kpi-card" id="pipeStage4">
+                <span class="kpi-label">Stage 4</span>
+                <span style="font-size:12px; font-weight:bold; color:var(--parakh-navy); margin-top:2px;">Contradiction Check</span>
+                <span class="kpi-subtext" id="pipeStage4Status">Pending</span>
+              </div>
+              <div class="kpi-card" id="pipeStage5">
+                <span class="kpi-label">Stage 5</span>
+                <span style="font-size:12px; font-weight:bold; color:var(--parakh-navy); margin-top:2px;">Final Verdict</span>
+                <span class="kpi-subtext" id="pipeStage5Status">Pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="aiAnalysisResultsArea" style="display:none;">
+          <div style="display:flex; gap:14px;">
+            <div style="flex:1;">
+              <div class="panel">
+                <div class="panel-header" style="background:#FEF2F2; color:#991B1B; border-bottom-color:#FECACA;">
+                  <span style="display:flex; align-items:center; gap:6px;">
+                    ⚠️ CRITICAL COMPLIANCE FLAG DETECTED
+                  </span>
+                </div>
+                <div class="panel-body">
+                  <h3 style="margin-bottom:10px; color:#7F1D1D;" id="resultPrimaryFinding">Financial Discrepancy in Turnover Claim</h3>
+                  <p style="font-size:13px; color:#475569; margin-bottom:12px; line-height:1.5;">
+                    The Bidder's declared average annual turnover over the past 3 years is <strong>₹ 15.2 Cr</strong>. However, real-time cross-checking with MCA21 API reveals a filed turnover of <strong>₹ 9.8 Cr</strong>.
+                  </p>
+                  
+                  <div style="background:#F8FAFC; padding:10px; border-radius:4px; border:1px solid #E2E8F0; font-family:monospace; font-size:12px; margin-bottom:12px;">
+                    <div>> SOURCE: Tender Annexure II (Financials)</div>
+                    <div>> TARGET: MCA21 Company Registry</div>
+                    <div style="color:#DC2626;">> DEVIATION: -35.5% (Exceeds 0% tolerance)</div>
+                  </div>
+
+                  <button class="btn btn-primary" onclick="parakhApp.openGenerateReportModal()">Generate Compliance Report</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 5: STRUCTURED AI INSIGHTS
+           =================================================================== -->
+            <section class="view-section" id="view-crosscheck" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Registry CrossCheck & Expiry Monitoring</h1>
+            <p>Direct API integrations with MCA21, GSTN, and Udyam portals to cryptographically verify claims and monitor document expiry.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="btn btn-accent btn-sm" onclick="alert('Initiating real-time API sync...')">Sync with GSTN/MCA21</button>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <span class="kpi-label">Active API Links</span>
+            <span class="kpi-value">4/4</span>
+            <span class="kpi-subtext" style="color:var(--parakh-teal);">All systems operational</span>
+          </div>
+          <div class="kpi-card kpi-accent">
+            <span class="kpi-label">Mismatches Detected</span>
+            <span class="kpi-value">12</span>
+            <span class="kpi-subtext">Across 8 active tenders</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Documents Expiring</span>
+            <span class="kpi-value" style="color:#C25E00;">5</span>
+            <span class="kpi-subtext">Within next 30 days</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Forged Docs Blocked</span>
+            <span class="kpi-value" style="color:#DC2626;">2</span>
+            <span class="kpi-subtext">This quarter</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span>REAL-TIME REGISTRY VERIFICATION LOG</span>
+          </div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tender ID</th>
+                  <th>Bidder Name</th>
+                  <th>Registry Source</th>
+                  <th>Claim vs Actual</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>GEM-2026-T-4929</td>
+                  <td>Bidder A (Tech Solutions)</td>
+                  <td>MCA21 (Turnover)</td>
+                  <td>₹15.2 Cr vs ₹9.8 Cr</td>
+                  <td><span class="badge badge-error">Mismatch</span></td>
+                </tr>
+                <tr>
+                  <td>GEM-2026-T-5011</td>
+                  <td>Bidder C (Global Infra)</td>
+                  <td>Udyam Portal</td>
+                  <td>Micro vs Medium</td>
+                  <td><span class="badge badge-warning">Category Error</span></td>
+                </tr>
+                <tr>
+                  <td>GEM-2026-T-5100</td>
+                  <td>Bidder D (Secure Systems)</td>
+                  <td>GSTN</td>
+                  <td>Active vs Active</td>
+                  <td><span class="badge badge-success">Verified</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 6: STATUTORY REPORTS
+           =================================================================== -->
+      
+      <!-- ===================================================================
+           VIEW: SMARTBID COMPARE
+           =================================================================== -->
+            <section class="view-section" id="view-smartbid" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>SmartBid Compare</h1>
+            <p>AI-powered side-by-side comparison of technical specifications, financials, and compliance scores.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <span>TENDER #4929: TECHNICAL COMPARISON MATRIX</span>
+          </div>
+          <div class="panel-body">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px;">
+              <!-- Parameter Column -->
+              <div style="background:#F8FAFC; padding:12px; border-radius:4px; border:1px solid #E2E8F0;">
+                <h4 style="margin-bottom:12px; color:var(--parakh-navy);">Evaluation Criteria</h4>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1;">Required Turnover</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1;">ISO 9001:2015</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1;">Similar Past Experience</div>
+                <div style="padding:8px 0;">Overall AI Score</div>
+              </div>
+              
+              <!-- Bidder 1 -->
+              <div style="background:#fff; padding:12px; border-radius:4px; border:1px solid #E2E8F0;">
+                <h4 style="margin-bottom:12px; color:var(--parakh-navy);">Bidder A</h4>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#DC2626;">Fail (₹9.8 Cr vs ₹10 Cr req)</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#166534;">Pass (Verified)</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#166534;">Pass (3 Projects)</div>
+                <div style="padding:8px 0; font-weight:bold; color:#DC2626;">Rejected (Compliance Flag)</div>
+              </div>
+
+              <!-- Bidder 2 -->
+              <div style="background:#fff; padding:12px; border-radius:4px; border:1px solid #E2E8F0;">
+                <h4 style="margin-bottom:12px; color:var(--parakh-navy);">Bidder C</h4>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#166534;">Pass (₹45.2 Cr)</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#166534;">Pass (Verified)</div>
+                <div style="padding:8px 0; border-bottom:1px solid #CBD5E1; color:#166534;">Pass (12 Projects)</div>
+                <div style="padding:8px 0; font-weight:bold; color:#166534;">98/100 (Recommended L1)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <section class="view-section" id="view-reports" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Reports & Exports</h1>
+            <p>Generate verifiable, cryptographic compliance reports for procurement audits and stakeholder reviews.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="btn btn-primary btn-sm" onclick="parakhApp.openGenerateReportModal()">
+              <span class="btn-icon">📄</span>
+              <span>Generate New Report</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span>RECENT EXPORTS (SHA-256 VERIFIED)</span>
+          </div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Report ID</th>
+                  <th>Tender Ref</th>
+                  <th>Generated By</th>
+                  <th>Date & Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>RPT-GEM-8841</td>
+                  <td>Tender #4929</td>
+                  <td>Shri Rajesh K. Sharma</td>
+                  <td>04-Sep-2026 14:30</td>
+                  <td><button class="btn btn-secondary btn-sm">Download PDF</button></td>
+                </tr>
+                <tr>
+                  <td>RPT-GEM-9022</td>
+                  <td>Tender #5011</td>
+                  <td>Shri Rajesh K. Sharma</td>
+                  <td>03-Sep-2026 09:15</td>
+                  <td><button class="btn btn-secondary btn-sm">Download PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 7: OPERATIONAL ALERTS
+           =================================================================== -->
+      <section class="view-section" id="view-notifications" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Operational & Statutory Alert Centre</h1>
+            <p>Threshold violations, telemetry gaps, and suspected allocation divergences requiring formal officer acknowledgment and action.</p>
+          </div>
+          <div class="page-actions-group">
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.filterAlerts('ALL')">All Alerts (9)</button>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.filterAlerts('CRITICAL')">Critical (3)</button>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.filterAlerts('HIGH')">High (4)</button>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.filterAlerts('MEDIUM')">Medium (2)</button>
+            <button class="btn btn-secondary btn-sm" onclick="parakhApp.filterAlerts('LOW')">Low (1)</button>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;" id="alertsFullContainer">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 8: AUDIT TRAIL (NIC STANDARD)
+           =================================================================== -->
+            <section class="view-section" id="view-history" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Audit Trail (Immutable)</h1>
+            <p>Cryptographically secure log of all system interactions, compliance verifications, and manual overrides.</p>
+          </div>
+        </div>
+
+        <div class="timeline" id="auditTimeline">
+          <!-- Populated by JS -->
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--parakh-teal);"></div>
+            <div class="timeline-content">
+              <strong>04-Sep-2026 14:30:12 IST</strong><br>
+              <span style="color:var(--text-muted);">Shri Rajesh K. Sharma generated Compliance Report RPT-GEM-8841.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:#C25E00;"></div>
+            <div class="timeline-content">
+              <strong>04-Sep-2026 10:15:00 IST</strong><br>
+              <span style="color:var(--text-muted);">AI Scrutiny flagged Bidder A (Tender #4929) for Financial Discrepancy.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:#166534;"></div>
+            <div class="timeline-content">
+              <strong>04-Sep-2026 09:00:22 IST</strong><br>
+              <span style="color:var(--text-muted);">System synced with MCA21 API successfully (0 ms latency).</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 9: PORTAL SETTINGS
+           =================================================================== -->
+      <section class="view-section" id="view-settings" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Portal Settings & Regulatory Parameters</h1>
+            <p>Calibrate GeM threshold tolerances, statutory boundary limits, and notification dispatch rules.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div class="panel">
+            <div class="panel-header">
+              <span>STATUTORY THRESHOLD CALIBRATION</span>
+            </div>
+            <div class="panel-body">
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="form-group">
+                  <label class="form-label">Pipeline Mass Balance Divergence Cutoff (%)</label>
+                  <input type="number" class="form-control" value="1.2" step="0.1">
+                  <span style="font-size:11px; color:#64748B;">Standard GeM guideline limit: &le; 1.2%</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">BS-VI Diesel Sulphur Specification Ceiling (ppm)</label>
+                  <input type="number" class="form-control" value="10.0" step="0.5">
+                  <span style="font-size:11px; color:#64748B;">Bureau of Indian Standards (BIS) IS 1460:2020 limit: 10 ppm</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Subsidized LPG Household Diversion Alarm Threshold (%)</label>
+                  <input type="number" class="form-control" value="2.5" step="0.5">
+                  <span style="font-size:11px; color:#64748B;">DBTL Pahal algorithm variance trigger</span>
+                </div>
+                <div style="display:flex; justify-content:flex-end;">
+                  <button class="btn btn-accent btn-sm" onclick="alert('Threshold parameters updated and recorded to Ministry audit log.')">Update Parameters</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <span>NOTIFICATION & DATA RETENTION RULES</span>
+            </div>
+            <div class="panel-body">
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div class="form-group">
+                  <label class="form-label">Critical Alert Escalation Window (Hours)</label>
+                  <input type="number" class="form-control" value="24" step="1">
+                  <span style="font-size:11px; color:#64748B;">Auto-escalation to Joint Secretary if unacknowledged</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Audit Log Retention Policy</label>
+                  <select class="form-control">
+                    <option>7 Years (Statutory Government Standard)</option>
+                    <option>10 Years (Classified Strategic Infrastructure)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">SCADA Sensor Heartbeat Interval (Seconds)</label>
+                  <input type="number" class="form-control" value="30" step="5">
+                </div>
+                <div style="display:flex; justify-content:flex-end;">
+                  <button class="btn btn-primary btn-sm" onclick="alert('System retention rules updated.')">Save Rules</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           VIEW 10: ADMINISTRATION
+           =================================================================== -->
+            <section class="view-section" id="view-risk" style="display:none;">
+        <div class="page-title-banner">
+          <div class="page-title-group">
+            <h1>Risk Analysis & Scoring</h1>
+            <p>Predictive risk scoring and cartelization detection based on historical bidding patterns and entity relationships.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <span>BIDDER RISK PROFILES</span>
+          </div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Bidder Name</th>
+                  <th>Risk Score</th>
+                  <th>Key Risk Factors</th>
+                  <th>Action Recommendation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Bidder A (Tech Solutions)</td>
+                  <td><span class="badge badge-error">High (85/100)</span></td>
+                  <td>Financial Mismatch, Shared IP with Bidder B</td>
+                  <td>Disqualify / Manual Audit</td>
+                </tr>
+                <tr>
+                  <td>Bidder B (Infra Corp)</td>
+                  <td><span class="badge badge-warning">Medium (55/100)</span></td>
+                  <td>Recent contract delays, Shared IP</td>
+                  <td>Monitor Execution closely</td>
+                </tr>
+                <tr>
+                  <td>Bidder C (Global Systems)</td>
+                  <td><span class="badge badge-success">Low (15/100)</span></td>
+                  <td>None detected</td>
+                  <td>Proceed with evaluation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =====================================================================
+       6. INSTITUTIONAL LOGIN SCREEN VIEW (Toggleable / Modal)
+       ===================================================================== -->
+  <div id="institutionalLoginSection" style="display:none;">
+    <div class="login-view-container">
+      <!-- Left Panel: Official Government Identity -->
+      <div class="login-left-panel">
+        <div>
+          <div class="login-emblem-wrap">
+            <div class="login-emblem-box">
+              <svg viewBox="0 0 100 110" fill="#123B63" style="width:100%; height:100%;">
+                <path d="M50 5 C40 5 35 15 35 22 C35 28 38 32 42 35 C38 38 34 44 34 52 C34 60 40 68 50 70 C60 68 66 60 66 52 C66 44 62 38 58 35 C62 32 65 28 65 22 C65 15 60 5 50 5 Z" fill="#123B63"/>
+                <rect x="25" y="75" width="50" height="8" rx="1" fill="#123B63"/>
+                <circle cx="50" cy="92" r="10" stroke="#123B63" stroke-width="2.5" fill="none"/>
+                <rect x="20" y="104" width="60" height="4" fill="#123B63"/>
+              </svg>
+            </div>
+            <div class="login-goi-titles">
+              <h4>भारत सरकार | Government of India</h4>
+              <h5>à¤ªà¥‡à¤Ÿà¥à¤°à¥‹à¤²à¤¿à¤¯à¤® à¤à¤µà¤‚ à¤ªà¥à¤°à¤¾à¤•à¥ƒà¤¤à¤¿à¤• à¤—à¥ˆà¤¸ à¤®à¤‚à¤¤à¥à¤°à¤¾à¤²à¤¯</h5>
+              <h5>Government e-Marketplace</h5>
+            </div>
+          </div>
+
+          <h3 style="font-size:18px; font-weight:bold; color:#FFFFFF; margin-top:12px;">PARAKH AI ENTERPRISE PORTAL</h3>
+          <p class="login-portal-desc">
+            Integrated decision-support and regulatory scrutiny system for national hydrocarbon infrastructure, pipeline pressure integrity, and subsidized fuel allocations.
+          </p>
+
+          <ul class="login-features-list">
+            <li>Continuous SCADA mass-flow and pipeline telemetry reconciliation.</li>
+            <li>Deterministic compliance engines with immutable NIC audit trails.</li>
+            <li>Multi-source verification across GAIL, IOCL, ONGC, HPCL, and BPCL.</li>
+            <li>Officer-led human sign-off architecture with digital attestation.</li>
+          </ul>
+        </div>
+
+        <div class="login-security-notice">
+          <strong>SECURITY NOTICE:</strong> Access is restricted exclusively to authorized Government of India officials and designated PSU audit officers. Unauthorized access attempts are monitored and punishable under the Information Technology Act, 2000 and the Official Secrets Act, 1923.
+        </div>
+      </div>
+
+      <!-- Right Panel: Institutional Login Box -->
+      <div class="login-right-panel">
+        <div class="login-box-header">
+          <h2>Official Portal Sign-In</h2>
+          <p>Please enter your NIC / GeM departmental credentials to access the operational scrutiny console.</p>
+        </div>
+
+        <form class="login-form" onsubmit="parakhApp.handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="loginUsername">Username / NIC Email ID *</label>
+            <input type="text" id="loginUsername" class="form-control" value="officer" required placeholder="e.g. rajesh.kumar@nic.in or officer">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password *</label>
+            <input type="password" id="loginPassword" class="form-control" value="demo123" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginRole">Designated Role *</label>
+            <select id="loginRole" class="form-control">
+              <option value="officer">Senior Audit Officer (Shri Rajesh K. Sharma)</option>
+              <option value="examiner">Chief Technical Examiner (Pipelines & Terminals)</option>
+              <option value="admin">System Administrator (NIC National Node)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginCaptcha">Security Verification Code *</label>
+            <div class="captcha-row">
+              <span class="captcha-box" id="captchaValue">7 M 9 K 2</span>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.refreshCaptcha()" title="Refresh Captcha">â†º</button>
+              <input type="text" id="loginCaptcha" class="form-control" style="width:110px;" placeholder="Code" required value="7M9K2">
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+            <label style="font-size:11.5px; display:flex; align-items:center; gap:4px; color:#475569;">
+              <input type="checkbox" checked> Remember session on this NIC workstation
+            </label>
+            <a href="javascript:void(0)" onclick="alert('Please contact the NIC GeM Helpdesk at support-mopng@nic.in for digital certificate reset.')" style="font-size:11.5px;">Forgot Password?</a>
+          </div>
+
+          <div style="margin-top:10px;">
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:9px 12px; font-size:13.5px;">
+              [ Sign In to Portal ]
+            </button>
+          </div>
+
+          <div style="margin-top:8px; text-align:center;">
+            <button type="button" class="btn btn-secondary btn-sm" style="width:100%;" onclick="parakhApp.fillDemoCredentials()">
+              Quick Demo Login (Pre-fill Officer Credentials)
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       7. MODAL DIALOGS
+       ===================================================================== -->
+  <!-- MODAL: View Record Details & Telemetry -->
+  <div class="modal-overlay" id="recordDetailsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="recordModalTitle">Record Telemetry & Scrutiny Details</h3>
+        <button type="button" class="modal-close-btn" onclick="parakhApp.closeRecordModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="recordModalBody">
+        <!-- Injected by JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.closeRecordModal()">Close</button>
+        <button type="button" class="btn btn-accent btn-sm" onclick="parakhApp.openOfficerSignOffFromModal()">[ Record Officer Decision ]</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Generate Statutory Report -->
+  <div class="modal-overlay" id="generateReportModal">
+    <div class="modal-card" style="max-width:620px;">
+      <div class="modal-header">
+        <h3>Generate Official Statutory Compliance Report</h3>
+        <button type="button" class="modal-close-btn" onclick="parakhApp.closeGenerateReportModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="generateReportForm" onsubmit="parakhApp.handleGenerateReportSubmit(event)">
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div class="form-group">
+              <label class="form-label" for="reportParamTitle">Report Title *</label>
+              <input type="text" id="reportParamTitle" class="form-control" required value="Quarterly Hydrocarbon Discrepancy & Flow Verification Brief â€” Q3 2026">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reportParamSector">Sector / Jurisdiction *</label>
+              <select id="reportParamSector" class="form-control" required>
+                <option value="All Sectors">Consolidated All-India Hydrocarbon Infrastructure</option>
+                <option value="Natural Gas Grid">GAIL Natural Gas Grid & HVJ Pipeline</option>
+                <option value="Crude Refining">IOCL & HPCL Refineries</option>
+                <option value="LPG Allocation">National Subsidized LPG Distribution</option>
+                <option value="Strategic Reserves">ISPRL Strategic Storage</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group flex-grow">
+                <label class="form-label" for="reportParamDateFrom">Period From *</label>
+                <input type="date" id="reportParamDateFrom" class="form-control" value="2026-08-01" required>
+              </div>
+              <div class="form-group flex-grow">
+                <label class="form-label" for="reportParamDateTo">Period To *</label>
+                <input type="date" id="reportParamDateTo" class="form-control" value="2026-09-04" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reportParamFormat">Output Classification & Format *</label>
+              <select id="reportParamFormat" class="form-control">
+                <option value="PDF">Official PDF with Digital Sign-Off Header</option>
+                <option value="CSV">Raw Telemetry & Audit CSV Spreadsheet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reportParamOfficerRemark">Mandatory Officer Executive Summary</label>
+              <textarea id="reportParamOfficerRemark" class="form-control" rows="3" placeholder="Enter high-level commentary for submission to Ministry Joint Secretary..."></textarea>
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+              <button type="button" class="btn btn-secondary" onclick="parakhApp.closeGenerateReportModal()">Cancel</button>
+              <button type="submit" class="btn btn-accent">[ Generate & Sign Report ]</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Officer Sign-Off & Decision -->
+  <div class="modal-overlay" id="officerSignOffModal">
+    <div class="modal-card" style="max-width:580px;">
+      <div class="modal-header">
+        <h3>Formal Officer Decision & Digital Attestation</h3>
+        <button type="button" class="modal-close-btn" onclick="parakhApp.closeOfficerSignOffModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="background:#F8FAFC; border:1px solid #CBD5E1; padding:9px 12px; font-size:12.5px; border-radius:3px;">
+          <div><strong>Target Subject:</strong> <span id="signOffTargetTitle">GAIL HVJ Trunk Sector 4B</span></div>
+          <div><strong>Case ID:</strong> <span id="signOffTargetId">CASE-8841</span></div>
+          <div><strong>Signing Officer:</strong> Shri Rajesh K. Sharma, Director</div>
+        </div>
+
+        <form id="officerDecisionForm" onsubmit="parakhApp.handleOfficerDecisionSubmit(event)">
+          <div style="display:flex; flex-direction:column; gap:11px; margin-top:10px;">
+            <div class="form-group">
+              <label class="form-label" for="decisionSelect">Statutory Decision *</label>
+              <select id="decisionSelect" class="form-control" required>
+                <option value="APPROVE">ENDORSE FINDING & DISPATCH TECHNICAL TEAM</option>
+                <option value="SEND_FOR_REVIEW">REQUEST RE-CALIBRATION & LOG CLARIFICATION</option>
+                <option value="REJECT">CLOSE INCIDENT (WITHIN STATUTORY TOLERANCE)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="decisionRemarkInput">Officer Statutory Remark / Direction *</label>
+              <textarea id="decisionRemarkInput" class="form-control" rows="3" required placeholder="Mandatory official justification conforming to GeM regulations..."></textarea>
+            </div>
+            <div style="font-size:11.5px; color:#475569; background:#EFF6FF; border:1px solid #BFDBFE; padding:7px 10px; border-radius:2px;">
+              Digital Signature will be generated using NIC-SHA256 Token and logged permanently into the Ministry event ledger.
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
+              <button type="button" class="btn btn-secondary" onclick="parakhApp.closeOfficerSignOffModal()">Cancel</button>
+              <button type="submit" class="btn btn-primary">[ Sign & Attest Decision ]</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       8. INSTITUTIONAL FOOTER
+       ===================================================================== -->
+  <footer class="institutional-footer" id="institutionalFooter">
+    <div class="footer-top">
+      <div class="footer-col">
+        <h5>Government e-Marketplace</h5>
+        <p style="margin-bottom:6px; color:#CBD5E1;">
+          Shastri Bhawan, Dr. Rajendra Prasad Road, New Delhi â€” 110001
+        </p>
+        <p style="color:#94A3B8;">
+          Government of India Decision-Support Portal under GeM & GeM Procurement Rules.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Quick Navigation</h5>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="window.location.href='/'">Operational Dashboard</a></li>
+          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('records')">Production & Dispatch Records</a></li>
+          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('ai-insights')">Structured AI Insights</a></li>
+          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('reports')">Statutory Reports Archive</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Regulatory Jurisdictions</h5>
+        <ul class="footer-links">
+          <li><a href="https://pngrb.gov.in" target="_blank" rel="noopener">Petroleum & Natural Gas Regulatory Board (GeM)</a></li>
+          <li><a href="https://ppac.gov.in" target="_blank" rel="noopener">Petroleum Planning & Analysis Cell (GeM Analytics)</a></li>
+          <li><a href="https://gailonline.com" target="_blank" rel="noopener">GAIL (India) Ltd</a></li>
+          <li><a href="https://iocl.com" target="_blank" rel="noopener">Indian Oil Corporation Ltd (IOCL)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Helpdesk & Technical Support</h5>
+        <p style="color:#CBD5E1; margin-bottom:4px;">
+          National Informatics Centre (NIC) GeM Technical Cell
+        </p>
+        <p style="color:#CBD5E1; margin-bottom:4px;">
+          <strong>Email:</strong> support-parakh@nic.in | <strong>Phone:</strong> 011-2338-8921
+        </p>
+        <p style="color:#94A3B8;">
+          Guidelines for Indian Government Websites (GIGW) Compliant.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <span>PARAKH AI v2.0.0 | Government of India | Government e-Marketplace</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a class="strip-link" href="javascript:void(0)" onclick="alert('Privacy Policy: All telemetry and operational data are classified under Ministry statutory guidelines.')">Privacy Policy</a>
+        <span>|</span>
+        <a class="strip-link" href="javascript:void(0)" onclick="alert('Terms of Use: This portal is for official government auditing and decision-support only.')">Terms of Service</a>
+        <span>|</span>
+        <a class="strip-link" href="javascript:void(0)" onclick="alert('Help: Refer to the official GeM operational guidelines handbook.')">Help & Documentation</a>
+        <span>|</span>
+        <span class="footer-version">BUILD: 2026-09-04-REL</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

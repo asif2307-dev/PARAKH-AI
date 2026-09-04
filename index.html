@@ -52,7 +52,7 @@
   <header class="institutional-header" id="institutionalHeader">
     <div class="header-inner">
       <!-- Left: Emblem & Ministry Identity -->
-      <div class="brand-section">
+      <div class="brand-section" onclick="parakhApp.switchView('home')" title="Go to PARAKH AI Home Overview">
         <div class="emblem-logo-container" title="State Emblem of India">
           <svg class="emblem-svg" viewBox="0 0 100 110" fill="#123B63">
             <path d="M50 5 C40 5 35 15 35 22 C35 28 38 32 42 35 C38 38 34 44 34 52 C34 60 40 68 50 70 C60 68 66 60 66 52 C66 44 62 38 58 35 C62 32 65 28 65 22 C65 15 60 5 50 5 Z" fill="#123B63"/>
@@ -92,6 +92,12 @@
         </div>
 
         <div class="header-actions">
+          <button class="header-btn header-btn-portal" onclick="parakhApp.switchView('dashboard')" title="Access Officer Portal & Live Operational Dashboard" style="background-color:#C25E00; border-color:#9A4A00; color:#FFFFFF; font-weight:700; padding:6px 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+            </svg>
+            <span>Access Portal</span>
+          </button>
           <button class="header-btn" onclick="parakhApp.switchView('alerts')" title="Operational Alerts">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
@@ -111,49 +117,41 @@
   </header>
 
   <!-- =====================================================================
-       3. MAIN HORIZONTAL NAVIGATION BAR
+       3. MAIN HORIZONTAL NAVIGATION BAR (PUBLIC PILLAR PAGES + PORTAL BUTTON)
        ===================================================================== -->
   <nav class="main-navbar" id="mainNavbar">
     <div class="navbar-inner">
-      <button type="button" class="nav-item active" data-view="dashboard" onclick="parakhApp.switchView('dashboard')">
-        <span class="nav-icon">📊</span>
-        <span>Dashboard</span>
-      </button>
-      <button type="button" class="nav-item" data-view="records" onclick="parakhApp.switchView('records')">
-        <span class="nav-icon">📁</span>
-        <span>Production & Dispatch</span>
-      </button>
-      <button type="button" class="nav-item" data-view="upload" onclick="parakhApp.switchView('upload')">
-        <span class="nav-icon">⬆️</span>
-        <span>Telemetry Upload</span>
-      </button>
-      <button type="button" class="nav-item" data-view="ai-analysis" onclick="parakhApp.switchView('ai-analysis')">
-        <span class="nav-icon">⚙️</span>
-        <span>AI Compliance Scrutiny</span>
-      </button>
-      <button type="button" class="nav-item" data-view="ai-insights" onclick="parakhApp.switchView('ai-insights')">
-        <span class="nav-icon">💡</span>
-        <span>Structured AI Insights</span>
-      </button>
-      <button type="button" class="nav-item" data-view="reports" onclick="parakhApp.switchView('reports')">
-        <span class="nav-icon">📑</span>
-        <span>Statutory Reports</span>
-      </button>
-      <button type="button" class="nav-item" data-view="alerts" onclick="parakhApp.switchView('alerts')">
-        <span class="nav-icon">🔔</span>
-        <span>Active Alerts</span>
-      </button>
-      <button type="button" class="nav-item" data-view="history" onclick="parakhApp.switchView('history')">
-        <span class="nav-icon">🕒</span>
-        <span>Audit Trail</span>
-      </button>
-      <button type="button" class="nav-item" data-view="settings" onclick="parakhApp.switchView('settings')">
-        <span class="nav-icon">⚙️</span>
-        <span>Portal Settings</span>
-      </button>
-      <button type="button" class="nav-item" data-view="administration" onclick="parakhApp.switchView('administration')">
-        <span class="nav-icon">🛡️</span>
-        <span>Administration</span>
+      <div class="navbar-left-links">
+        <button type="button" class="nav-item active" data-view="home" onclick="parakhApp.switchView('home')">
+          <span class="nav-icon">🏠</span>
+          <span>Home</span>
+        </button>
+        <button type="button" class="nav-item" data-view="tech" onclick="parakhApp.switchView('tech')">
+          <span class="nav-icon">⚡</span>
+          <span>AI Engine & Tech</span>
+        </button>
+        <button type="button" class="nav-item" data-view="grid" onclick="parakhApp.switchView('grid')">
+          <span class="nav-icon">🌐</span>
+          <span>National Grid & PSUs</span>
+        </button>
+        <button type="button" class="nav-item" data-view="compliance" onclick="parakhApp.switchView('compliance')">
+          <span class="nav-icon">⚖️</span>
+          <span>Statutory Mandates</span>
+        </button>
+        <button type="button" class="nav-item" data-view="about" onclick="parakhApp.switchView('about')">
+          <span class="nav-icon">🏛️</span>
+          <span>About & Governance</span>
+        </button>
+        <button type="button" class="nav-item" data-view="helpdesk" onclick="parakhApp.switchView('helpdesk')">
+          <span class="nav-icon">📞</span>
+          <span>Helpdesk & Support</span>
+        </button>
+      </div>
+
+      <!-- Single Dedicated Top Portal Button in Navbar -->
+      <button type="button" class="nav-portal-btn" onclick="parakhApp.switchView('dashboard')" title="Launch Officer Operational Portal">
+        <span>🚀 Enter Officer Portal</span>
+        <span class="portal-btn-badge">Live System</span>
       </button>
     </div>
   </nav>
@@ -175,20 +173,25 @@
        ===================================================================== -->
   <div class="portal-container" id="portalContainer">
 
-    <!-- EXACT REQUESTED SIDEBAR NAVIGATION -->
+    <!-- OPERATIONAL SIDEBAR NAVIGATION (DISPLAYED IN PORTAL MODE) -->
     <aside class="portal-sidebar" id="portalSidebar">
+      <!-- Return to Public Platform Action -->
+      <button type="button" class="sidebar-back-website-btn" onclick="parakhApp.switchView('home')" title="Exit to Public Website">
+        <span>← Back to Public Website</span>
+      </button>
+
       <div class="sidebar-header">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
           <path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"/>
         </svg>
-        <span>PARAKH AI MENU</span>
+        <span>OFFICER CONSOLE</span>
       </div>
 
       <!-- Group 1: Dashboard -->
       <div class="sidebar-nav-group">
         <button type="button" class="sidebar-link-btn active" data-view="dashboard" onclick="parakhApp.switchView('dashboard')">
-          <span>DASHBOARD</span>
-          <span class="sidebar-count">Live</span>
+          <span>📊 DASHBOARD</span>
+          <span class="sidebar-count" style="background:#DBEAFE; color:#1E40AF;">Live</span>
         </button>
       </div>
 
@@ -295,21 +298,1306 @@
     <main class="portal-main-content" id="portalMainContent">
 
       <!-- Breadcrumbs -->
-      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+      <nav class="breadcrumb-bar" id="breadcrumbBar" aria-label="Breadcrumb">
         <ul class="breadcrumb-list">
-          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('dashboard')">Home</a></li>
+          <li><a href="javascript:void(0)" onclick="parakhApp.switchView('home')">Home</a></li>
           <li class="breadcrumb-separator">/</li>
-          <li id="breadcrumbParent"><a href="javascript:void(0)">Operational Portal</a></li>
+          <li id="breadcrumbParent"><a href="javascript:void(0)">PARAKH AI</a></li>
           <li class="breadcrumb-separator">/</li>
-          <li class="breadcrumb-current" id="breadcrumbCurrent">Main Dashboard</li>
+          <li class="breadcrumb-current" id="breadcrumbCurrent">Institutional Home Overview</li>
         </ul>
         <span class="breadcrumb-timestamp" id="breadcrumbTime">Refreshed: Just now</span>
       </nav>
 
       <!-- ===================================================================
-           VIEW 1: MAIN DASHBOARD
+           VIEW 0: INSTITUTIONAL HOME PAGE (PHASE 1 LANDING)
            =================================================================== -->
-      <section class="view-section" id="view-dashboard">
+      <section class="view-section" id="view-home" style="display:block;">
+        <div class="home-page-wrapper">
+          
+          <!-- 1. Hero Showcase Banner -->
+          <div class="home-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">🇮🇳 Government of India</span>
+              <span class="home-badge">Ministry of Petroleum & Natural Gas</span>
+              <span class="home-badge home-badge-amber">Smart India Hackathon 2026 | SIH26100</span>
+              <span class="home-badge home-badge-green">Deterministic Scrutiny Engine v2.0</span>
+            </div>
+
+            <h1 class="home-hero-title">
+              PARAKH AI — Autonomous Statutory Compliance & Multilateral Hydrocarbon Telemetry Scrutiny System
+            </h1>
+
+            <p class="home-hero-lead">
+              Official Decision-Support & Compliance Platform empowering Ministry Officers, Auditors, and PSU Stakeholders with real-time pipeline SCADA flow-balance verification, BS-VI refinery quality assurance, subsidized LPG leakage prevention, and tamper-evident cryptographic audit scrutiny.
+            </p>
+
+            <div class="home-hero-actions">
+              <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+                <span>🚀 Launch Officer Portal & Live Dashboard</span>
+                <span style="font-size:11px; background:rgba(0,0,0,0.25); padding:2px 6px; border-radius:2px;">Phase 2</span>
+              </button>
+              <button type="button" class="btn-hero-secondary" onclick="document.getElementById('home-connectors-section').scrollIntoView({behavior:'smooth'})">
+                <span>📡 National Grid Telemetry Connectors</span>
+              </button>
+              <button type="button" class="btn-hero-secondary" onclick="document.getElementById('home-statutory-section').scrollIntoView({behavior:'smooth'})">
+                <span>⚖️ Statutory Standards & Mandates</span>
+              </button>
+            </div>
+
+            <!-- Hero Vitals Strip -->
+            <div class="home-hero-vitals">
+              <div class="home-vital-item">
+                <span class="home-vital-label">Monitored Facilities</span>
+                <span class="home-vital-value">14,820</span>
+                <span class="home-vital-sub">Across 6 PSUs & CGD Grids</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">National Connectors</span>
+                <span class="home-vital-value">8 Active</span>
+                <span class="home-vital-sub">SCADA, LIMS, GSTN, MCA21</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Reconciliation Rate</span>
+                <span class="home-vital-value" style="color:#86EFAC;">99.4%</span>
+                <span class="home-vital-sub">Multi-Source Verification</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Audit Immutability</span>
+                <span class="home-vital-value">0.0s Latency</span>
+                <span class="home-vital-sub">NIC SHA-256 Tamper-Evident</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Four-Stage Scrutiny Architecture -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">OPERATIONAL WORKFLOW</span>
+              <h2 class="home-section-title">The 4-Stage Autonomous Scrutiny Architecture</h2>
+              <p class="home-section-desc">How PARAKH AI transforms raw telemetry into legally sound statutory determinations and decision support.</p>
+            </div>
+
+            <div class="home-pathway-grid">
+              <div class="home-pathway-card">
+                <div class="home-step-num">
+                  <span>Step 01</span>
+                  <span class="home-step-icon">📡</span>
+                </div>
+                <h3 class="home-step-title">Multilateral Ingestion</h3>
+                <p class="home-step-text">
+                  Continuous ingestion from SCADA flow meters, refinery LIMS test certs, DBTL Pahal ledgers, and automated weighbridge tare RFID tags.
+                </p>
+                <span class="home-step-tag">Automated Ingestion</span>
+              </div>
+
+              <div class="home-pathway-card">
+                <div class="home-step-num">
+                  <span>Step 02</span>
+                  <span class="home-step-icon">⚙️</span>
+                </div>
+                <h3 class="home-step-title">Deterministic AI Scrutiny</h3>
+                <p class="home-step-text">
+                  Mathematical flow-balance divergence analysis, BIS IS 1460 fuel specification thresholds, and DBTL ghost-booking anomaly pattern detection.
+                </p>
+                <span class="home-step-tag">Zero Hallucination</span>
+              </div>
+
+              <div class="home-pathway-card highlight">
+                <div class="home-step-num">
+                  <span style="color:var(--accent-amber);">Step 03 (Phase 2)</span>
+                  <span class="home-step-icon">👨‍💼</span>
+                </div>
+                <h3 class="home-step-title">Officer Decision Support</h3>
+                <p class="home-step-text">
+                  Interactive case workspace displaying evidence nodes, discrepancy confidence metrics, and one-click drafting of statutory show-cause notices.
+                </p>
+                <span class="home-step-tag" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A;">Active Workspace</span>
+              </div>
+
+              <div class="home-pathway-card">
+                <div class="home-step-num">
+                  <span>Step 04</span>
+                  <span class="home-step-icon">🛡️</span>
+                </div>
+                <h3 class="home-step-title">Cryptographic Audit Trail</h3>
+                <p class="home-step-text">
+                  Every determination, parameter check, and attestation is permanently anchored with SHA-256 digital signatures for parliamentary transparency.
+                </p>
+                <span class="home-step-tag">NIC SHA-256 Ledger</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Core Institutional Scrutiny Modules -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">STATUTORY SCRUTINY MODULES</span>
+              <h2 class="home-section-title">National Energy Infrastructure Scrutiny Modules</h2>
+              <p class="home-section-desc">Direct access to specialized compliance verification workflows across national hydrocarbon operations.</p>
+            </div>
+
+            <div class="home-modules-grid">
+              <!-- Module 1: Natural Gas Grid -->
+              <div class="home-module-card">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🔥</span>
+                    <span class="home-module-title">Natural Gas Transmission Grid</span>
+                  </div>
+                  <span class="badge badge-info">GAIL / PNGRB</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Real-time mass-balance auditing across HVJ, Urja Ganga, and North-East gas pipelines. Detects localized pressure drops and off-take divergences beyond statutory 1.2% limits.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Monitored Network:</span>
+                      <span class="home-spec-val">18,400+ km Pipeline Grid</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Statutory Tolerance:</span>
+                      <span class="home-spec-val">&le; 1.2% Mass Variance</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">SCADA Integration:</span>
+                      <span class="home-spec-val">Active (RTU-09 Node)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#166534; font-weight:700;">● 1 Flagged Discrepancy (Case 8841)</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records'); parakhApp.filterRecordsByPsu('GAIL');">
+                    <span>Inspect Pipeline Records →</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Module 2: Refinery Quality -->
+              <div class="home-module-card">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">⚗️</span>
+                    <span class="home-module-title">Refinery BS-VI Fuel Quality Assurance</span>
+                  </div>
+                  <span class="badge badge-info">IOCL / BPCL / HPCL</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Mandatory environmental scrutiny for BS-VI diesel, petrol, and aviation turbine fuel (ATF). Automatically flags sulphur ceiling violations (&gt; 10.0 ppm) and flash point deviations.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Statutory Standard:</span>
+                      <span class="home-spec-val">BIS IS 1460:2020 (BS-VI)</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Sulphur Limit:</span>
+                      <span class="home-spec-val">&le; 10.0 ppm Max Ceiling</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Certified Despatches:</span>
+                      <span class="home-spec-val">4,890 Batches / Month</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#991B1B; font-weight:700;">● 1 Critical Alert (Paradip Refinery)</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records'); parakhApp.filterRecordsByPsu('IOCL');">
+                    <span>Inspect Refinery Batches →</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Module 3: LPG Subsidy Scrutiny -->
+              <div class="home-module-card">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🛢️</span>
+                    <span class="home-module-title">Subsidized LPG (DBTL Pahal) Leakage Scrutiny</span>
+                  </div>
+                  <span class="badge badge-info">NIC Cloud / PMUY</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Prevents domestic-to-commercial subsidy diversion by cross-verifying bottling plant weighbridge tare weights against Aadhaar authentication tokens and geographic distribution clusters.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Monitored Facilities:</span>
+                      <span class="home-spec-val">198 Bottling Plants</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Daily Reconciliation:</span>
+                      <span class="home-spec-val">4.8 Million Cylinders</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Leakage Prevention:</span>
+                      <span class="home-spec-val">1,420 Flagged (Kanpur Agency)</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#991B1B; font-weight:700;">● Show-Cause Summons Drafted</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('ai-insights');">
+                    <span>Audit LPG Allocations →</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Module 4: Offshore & Strategic Reserves -->
+              <div class="home-module-card">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🌊</span>
+                    <span class="home-module-title">Offshore Extraction & Strategic Reserves</span>
+                  </div>
+                  <span class="badge badge-info">ONGC / ISPRL</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Monitors multi-phase flow telemetry from Mumbai High subsea wellheads alongside hydrostatic water curtain pressures at Padur & Visakhapatnam underground crude storage caverns.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Strategic Crude Reserves:</span>
+                      <span class="home-spec-val">5.33 Million Metric Tonnes</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Cavern Water Curtain:</span>
+                      <span class="home-spec-val">9.2 bar (Permissible &ge; 8.5 bar)</span>
+                    </div>
+                    <div class="home-spec-row">
+                      <span class="home-spec-name">Subsea Coriolis Cal:</span>
+                      <span class="home-spec-val">Dual Rosemount Verified</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#166534; font-weight:700;">● All Caverns & Wellheads Verified</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records'); parakhApp.filterRecordsByPsu('ONGC');">
+                    <span>View Offshore Telemetry →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. National Connectivity Grid -->
+          <div id="home-connectors-section">
+            <div class="home-section-header">
+              <span class="home-section-tag">INTER-MINISTERIAL INTEGRATION</span>
+              <h2 class="home-section-title">National Registry & Sensor Connectivity Matrix</h2>
+              <p class="home-section-desc">Live synchronization status across 8 connected statutory registries, SCADA networks, and ERP gateways.</p>
+            </div>
+
+            <div class="home-connectors-grid">
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">PNGRB National Grid</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Pipeline Regulatory Telemetry</span>
+                <span class="home-connector-stat">✓ Online (99.8% Uptime)</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">GAIL SCADA Stream</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Mass-Flow & Pressure RTU-09</span>
+                <span class="home-connector-stat">✓ Live Sync (14.2 MMSCMD)</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">IOCL SAP ERP & LIMS</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Refinery Quality Certs & Despatch</span>
+                <span class="home-connector-stat">✓ Encrypted (TLS 1.3)</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">ONGC Subsea Telemetry</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Mumbai High Platform Multi-Phase</span>
+                <span class="home-connector-stat">✓ Coriolis Calibrated</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">DBTL Pahal Portal</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">LPG Direct Benefit Subsidies</span>
+                <span class="home-connector-stat">✓ NIC Cloud Gateway</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">GSTN E-Way Bill Matrix</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Road Tanker In-Transit Scrutiny</span>
+                <span class="home-connector-stat">✓ Active Query Feed</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">MCA21 Corporate Registry</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Distributor ROC Annual Returns</span>
+                <span class="home-connector-stat">✓ Verified Ledger Sync</span>
+              </div>
+
+              <div class="home-connector-card">
+                <div class="home-connector-top">
+                  <span class="home-connector-name">NABL Lab Accreditation</span>
+                  <span class="home-connector-pulse"></span>
+                </div>
+                <span class="home-connector-sub">Petroleum Testing Laboratory Auth</span>
+                <span class="home-connector-stat">✓ Automated Cert Match</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Statutory Framework & Notices Split -->
+          <div id="home-statutory-section">
+            <div class="home-split-grid">
+              <!-- Left: Statutory Mandate -->
+              <div>
+                <div class="home-section-header">
+                  <span class="home-section-tag">LEGAL & REGULATORY AUTHORITY</span>
+                  <h2 class="home-section-title">Governing Statutory Mandates</h2>
+                  <p class="home-section-desc">Statutory provisions under which PARAKH AI executes automated scrutiny.</p>
+                </div>
+
+                <div class="home-statutory-list">
+                  <div class="home-statutory-item">
+                    <div class="home-statutory-title">PNGRB Act 2006 (Technical & Safety Standards)</div>
+                    <div class="home-statutory-body">Mandates continuous pressure monitoring and volumetric flow mass-balance reconciliation across natural gas trunk pipelines with maximum 1.2% allowable measurement discrepancy.</div>
+                  </div>
+                  <div class="home-statutory-item">
+                    <div class="home-statutory-title">Bureau of Indian Standards (BIS IS 1460:2020)</div>
+                    <div class="home-statutory-body">Prescribes nationwide statutory quality limits for BS-VI Automotive Diesel and Motor Spirit, specifying a strict 10.0 ppm maximum sulphur ceiling and 38.0°C minimum flash point.</div>
+                  </div>
+                  <div class="home-statutory-item">
+                    <div class="home-statutory-title">Petroleum Rules 2002 & Explosives Act</div>
+                    <div class="home-statutory-body">Governs custody transfer containment, refinery storage tank radar gauging, and terminal offloading licensing to prevent hazardous volatile emissions.</div>
+                  </div>
+                  <div class="home-statutory-item">
+                    <div class="home-statutory-title">Direct Benefit Transfer for LPG (DBTL Pahal) Guidelines</div>
+                    <div class="home-statutory-body">Statutory Aadhaar authentication and weighbridge reconciliation requirements governing subsidized domestic LPG allocations under the Pradhan Mantri Ujjwala Yojana (PMUY).</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Gazetted Notices & Circulars -->
+              <div>
+                <div class="home-section-header">
+                  <span class="home-section-tag">GAZETTED ADVISORIES</span>
+                  <h2 class="home-section-title">Official Ministry Notices</h2>
+                  <p class="home-section-desc">Recent directives and upcoming statutory compliance deadlines.</p>
+                </div>
+
+                <div class="panel" style="background-color:#FFFFFF;">
+                  <div class="panel-body" style="padding:12px 16px;">
+                    <div class="home-notice-item">
+                      <span class="home-notice-date">04-Sep-2026 | CIRCULAR MoPNG/PNGRB/2026/08</span>
+                      <p class="home-notice-text">
+                        <strong>Q2 Hydrocarbon Mass-Balance Reconciliation:</strong> All authorized transmission pipeline entities must reconcile volumetric despatches by <strong>15-Sep-2026</strong>.
+                      </p>
+                    </div>
+
+                    <div class="home-notice-item">
+                      <span class="home-notice-date">02-Sep-2026 | NOTIFICATION BIS/EP-04</span>
+                      <p class="home-notice-text">
+                        <strong>BS-VI Refinery Protocol:</strong> Automated NABL test certification sync is now mandatory for coastal diesel custody transfer manifolds.
+                      </p>
+                    </div>
+
+                    <div class="home-notice-item">
+                      <span class="home-notice-date">28-Aug-2026 | ADVISORY VIG/LPG/902</span>
+                      <p class="home-notice-text">
+                        <strong>LPG Subsidy Leakage Prevention:</strong> Field vigilance inspections initiated for 14 commercial highway distributors with repeat booking anomalies.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Phase 2 Portal Launchpad Callout Banner -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Ready for Scrutiny? Launch the Operational Decision-Support Workspace</h3>
+              <p class="home-launchpad-sub">
+                Review 42 active cases under scrutiny, investigate flagged telemetry discrepancies, explore evidence mapping graphs, and sign off official determinations with SHA-256 digital attestation.
+              </p>
+            </div>
+            <div>
+              <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+                <span>🚀 Enter Officer Dashboard (Phase 2) →</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PILLAR PAGE 2: AI ENGINE & TECHNOLOGY ARCHITECTURE
+           =================================================================== -->
+      <section class="view-section" id="view-tech" style="display:none;">
+        <div class="pillar-page-wrapper">
+          
+          <!-- Hero Banner -->
+          <div class="pillar-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">⚡ Deep-Tech Architecture</span>
+              <span class="home-badge home-badge-amber">Deterministic Rule Matrix v2.0</span>
+              <span class="home-badge home-badge-green">Zero-Hallucination Guaranteed</span>
+              <span class="home-badge">NIC SHA-256 Ledger</span>
+            </div>
+            <h1 class="pillar-hero-title">PARAKH AI — Technology Architecture & Scrutiny Engine</h1>
+            <p class="pillar-hero-lead">
+              A multi-tier decision-support platform integrating real-time SCADA/IoT streams, mathematical flow-balance equations, multilateral registry cross-verification, and cryptographic tamper-evident event logging.
+            </p>
+            <div class="pillar-stat-strip">
+              <div class="home-vital-item">
+                <span class="home-vital-label">Scrutiny Latency</span>
+                <span class="home-vital-value">0.0s Audit Log</span>
+                <span class="home-vital-sub">Real-Time Ingestion</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Deterministic Rules</span>
+                <span class="home-vital-value">100% Verifiable</span>
+                <span class="home-vital-sub">Mathematical Precision</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Cross-Connectors</span>
+                <span class="home-vital-value">8 Registries</span>
+                <span class="home-vital-sub">SCADA, LIMS, GSTN, MCA</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Ledger Security</span>
+                <span class="home-vital-value" style="color:#86EFAC;">SHA-256</span>
+                <span class="home-vital-sub">Tamper-Evident Hash Chain</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4-Layer Architecture Stack -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">SYSTEM ARCHITECTURE</span>
+              <h2 class="home-section-title">4-Tier Multilateral Scrutiny Framework</h2>
+              <p class="home-section-desc">How PARAKH AI guarantees legally sound, zero-hallucination compliance verification.</p>
+            </div>
+
+            <div class="pillar-grid-4col">
+              <div class="home-pathway-card">
+                <div class="home-step-num"><span>Tier 01</span><span>📡</span></div>
+                <h3 class="home-step-title">Ingestion & Telemetry</h3>
+                <p class="home-step-text">
+                  Ingests Modbus/DNP3 SCADA telemetry from pipeline RTU nodes, refinery LIMS test certificates, weighbridge tare RFID, and tank radar gauges.
+                </p>
+                <span class="home-step-tag">SCADA & IoT Streams</span>
+              </div>
+
+              <div class="home-pathway-card">
+                <div class="home-step-num"><span>Tier 02</span><span>🔗</span></div>
+                <h3 class="home-step-title">Multi-Registry Verification</h3>
+                <p class="home-step-text">
+                  Real-time cross-querying against MCA21, GSTN E-Way matrices, NABL Lab Accreditation directories, and PNGRB authorized gas grid networks.
+                </p>
+                <span class="home-step-tag">Cross-Registry Matrix</span>
+              </div>
+
+              <div class="home-pathway-card highlight">
+                <div class="home-step-num"><span style="color:var(--accent-amber);">Tier 03</span><span>⚙️</span></div>
+                <h3 class="home-step-title">Deterministic AI Core</h3>
+                <p class="home-step-text">
+                  Executes mathematical mass-balance differential equations, BIS IS 1460:2020 limit checks, and DBTL subsidy diversion spatial cluster detection.
+                </p>
+                <span class="home-step-tag" style="background:#FEF3C7; color:#92400E; border-color:#FDE68A;">Deterministic Engine</span>
+              </div>
+
+              <div class="home-pathway-card">
+                <div class="home-step-num"><span>Tier 04</span><span>🛡️</span></div>
+                <h3 class="home-step-title">Cryptographic Immutability</h3>
+                <p class="home-step-text">
+                  Every parameter test, officer sign-off, and show-cause notice is hashed with NIC-SHA256 tokens and chained in the event ledger for parliamentary oversight.
+                </p>
+                <span class="home-step-tag">Immutable Audit Trail</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison Table: Deterministic Rules vs GenAI Hallucination -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">ENGINEERING RIGOR</span>
+              <h2 class="home-section-title">Deterministic Rule Core vs. Probabilistic GenAI Risks</h2>
+              <p class="home-section-desc">Why mission-critical statutory scrutiny requires strict mathematical determinism over unconstrained LLMs.</p>
+            </div>
+
+            <div class="pillar-table-wrap">
+              <table class="pillar-spec-table">
+                <thead>
+                  <tr>
+                    <th>Evaluation Dimension</th>
+                    <th>PARAKH AI Deterministic Core</th>
+                    <th>Standard LLM / GenAI Tool</th>
+                    <th>Statutory Compliance Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Mathematical Exactness</strong></td>
+                    <td><span class="badge badge-success">Exact Formula Calculation</span></td>
+                    <td><span class="badge badge-critical">Approximate / Risk of Hallucination</span></td>
+                    <td>Guarantees 100% adherence to PNGRB 1.2% mass-balance tolerance.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Decision Reproducibility</strong></td>
+                    <td><span class="badge badge-success">100% Deterministic (Same Input = Same Output)</span></td>
+                    <td><span class="badge badge-high">Stochastic / Temperature Variance</span></td>
+                    <td>Legally admissible in statutory court proceedings and vigilance inquiries.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Evidence Lineage</strong></td>
+                    <td><span class="badge badge-success">Exact Clause-to-Sensor Node Mapping</span></td>
+                    <td><span class="badge badge-critical">Opaque Latent Weights</span></td>
+                    <td>Officers see exact sensor ID, timestamp, and standard threshold violated.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Audit Immutability</strong></td>
+                    <td><span class="badge badge-success">SHA-256 Chained Event Log</span></td>
+                    <td><span class="badge badge-info">Transient Prompt Output</span></td>
+                    <td>Conforms to NIC Regulatory Guidelines and Parliamentary Audit Standards.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Processing Latency</strong></td>
+                    <td><span class="badge badge-success">&lt; 50ms Rule Execution</span></td>
+                    <td><span class="badge badge-high">2000ms – 5000ms Generation Time</span></td>
+                    <td>Enables real-time monitoring across 14,820 facilities simultaneously.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Technical Formula Spotlight -->
+          <div class="pillar-grid-2col">
+            <div class="tech-formula-box">
+              <div class="tech-formula-title">Pipeline Mass-Balance Conservation Formula</div>
+              <p style="color:#CBD5E1; margin-bottom:8px; font-family:var(--font-family); font-size:11.5px;">
+                Statutory Mass Balance divergence calculation enforced under PNGRB Technical Standards 2026:
+              </p>
+              <code>
+                &Delta;M = &Sigma; &rho;_in &middot; Q_in &minus; &Sigma; &rho;_out &middot; Q_out &minus; (V_pipe &middot; d&rho;_avg / dt)<br>
+                Tolerance_Limit = 0.012 &times; &Sigma; (&rho;_in &middot; Q_in)<br>
+                IF (&Delta;M &gt; Tolerance_Limit) &rarr; TRIGGER_ALERT("FLOW_MISMATCH_CRITICAL")
+              </code>
+            </div>
+
+            <div class="tech-formula-box">
+              <div class="tech-formula-title">Cryptographic SHA-256 Ledger Chaining</div>
+              <p style="color:#CBD5E1; margin-bottom:8px; font-family:var(--font-family); font-size:11.5px;">
+                Immutability proof generated upon officer attestation and telemetry verification:
+              </p>
+              <code>
+                Block_Hash = SHA256( Prev_Hash + Timestamp + Officer_ID + Record_ID + Statutory_Decision + Payload_Hash )<br>
+                Sign_Attestation = Sign( Officer_Token_PrivateKey, Block_Hash )<br>
+                Status = Verified_Tamper_Evident (NIC Node DEL-04)
+              </code>
+            </div>
+          </div>
+
+          <!-- Callout to Officer Portal -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Experience the AI Engine in Live Operations</h3>
+              <p class="home-launchpad-sub">
+                Launch the Officer Decision-Support Workspace to inspect active telemetry cases, review evidence graphs, and test deterministic scrutiny on real datasets.
+              </p>
+            </div>
+            <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+              <span>🚀 Launch Officer Portal →</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PILLAR PAGE 3: NATIONAL GRID & PSU ECOSYSTEM
+           =================================================================== -->
+      <section class="view-section" id="view-grid" style="display:none;">
+        <div class="pillar-page-wrapper">
+          
+          <!-- Hero Banner -->
+          <div class="pillar-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">🌐 National Energy Matrix</span>
+              <span class="home-badge home-badge-amber">14,820 Monitored Facilities</span>
+              <span class="home-badge home-badge-green">6 Major PSU Grids</span>
+              <span class="home-badge">PNGRB Synced</span>
+            </div>
+            <h1 class="pillar-hero-title">National Hydrocarbon Grid & Infrastructure Directory</h1>
+            <p class="pillar-hero-lead">
+              Comprehensive telemetry directory across India's energy infrastructure — natural gas transmission pipelines, crude oil refineries, subsidized LPG bottling networks, offshore platforms, and underground strategic petroleum reserves.
+            </p>
+            <div class="pillar-stat-strip">
+              <div class="home-vital-item">
+                <span class="home-vital-label">Gas Pipeline Grid</span>
+                <span class="home-vital-value">18,400+ km</span>
+                <span class="home-vital-sub">GAIL HVJ & Urja Ganga</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Active Refineries</span>
+                <span class="home-vital-value">23 Units</span>
+                <span class="home-vital-sub">BS-VI Diesel & Petrol</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">LPG Bottling Plants</span>
+                <span class="home-vital-value">198 Plants</span>
+                <span class="home-vital-sub">4.8M Cylinders / Day</span>
+              </div>
+              <div class="home-vital-item">
+                <span class="home-vital-label">Strategic Reserves</span>
+                <span class="home-vital-value" style="color:#86EFAC;">5.33 MMT</span>
+                <span class="home-vital-sub">Padur & Vizag Caverns</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PSU Filter Chips -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">INFRASTRUCTURE DIRECTORY</span>
+              <h2 class="home-section-title">Major Monitored Entities & Sectors</h2>
+              <p class="home-section-desc">Select an infrastructure sector to explore telemetry parameters and statutory standards.</p>
+            </div>
+
+            <div class="psu-filter-bar">
+              <button type="button" class="psu-filter-pill active" onclick="parakhApp.filterPillarGrid('ALL', this)">All Infrastructure (6 PSUs)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('GAIL', this)">GAIL (Natural Gas Grid)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('IOCL', this)">IOCL (Refineries & LPG)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('ONGC', this)">ONGC (Offshore Wells)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('BPCL', this)">BPCL (Aviation ATF & Fuels)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('HPCL', this)">HPCL (Refining & Petrochem)</button>
+              <button type="button" class="psu-filter-pill" onclick="parakhApp.filterPillarGrid('ISPRL', this)">ISPRL (Strategic Reserves)</button>
+            </div>
+
+            <!-- Grid Cards -->
+            <div class="pillar-grid-2col" id="pillarGridCardsContainer">
+              
+              <!-- GAIL -->
+              <div class="home-module-card" data-psu="GAIL">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🔥</span>
+                    <span class="home-module-title">GAIL — Hazira-Vijaipur-Jagdishpur (HVJ) Trunk Pipeline</span>
+                  </div>
+                  <span class="badge badge-info">GAIL / PNGRB</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    National arterial natural gas transmission pipeline connecting Western offshore gas terminals to Northern and Central Indian industrial centers. SCADA RTU-09 monitors mass-balance and pressure curves in real-time.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Pipeline Length:</span><span class="home-spec-val">4,200 km (HVJ Grid)</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Transmission Rate:</span><span class="home-spec-val">14.22 MMSCMD</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Current Status:</span><span class="home-spec-val" style="color:#C25E00;">Under Scrutiny (4.8% divergence)</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#64748B;">Node: SCADA-RTU-09 (Hazira)</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records', 'GAIL')">View Records →</button>
+                </div>
+              </div>
+
+              <!-- IOCL Refinery -->
+              <div class="home-module-card" data-psu="IOCL">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">⚗️</span>
+                    <span class="home-module-title">IOCL — Paradip Refinery BS-VI Despatch Manifold</span>
+                  </div>
+                  <span class="badge badge-info">IOCL / BIS</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    15.0 MMTPA coastal mega-refinery producing ultra-low sulphur BS-VI automotive fuels. Automated laboratory test certificates verified against BIS IS 1460:2020 quality specifications before custody transfer.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Batch Volume:</span><span class="home-spec-val">42,000 Kilolitres</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Sulphur Spec:</span><span class="home-spec-val" style="color:#991B1B;">11.4 ppm (Ceiling: 10.0 ppm)</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Lab Verification:</span><span class="home-spec-val">ASTM D2622 XRF Verified</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#991B1B; font-weight:700;">Flagged: Sulphur Spec Exceeded</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records', 'IOCL')">View Records →</button>
+                </div>
+              </div>
+
+              <!-- IOCL LPG -->
+              <div class="home-module-card" data-psu="IOCL">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🛢️</span>
+                    <span class="home-module-title">IOCL — Subsidized Domestic LPG Bottling (Kanpur)</span>
+                  </div>
+                  <span class="badge badge-info">IOCL / PMUY</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    High-throughput automated carousel bottling facility servicing domestic PMUY beneficiaries. Weighbridge tare RFID logs cross-checked with DBTL Pahal Aadhaar tokens to eliminate subsidy diversion.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Bottled Count:</span><span class="home-spec-val">28,400 Cylinders / Day</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Verified Dispenses:</span><span class="home-spec-val">26,980 Reconciled</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Discrepancy:</span><span class="home-spec-val" style="color:#991B1B;">1,420 Unaccounted Cylinders</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#991B1B; font-weight:700;">Show-Cause Notice Issued</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('ai-insights')">View AI Insights →</button>
+                </div>
+              </div>
+
+              <!-- ONGC -->
+              <div class="home-module-card" data-psu="ONGC">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">🌊</span>
+                    <span class="home-module-title">ONGC — Mumbai High Offshore Platform B-17</span>
+                  </div>
+                  <span class="badge badge-info">ONGC / DGH</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Offshore production platform operating deep subsea wellheads. Continuous multi-phase flow telemetry (crude, associated gas, water cut) calibrated using dual Rosemount Coriolis meters holding 99.4% reconciliation.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Crude Production:</span><span class="home-spec-val">38,200 BBL / Day</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Wellhead Pressure:</span><span class="home-spec-val">184 bar (Normal: 180–190 bar)</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Methane Venting:</span><span class="home-spec-val" style="color:#166534;">0.0% (Zero Environmental Venting)</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#166534; font-weight:700;">✓ Fully Compliant</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records', 'ONGC')">View Records →</button>
+                </div>
+              </div>
+
+              <!-- ISPRL -->
+              <div class="home-module-card" data-psu="ISPRL">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">⛰️</span>
+                    <span class="home-module-title">ISPRL — Padur Underground Strategic Rock Cavern</span>
+                  </div>
+                  <span class="badge badge-info">ISPRL / MoPNG</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    National strategic crude oil reserve stored in unlined underground rock caverns utilizing hydraulic containment principle. Triple redundant piezometers monitor water curtain hydrostatic pressure.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Stored Crude:</span><span class="home-spec-val">2.50 Million Metric Tonnes</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Water Curtain Pressure:</span><span class="home-spec-val">9.2 bar (Permissible &ge; 8.5 bar)</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Seepage Rate:</span><span class="home-spec-val" style="color:#166534;">0.4 L/min (Safe &le; 2.5 L/min)</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#166534; font-weight:700;">✓ Hydrostatic Containment Normal</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records')">View Records →</button>
+                </div>
+              </div>
+
+              <!-- BPCL -->
+              <div class="home-module-card" data-psu="BPCL">
+                <div class="home-module-header">
+                  <div class="home-module-header-left">
+                    <span style="font-size:18px;">✈️</span>
+                    <span class="home-module-title">BPCL — Kochi Refinery Aviation Turbine Fuel (ATF) Terminal</span>
+                  </div>
+                  <span class="badge badge-info">BPCL / DGCA</span>
+                </div>
+                <div class="home-module-body">
+                  <p class="home-module-desc">
+                    Dedicated aviation fuel terminal supplying domestic and international airport bunkering. Flash point (41.2°C) and smoke point (24.5mm) validated under DefStan 91-091 and IS 1571 specifications.
+                  </p>
+                  <div class="home-module-specs">
+                    <div class="home-spec-row"><span class="home-spec-name">Batch Volume:</span><span class="home-spec-val">18,500 Kilolitres</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">Flash Point:</span><span class="home-spec-val">41.2°C (Min: 38.0°C)</span></div>
+                    <div class="home-spec-row"><span class="home-spec-name">DGCA Sign-off:</span><span class="home-spec-val" style="color:#166534;">Attested & Approved</span></div>
+                  </div>
+                </div>
+                <div class="home-module-footer">
+                  <span style="font-size:11.5px; color:#166534; font-weight:700;">✓ Approved for Airport Bunkering</span>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="parakhApp.switchView('records')">View Records →</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Callout -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Need to Inspect Live Sensor Telemetry?</h3>
+              <p class="home-launchpad-sub">
+                Enter the Officer Portal to monitor real-time SCADA pressure curves, submit batch lab test reports, or review automated discrepancy alerts.
+              </p>
+            </div>
+            <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+              <span>🚀 Enter Officer Portal →</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PILLAR PAGE 4: STATUTORY MANDATES & COMPLIANCE
+           =================================================================== -->
+      <section class="view-section" id="view-compliance" style="display:none;">
+        <div class="pillar-page-wrapper">
+          
+          <!-- Hero Banner -->
+          <div class="pillar-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">⚖️ Statutory Authority</span>
+              <span class="home-badge home-badge-amber">PNGRB Act 2006</span>
+              <span class="home-badge home-badge-green">BIS IS 1460 (BS-VI)</span>
+              <span class="home-badge">Petroleum Rules 2002</span>
+            </div>
+            <h1 class="pillar-hero-title">Statutory Mandates, Regulations & Gazetted Standards</h1>
+            <p class="pillar-hero-lead">
+              Governing statutory provisions under which the Ministry of Petroleum & Natural Gas executes continuous algorithmic scrutiny, quality certifications, and legal show-cause escalations.
+            </p>
+          </div>
+
+          <!-- 4 Core Acts -->
+          <div class="pillar-grid-2col">
+            <div class="compliance-act-card">
+              <div class="compliance-act-header">
+                <span class="compliance-act-title">PNGRB Technical & Safety Standards Regulations 2026</span>
+                <span class="badge badge-info">Statutory Act</span>
+              </div>
+              <p class="compliance-act-body">
+                Governs design, operation, and mass-balance reconciliation across natural gas trunk and distribution pipelines. Mandates automated SCADA flow recording and maximum 1.2% allowable measurement variance.
+              </p>
+              <div class="compliance-stat-row">
+                <span><strong>Key Parameter:</strong> Volumetric Mass Balance</span>
+                <span style="color:#123B63; font-weight:700;">Max Tolerance: &le; 1.2%</span>
+              </div>
+            </div>
+
+            <div class="compliance-act-card">
+              <div class="compliance-act-header">
+                <span class="compliance-act-title">Bureau of Indian Standards (BIS IS 1460:2020 BS-VI)</span>
+                <span class="badge badge-info">Fuel Quality Act</span>
+              </div>
+              <p class="compliance-act-body">
+                Specifies nationwide statutory limits for Euro-VI / BS-VI compliant High Speed Diesel and Motor Spirit. Mandates ultra-low sulphur content ceiling of 10.0 ppm to protect ambient air quality.
+              </p>
+              <div class="compliance-stat-row">
+                <span><strong>Key Parameter:</strong> Diesel Sulphur Ceiling</span>
+                <span style="color:#991B1B; font-weight:700;">Max Ceiling: 10.0 ppm</span>
+              </div>
+            </div>
+
+            <div class="compliance-act-card">
+              <div class="compliance-act-header">
+                <span class="compliance-act-title">Direct Benefit Transfer for LPG (DBTL Pahal) Guidelines</span>
+                <span class="badge badge-info">Subsidy Directive</span>
+              </div>
+              <p class="compliance-act-body">
+                Statutory guidelines governing subsidized domestic LPG allocations under the Pradhan Mantri Ujjwala Yojana (PMUY). Requires biometric/Aadhaar token binding and weighbridge tare authentication.
+              </p>
+              <div class="compliance-stat-row">
+                <span><strong>Key Parameter:</strong> Aadhaar Authentication Match</span>
+                <span style="color:#123B63; font-weight:700;">100% Token Reconciliation</span>
+              </div>
+            </div>
+
+            <div class="compliance-act-card">
+              <div class="compliance-act-header">
+                <span class="compliance-act-title">Petroleum Rules 2002 & Explosives Act 1884</span>
+                <span class="badge badge-info">Safety & Storage</span>
+              </div>
+              <p class="compliance-act-body">
+                Mandates automated tank radar gauging, terminal vapor recovery systems, and marine custody transfer containment manifolds to prevent hazardous emissions during petroleum transit.
+              </p>
+              <div class="compliance-stat-row">
+                <span><strong>Key Parameter:</strong> Containment & Hydrostatic</span>
+                <span style="color:#123B63; font-weight:700;">100% Vessel Sealing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Gazetted Notices Archive -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">OFFICIAL CIRCULARS</span>
+              <h2 class="home-section-title">Gazetted Directives & Compliance Deadlines</h2>
+              <p class="home-section-desc">Recent statutory notifications issued by MoPNG and regulatory directorates.</p>
+            </div>
+
+            <div class="pillar-table-wrap">
+              <table class="pillar-spec-table">
+                <thead>
+                  <tr>
+                    <th>Gazette Ref ID</th>
+                    <th>Date Published</th>
+                    <th>Statutory Subject</th>
+                    <th>Enforcing Authority</th>
+                    <th>Compliance Deadline</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>MoPNG/PNGRB/2026/08</strong></td>
+                    <td>04-Sep-2026</td>
+                    <td>Q2 National Gas Pipeline Mass-Balance Reconciliation</td>
+                    <td>PNGRB Regulatory Directorate</td>
+                    <td><strong>15-Sep-2026</strong></td>
+                    <td><span class="badge badge-critical">Active Enforcement</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>BIS/EP-04/BSVI-2026</strong></td>
+                    <td>02-Sep-2026</td>
+                    <td>Mandatory Digital NABL Sync for Coastal Diesel Despatch</td>
+                    <td>Bureau of Indian Standards</td>
+                    <td><strong>30-Sep-2026</strong></td>
+                    <td><span class="badge badge-high">Compliance Window</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>VIG/LPG/902-PAHAL</strong></td>
+                    <td>28-Aug-2026</td>
+                    <td>Biometric Token Verification at Highway LPG Distributors</td>
+                    <td>Ministry Vigilance Cell</td>
+                    <td><strong>Immediate</strong></td>
+                    <td><span class="badge badge-success">Enforced</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Callout -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Generate Statutory Compliance Briefs</h3>
+              <p class="home-launchpad-sub">
+                Authorized officers can draft official show-cause notices, export statutory audit logs, and review legal determinations directly from the Officer Portal.
+              </p>
+            </div>
+            <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+              <span>🚀 Access Statutory Portal →</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PILLAR PAGE 5: ABOUT & GOVERNANCE
+           =================================================================== -->
+      <section class="view-section" id="view-about" style="display:none;">
+        <div class="pillar-page-wrapper">
+          
+          <!-- Hero Banner -->
+          <div class="pillar-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">🏛️ Institutional Mandate</span>
+              <span class="home-badge home-badge-amber">Ministry of Petroleum & Natural Gas</span>
+              <span class="home-badge home-badge-green">Smart India Hackathon 2026</span>
+              <span class="home-badge">SIH26100</span>
+            </div>
+            <h1 class="pillar-hero-title">About PARAKH AI & Ministry Governance</h1>
+            <p class="pillar-hero-lead">
+              Official institutional profile of the PARAKH AI decision-support platform, developed for the Ministry of Petroleum & Natural Gas under Smart India Hackathon 2026 (Problem Statement: SIH26100).
+            </p>
+          </div>
+
+          <!-- Mission & Vision 3-Col -->
+          <div class="pillar-grid-3col">
+            <div class="home-pathway-card">
+              <div class="home-step-num"><span>Mandate 01</span><span>🇮🇳</span></div>
+              <h3 class="home-step-title">National Energy Security</h3>
+              <p class="home-step-text">
+                Safeguarding India's strategic hydrocarbon reserves, trunk gas grids, and refining infrastructure through 24/7 autonomous telemetry scrutiny.
+              </p>
+            </div>
+
+            <div class="home-pathway-card">
+              <div class="home-step-num"><span>Mandate 02</span><span>🔍</span></div>
+              <h3 class="home-step-title">Zero Revenue Leakage</h3>
+              <p class="home-step-text">
+                Eliminating subsidy diversion in domestic LPG (DBTL Pahal) and catching off-take pipeline divergences before revenue loss occurs.
+              </p>
+            </div>
+
+            <div class="home-pathway-card">
+              <div class="home-step-num"><span>Mandate 03</span><span>⚖️</span></div>
+              <h3 class="home-step-title">Transparent Governance</h3>
+              <p class="home-step-text">
+                Providing Ministry officers and parliamentary committees with immutable, cryptographic audit ledgers backed by deterministic proof.
+              </p>
+            </div>
+          </div>
+
+          <!-- SIH 2026 & Team BUTTER CHICKEN Box -->
+          <div class="panel" style="background:#FFFFFF;">
+            <div class="panel-header">
+              <span>SMART INDIA HACKATHON 2026 (SIH26100) — PLATFORM PEDIGREE</span>
+              <span class="badge badge-info">Theme: Smart Automation</span>
+            </div>
+            <div class="panel-body" style="display:flex; flex-direction:column; gap:12px;">
+              <p style="font-size:13px; color:#1E293B; line-height:1.6;">
+                <strong>PARAKH AI</strong> is engineered by <strong>Team BUTTER CHICKEN</strong> for <strong>Smart India Hackathon 2026 (SIH26100)</strong> to resolve the national challenge of fragmented hydrocarbon compliance. By combining multilateral SCADA ingestion, deterministic cross-registry verification (MCA21, GSTN, NABL, PNGRB), and SHA-256 tamper-evident logs, PARAKH AI reduces audit review latency from 14 hours to under 2 hours (85.7% time saved).
+              </p>
+              <div class="pillar-stat-strip">
+                <div class="home-vital-item">
+                  <span class="home-vital-label">Hackathon ID</span>
+                  <span class="home-vital-value" style="font-size:17px;">SIH26100</span>
+                  <span class="home-vital-sub">Software Category</span>
+                </div>
+                <div class="home-vital-item">
+                  <span class="home-vital-label">Team Name</span>
+                  <span class="home-vital-value" style="font-size:17px;">BUTTER CHICKEN</span>
+                  <span class="home-vital-sub">Smart India Hackathon 2026</span>
+                </div>
+                <div class="home-vital-item">
+                  <span class="home-vital-label">Ministry Partner</span>
+                  <span class="home-vital-value" style="font-size:17px;">MoPNG</span>
+                  <span class="home-vital-sub">Govt. of India</span>
+                </div>
+                <div class="home-vital-item">
+                  <span class="home-vital-label">Architecture</span>
+                  <span class="home-vital-value" style="font-size:17px; color:#86EFAC;">FastAPI + JS</span>
+                  <span class="home-vital-sub">Deterministic AI Core</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security, Privacy & National Standards -->
+          <div>
+            <div class="home-section-header">
+              <span class="home-section-tag">GOVERNANCE & SECURITY</span>
+              <h2 class="home-section-title">Government IT & Security Compliance Standards</h2>
+              <p class="home-section-desc">Strict compliance with Government of India digital governance frameworks.</p>
+            </div>
+
+            <div class="pillar-grid-4col">
+              <div class="compliance-act-card">
+                <span class="compliance-act-title">GIGW 3.0 Standard</span>
+                <p class="compliance-act-body">Guidelines for Indian Government Websites compliant (accessibility, contrast, clean markup).</p>
+              </div>
+              <div class="compliance-act-card">
+                <span class="compliance-act-title">CERT-In Security</span>
+                <p class="compliance-act-body">Hardened endpoints, TLS 1.3 encryption, and protection against unauthorized data exfiltration.</p>
+              </div>
+              <div class="compliance-act-card">
+                <span class="compliance-act-title">NIC Cloud Infrastructure</span>
+                <p class="compliance-act-body">Hosted on high-availability PostgreSQL HA cluster with dual-redundant geographical nodes.</p>
+              </div>
+              <div class="compliance-act-card">
+                <span class="compliance-act-title">Data Privacy & Sovereignty</span>
+                <p class="compliance-act-body">All hydrocarbon telemetry and corporate financial data strictly retained within sovereign Indian borders.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Callout -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Enter Officer Decision Support Workspace</h3>
+              <p class="home-launchpad-sub">
+                Sign in with authorized officer credentials to inspect active telemetry records, run scrutiny algorithms, and attestate statutory findings.
+              </p>
+            </div>
+            <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+              <span>🚀 Launch Officer Portal →</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PILLAR PAGE 6: HELPDESK, SUPPORT & GRIEVANCES
+           =================================================================== -->
+      <section class="view-section" id="view-helpdesk" style="display:none;">
+        <div class="pillar-page-wrapper">
+          
+          <!-- Hero Banner -->
+          <div class="pillar-hero-banner">
+            <div class="home-hero-badge-strip">
+              <span class="home-badge">📞 Nodal Support Cell</span>
+              <span class="home-badge home-badge-amber">24/7 Telemetry Hotline</span>
+              <span class="home-badge home-badge-green">Grievance Redressal</span>
+              <span class="home-badge">NIC Support</span>
+            </div>
+            <h1 class="pillar-hero-title">Nodal Helpdesk, Technical Support & Grievances</h1>
+            <p class="pillar-hero-lead">
+              Direct escalation and support channels for Ministry Officers, PSU telemetry engineers, authorized auditors, and institutional stakeholders.
+            </p>
+          </div>
+
+          <!-- Emergency Hotline Strip -->
+          <div class="helpdesk-hotline-strip">
+            <div>
+              <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#FDBA74; letter-spacing:0.5px;">24/7 Emergency Telemetry Incident Hotline</div>
+              <div class="hotline-num">1800-11-MoPNG / 011-2338-8921</div>
+              <div style="font-size:11.5px; color:#CBD5E1;">Direct bridge to Ministry SCADA Duty Officer & PNGRB Emergency Cell</div>
+            </div>
+            <button type="button" class="btn btn-accent" onclick="alert('Calling MoPNG Emergency Desk: 011-2338-8921 (Demo Bridge)')">
+              <span>Connect Emergency Desk</span>
+            </button>
+          </div>
+
+          <!-- 2-Column: Interactive Grievance / Anomaly Form vs Contact Directory -->
+          <div class="pillar-grid-2col">
+            
+            <!-- Left: Interactive Form -->
+            <div class="helpdesk-form-card">
+              <div class="panel-header" style="margin:-20px -20px 16px -20px; padding:10px 16px;">
+                <span>LOG STATUTORY TELEMETRY ANOMALY / GRIEVANCE</span>
+              </div>
+              <form id="publicHelpdeskForm" onsubmit="parakhApp.handleGrievanceSubmit(event)">
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                  <div class="form-group">
+                    <label class="form-label" for="grievanceName">Reporting Officer / Stakeholder Name *</label>
+                    <input type="text" id="grievanceName" class="form-control" required placeholder="e.g. Shri A. K. Verma">
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group" style="flex:1;">
+                      <label class="form-label" for="grievancePsu">Target Entity / PSU *</label>
+                      <select id="grievancePsu" class="form-control" required>
+                        <option value="GAIL">GAIL (Natural Gas Transmission)</option>
+                        <option value="IOCL">IOCL (Refineries & Pipeline)</option>
+                        <option value="ONGC">ONGC (Offshore Wellheads)</option>
+                        <option value="BPCL">BPCL (Aviation & Marketing)</option>
+                        <option value="HPCL">HPCL (Refining & Petrochem)</option>
+                        <option value="ISPRL">ISPRL (Strategic Reserves)</option>
+                      </select>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                      <label class="form-label" for="grievanceFacility">Facility / Node ID</label>
+                      <input type="text" id="grievanceFacility" class="form-control" placeholder="e.g. VS-14, PDR-BSVI, KNP-LPG">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="grievanceCategory">Anomaly Category *</label>
+                    <select id="grievanceCategory" class="form-control" required>
+                      <option value="FLOW_MISMATCH">Pipeline Flow Divergence / Pressure Drop</option>
+                      <option value="FUEL_SPEC">BS-VI Fuel Spec Margin Exceeded (Sulphur/Flash Point)</option>
+                      <option value="LPG_DIVERSION">LPG Subsidy Weighbridge Allocation Anomaly</option>
+                      <option value="SENSOR_FAULT">SCADA RTU / Coriolis Sensor Malfunction</option>
+                      <option value="OTHER">General Grievance / Audit Clarification</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="grievanceDesc">Detailed Description / Observations *</label>
+                    <textarea id="grievanceDesc" class="form-control" rows="3" required placeholder="State exact observed values, time of telemetry anomaly, and relevant standard violated..."></textarea>
+                  </div>
+                  <div style="font-size:11.5px; color:#475569; background:#F8FAFC; border:1px solid #CBD5E1; padding:7px 10px; border-radius:2px;">
+                    Submissions are logged into the Ministry NIC Event Ledger with timestamp and tracking token.
+                  </div>
+                  <button type="submit" class="btn btn-primary" style="align-self:flex-start;">
+                    <span>Submit Grievance / Incident Log</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Right: Support Directory & FAQs -->
+            <div style="display:flex; flex-direction:column; gap:14px;">
+              <div class="contact-info-panel">
+                <div class="contact-block">
+                  <h4>Ministry of Petroleum & Natural Gas</h4>
+                  <p>Shastri Bhawan, Dr. Rajendra Prasad Road, New Delhi — 110001</p>
+                </div>
+                <div class="contact-block">
+                  <h4>National Informatics Centre (NIC) MoPNG Technical Cell</h4>
+                  <p><strong>Email:</strong> support-parakh@nic.in | <strong>Portal:</strong> nic.in/mopng</p>
+                </div>
+                <div class="contact-block">
+                  <h4>Petroleum & Natural Gas Regulatory Board (PNGRB)</h4>
+                  <p>World Trade Centre, Babar Road, New Delhi — 110001</p>
+                  <p><strong>Technical Standards Desk:</strong> standards-pngrb@gov.in</p>
+                </div>
+              </div>
+
+              <!-- FAQ -->
+              <div class="faq-accordion-group">
+                <div class="faq-card">
+                  <button type="button" class="faq-header-btn" onclick="parakhApp.toggleFaq(this)">
+                    <span>Who can access the Officer Operational Portal?</span>
+                    <span>▾</span>
+                  </button>
+                  <div class="faq-body-content" style="display:none;">
+                    Access is restricted to authorized Ministry of Petroleum & Natural Gas officers, PSU nodal audit officers, and PNGRB statutory inspectors with valid NIC credentials.
+                  </div>
+                </div>
+
+                <div class="faq-card">
+                  <button type="button" class="faq-header-btn" onclick="parakhApp.toggleFaq(this)">
+                    <span>How frequently is SCADA telemetry synchronized?</span>
+                    <span>▾</span>
+                  </button>
+                  <div class="faq-body-content" style="display:none;">
+                    SCADA telemetry streams from GAIL, IOCL, and ONGC RTU gateways are ingested in continuous near-real-time (sub-minute batches) with automated mass-balance recalculation every 15 minutes.
+                  </div>
+                </div>
+
+                <div class="faq-card">
+                  <button type="button" class="faq-header-btn" onclick="parakhApp.toggleFaq(this)">
+                    <span>What happens when a statutory limit is breached?</span>
+                    <span>▾</span>
+                  </button>
+                  <div class="faq-body-content" style="display:none;">
+                    The deterministic rule matrix automatically flags the record, calculates divergence confidence (e.g. 87%), logs an immutable SHA-256 event, and pre-drafts an official show-cause notice for officer sign-off.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Callout -->
+          <div class="home-launchpad-card">
+            <div class="home-launchpad-left">
+              <h3 class="home-launchpad-title">Authorized Officer? Enter the Operational Workspace</h3>
+              <p class="home-launchpad-sub">
+                Review active discrepancies, inspect flagged refinery batches, and sign off official determinations.
+              </p>
+            </div>
+            <button type="button" class="btn-hero-primary" onclick="parakhApp.switchView('dashboard')">
+              <span>🚀 Launch Officer Portal →</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+      <section class="view-section" id="view-dashboard" style="display:none;">
         <div class="page-title-banner">
           <div class="page-title-group">
             <h1>National Hydrocarbon Compliance & Telemetry Dashboard</h1>

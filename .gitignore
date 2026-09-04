@@ -64,3 +64,8 @@ node_modules/
 
 # Windows batch artifacts
 *.tmp
+
+# Database files
+*.db
+*.sqlite3
+
